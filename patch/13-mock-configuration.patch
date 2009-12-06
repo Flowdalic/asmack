@@ -1,0 +1,33 @@
+diff -ur ../../src-unpatched/trunk/org/apache/harmony/javax/security/auth/login/Configuration.java ./org/apache/harmony/javax/security/auth/login/Configuration.java
+--- ../../src-unpatched/trunk/org/apache/harmony/javax/security/auth/login/Configuration.java	2009-12-06 18:40:25.000000000 +0100
++++ ./org/apache/harmony/javax/security/auth/login/Configuration.java	2009-12-06 18:44:23.000000000 +0100
+@@ -20,8 +20,6 @@
+ import java.security.AccessController;
+ import org.apache.harmony.javax.security.auth.AuthPermission;
+ 
+-import org.apache.harmony.security.fortress.PolicyUtils;
+-
+ public abstract class Configuration {
+ 
+     // the current configuration 
+@@ -56,8 +54,18 @@
+      * exception, wraps it with SecurityException and throws further.
+      */
+     private static final Configuration getDefaultProvider() {
+-        return AccessController.doPrivileged(new PolicyUtils.ProviderLoader<Configuration>(
+-                LOGIN_CONFIGURATION_PROVIDER, Configuration.class));
++        return new Configuration() {
++			
++			@Override
++			public void refresh() {
++			}
++			
++			@Override
++			public AppConfigurationEntry[] getAppConfigurationEntry(
++					String applicationName) {
++				return new AppConfigurationEntry[0];
++			}
++		};
+     }
+ 
+     /**

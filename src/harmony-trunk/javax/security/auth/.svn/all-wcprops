@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/repos/asf/!svn/ver/825888/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth
+END
+Policy.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/Policy.java
+END
+Subject.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/asf/!svn/ver/785971/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/Subject.java
+END
+RefreshFailedException.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/RefreshFailedException.java
+END
+Refreshable.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/Refreshable.java
+END
+SubjectDomainCombiner.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/asf/!svn/ver/768124/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/SubjectDomainCombiner.java
+END
+AuthPermission.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/asf/!svn/ver/768124/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/AuthPermission.java
+END
+DestroyFailedException.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/asf/!svn/ver/768124/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/DestroyFailedException.java
+END
+Destroyable.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/asf/!svn/ver/768124/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/Destroyable.java
+END
+PrivateCredentialPermission.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repos/asf/!svn/ver/825888/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/PrivateCredentialPermission.java
+END

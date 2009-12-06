@@ -1,0 +1,46 @@
+<project name="asmack" default="compile" basedir=".">
+
+<target name="compile-jse"  description="Compile for java se">
+    <delete dir="build/classes" failonerror="false" />
+    <mkdir dir="build/classes" />
+    <mkdir dir="build/classes/trunk" />
+    <javac
+      srcdir="build/src/trunk"
+      destdir="build/classes/trunk"
+      classpath="lib/xmlpull_1_1_3_4c.jar"
+      excludes="**/de/measite/smack/AndroidDebugger.java"
+    />
+    <jar
+      basedir="build/classes/trunk"
+      destfile="build/asmack-jse.jar"
+      filesonly="false"
+      level="9"
+    />
+</target>
+
+<target name="compile-a201" description="Compile for android 2.0.1">
+    <delete dir="build/classes" failonerror="false" />
+    <mkdir dir="build/classes" />
+    <mkdir dir="build/classes/trunk" />
+    <javac
+      srcdir="build/src/trunk"
+      destdir="build/classes/trunk"
+      classpath="lib/xmlpull_1_1_3_4c.jar"
+      bootclasspath="lib/android-2.0.1.jar"
+    />
+    <jar
+      basedir="build/classes/trunk"
+      destfile="build/asmack-android.jar"
+      filesonly="false"
+      level="9"
+    />
+</target>
+
+<target
+  name="compile"
+  description="Compile for all targets"
+  depends="compile-jse,compile-a201"
+/>
+
+</project>
+

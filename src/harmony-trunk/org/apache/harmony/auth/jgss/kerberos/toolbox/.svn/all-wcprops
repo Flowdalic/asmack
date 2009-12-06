@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/asf/!svn/ver/720203/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/org/apache/harmony/auth/jgss/kerberos/toolbox
+END
+KerberosToolboxSpi.java
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/repos/asf/!svn/ver/594462/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/org/apache/harmony/auth/jgss/kerberos/toolbox/KerberosToolboxSpi.java
+END
+KerberosToolboxImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 163
+/repos/asf/!svn/ver/720203/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/org/apache/harmony/auth/jgss/kerberos/toolbox/KerberosToolboxImpl.java
+END
+KerberosApplicationRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 170
+/repos/asf/!svn/ver/594462/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/org/apache/harmony/auth/jgss/kerberos/toolbox/KerberosApplicationRequest.java
+END

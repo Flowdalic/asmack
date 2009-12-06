@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/10865/smack/trunk/source/org/jivesoftware/smack/util/collections
+END
+AbstractReferenceMap.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/6213/smack/trunk/source/org/jivesoftware/smack/util/collections/AbstractReferenceMap.java
+END
+AbstractMapEntry.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/6213/smack/trunk/source/org/jivesoftware/smack/util/collections/AbstractMapEntry.java
+END
+DefaultMapEntry.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/6213/smack/trunk/source/org/jivesoftware/smack/util/collections/DefaultMapEntry.java
+END
+ResettableIterator.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/6213/smack/trunk/source/org/jivesoftware/smack/util/collections/ResettableIterator.java
+END
+IterableMap.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/6213/smack/trunk/source/org/jivesoftware/smack/util/collections/IterableMap.java
+END
+KeyValue.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/6213/smack/trunk/source/org/jivesoftware/smack/util/collections/KeyValue.java
+END
+EmptyMapIterator.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/6213/smack/trunk/source/org/jivesoftware/smack/util/collections/EmptyMapIterator.java
+END
+MapIterator.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/6213/smack/trunk/source/org/jivesoftware/smack/util/collections/MapIterator.java
+END
+EmptyIterator.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/6213/smack/trunk/source/org/jivesoftware/smack/util/collections/EmptyIterator.java
+END
+AbstractKeyValue.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/10865/smack/trunk/source/org/jivesoftware/smack/util/collections/AbstractKeyValue.java
+END
+AbstractEmptyIterator.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/6213/smack/trunk/source/org/jivesoftware/smack/util/collections/AbstractEmptyIterator.java
+END
+ReferenceMap.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/6213/smack/trunk/source/org/jivesoftware/smack/util/collections/ReferenceMap.java
+END
+AbstractHashedMap.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/10865/smack/trunk/source/org/jivesoftware/smack/util/collections/AbstractHashedMap.java
+END

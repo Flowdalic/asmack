@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/repos/!svn/ver/11422/smack/trunk/source/org/jivesoftware/smackx/workgroup
+END
+MetaData.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/7400/smack/trunk/source/org/jivesoftware/smackx/workgroup/MetaData.java
+END
+QueueUser.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/7400/smack/trunk/source/org/jivesoftware/smackx/workgroup/QueueUser.java
+END
+WorkgroupInvitation.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/7400/smack/trunk/source/org/jivesoftware/smackx/workgroup/WorkgroupInvitation.java
+END
+WorkgroupInvitationListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/7400/smack/trunk/source/org/jivesoftware/smackx/workgroup/WorkgroupInvitationListener.java
+END

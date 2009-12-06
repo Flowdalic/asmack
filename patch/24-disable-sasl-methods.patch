@@ -1,0 +1,26 @@
+--- ../../src-unpatched/trunk/org/jivesoftware/smack/SASLAuthentication.java	2009-12-07 00:03:46.000000000 +0100
++++ org/jivesoftware/smack/SASLAuthentication.java	2009-12-07 00:05:46.000000000 +0100
+@@ -91,11 +91,11 @@
+         registerSASLMechanism("PLAIN", SASLPlainMechanism.class);
+         registerSASLMechanism("ANONYMOUS", SASLAnonymous.class);
+ 
+-        supportSASLMechanism("GSSAPI",0);
+-        supportSASLMechanism("DIGEST-MD5",1);
+-        supportSASLMechanism("CRAM-MD5",2);
+-        supportSASLMechanism("PLAIN",3);
+-        supportSASLMechanism("ANONYMOUS",4);
++//        supportSASLMechanism("GSSAPI",0);
++//        supportSASLMechanism("DIGEST-MD5",1);
++//        supportSASLMechanism("CRAM-MD5",2);
++        supportSASLMechanism("PLAIN",0);
++        supportSASLMechanism("ANONYMOUS",1);
+ 
+     }
+ 
+@@ -553,4 +553,4 @@
+         resourceBinded = false;
+         sessionSupported = false;
+     }
+-}
+\ No newline at end of file
++}

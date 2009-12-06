@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/repos/asf/!svn/ver/768124/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/login
+END
+CredentialNotFoundException.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/login/CredentialNotFoundException.java
+END
+Configuration.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/login/Configuration.java
+END
+LoginException.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/asf/!svn/ver/768124/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/login/LoginException.java
+END
+AccountNotFoundException.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/login/AccountNotFoundException.java
+END
+CredentialException.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/login/CredentialException.java
+END
+AppConfigurationEntry.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/login/AppConfigurationEntry.java
+END
+CredentialExpiredException.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/login/CredentialExpiredException.java
+END
+AccountException.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/login/AccountException.java
+END
+AccountExpiredException.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/login/AccountExpiredException.java
+END
+FailedLoginException.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/login/FailedLoginException.java
+END
+AccountLockedException.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/login/AccountLockedException.java
+END
+LoginContext.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/login/LoginContext.java
+END

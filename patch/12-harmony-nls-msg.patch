@@ -1,0 +1,59 @@
+diff -ur ../../src-unpatched/trunk/org/apache/harmony/javax/security/auth/login/LoginContext.java ./org/apache/harmony/javax/security/auth/login/LoginContext.java
+--- ../../src-unpatched/trunk/org/apache/harmony/javax/security/auth/login/LoginContext.java	2009-12-06 15:31:24.000000000 +0100
++++ ./org/apache/harmony/javax/security/auth/login/LoginContext.java	2009-12-06 15:36:20.000000000 +0100
+@@ -161,7 +161,7 @@
+             }
+             entries = config.getAppConfigurationEntry("other"); //$NON-NLS-1$
+             if (entries == null) {
+-                throw new LoginException(Messages.getString("auth.35", name)); //$NON-NLS-1$
++                throw new LoginException("auth.35 " + name); //$NON-NLS-1$
+             }
+         }
+ 
+@@ -524,8 +524,8 @@
+                 try {
+                     klass = Class.forName(klassName, false, contextClassLoader);
+                 } catch (ClassNotFoundException ex) {
+-                    throw (LoginException) new LoginException(Messages.getString(
+-                            "auth.39", klassName)).initCause(ex); //$NON-NLS-1$
++                    throw (LoginException) new LoginException(
++                            "auth.39 " + klassName).initCause(ex); //$NON-NLS-1$
+                 }
+             }
+ 
+@@ -533,12 +533,12 @@
+                 try {
+                     module = (LoginModule) klass.newInstance();
+                 } catch (IllegalAccessException ex) {
+-                    throw (LoginException) new LoginException(Messages.getString(
+-                            "auth.3A", klassName)) //$NON-NLS-1$
++                    throw (LoginException) new LoginException(
++                            "auth.3A " + klassName) //$NON-NLS-1$
+                             .initCause(ex);
+                 } catch (InstantiationException ex) {
+-                    throw (LoginException) new LoginException(Messages.getString(
+-                            "auth.3A", klassName)) //$NON-NLS-1$
++                    throw (LoginException) new LoginException(
++                            "auth.3A" + klassName) //$NON-NLS-1$
+                             .initCause(ex);
+                 }
+                 module.initialize(subject, callbackHandler, sharedState, entry.getOptions());
+diff -ur ../../src-unpatched/trunk/org/apache/harmony/javax/security/auth/Subject.java ./org/apache/harmony/javax/security/auth/Subject.java
+--- ../../src-unpatched/trunk/org/apache/harmony/javax/security/auth/Subject.java	2009-12-06 15:31:24.000000000 +0100
++++ ./org/apache/harmony/javax/security/auth/Subject.java	2009-12-06 15:32:10.000000000 +0100
+@@ -669,7 +669,7 @@
+ 
+                     if (!c.isAssignableFrom(o.getClass())) {
+                         throw new IllegalArgumentException(
+-                                Messages.getString("auth.0C", c.getName())); //$NON-NLS-1$
++                                "auth.0C " + c.getName()); //$NON-NLS-1$
+                     }
+ 
+                     if (elements.contains(o)) {
+@@ -779,4 +779,4 @@
+             }
+         }
+     }
+-}
+\ No newline at end of file
++}

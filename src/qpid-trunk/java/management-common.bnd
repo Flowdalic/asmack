@@ -1,0 +1,8 @@
+ver: 0.5.0
+
+Bundle-SymbolicName: qpid-management-common
+Bundle-Version: ${ver}
+Export-Package: *;version=${ver}
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: jmxremote.sasl;resolution:=optional
+

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/repos/!svn/ver/11258/smack/trunk/source/org/jivesoftware/smack/sasl
+END
+SASLCramMD5Mechanism.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/9498/smack/trunk/source/org/jivesoftware/smack/sasl/SASLCramMD5Mechanism.java
+END
+SASLMechanism.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/11258/smack/trunk/source/org/jivesoftware/smack/sasl/SASLMechanism.java
+END
+SASLExternalMechanism.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/9498/smack/trunk/source/org/jivesoftware/smack/sasl/SASLExternalMechanism.java
+END
+SASLAnonymous.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/11257/smack/trunk/source/org/jivesoftware/smack/sasl/SASLAnonymous.java
+END
+SASLPlainMechanism.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/9498/smack/trunk/source/org/jivesoftware/smack/sasl/SASLPlainMechanism.java
+END
+SASLDigestMD5Mechanism.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/9803/smack/trunk/source/org/jivesoftware/smack/sasl/SASLDigestMD5Mechanism.java
+END
+SASLGSSAPIMechanism.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/9498/smack/trunk/source/org/jivesoftware/smack/sasl/SASLGSSAPIMechanism.java
+END
+package.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/2735/smack/trunk/source/org/jivesoftware/smack/sasl/package.html
+END

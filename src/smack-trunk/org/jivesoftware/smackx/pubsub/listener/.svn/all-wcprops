@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/11346/smack/trunk/source/org/jivesoftware/smackx/pubsub/listener
+END
+NodeConfigListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/11346/smack/trunk/source/org/jivesoftware/smackx/pubsub/listener/NodeConfigListener.java
+END
+ItemEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/11346/smack/trunk/source/org/jivesoftware/smackx/pubsub/listener/ItemEventListener.java
+END
+ItemDeleteListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/11346/smack/trunk/source/org/jivesoftware/smackx/pubsub/listener/ItemDeleteListener.java
+END

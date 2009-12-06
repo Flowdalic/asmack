@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/repos/asf/!svn/ver/799222/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/kerberos
+END
+KrbDelegationPermissionCollection.java
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/kerberos/KrbDelegationPermissionCollection.java
+END
+KerberosTicket.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/asf/!svn/ver/487127/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/kerberos/KerberosTicket.java
+END
+DelegationPermission.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/kerberos/DelegationPermission.java
+END
+KrbServicePermissionCollection.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/kerberos/KrbServicePermissionCollection.java
+END
+KerberosKey.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/asf/!svn/ver/628023/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/kerberos/KerberosKey.java
+END
+ServicePermission.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/kerberos/ServicePermission.java
+END
+KeyImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/repos/asf/!svn/ver/799222/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/kerberos/KeyImpl.java
+END
+KerberosPrincipal.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/asf/!svn/ver/502562/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/kerberos/KerberosPrincipal.java
+END

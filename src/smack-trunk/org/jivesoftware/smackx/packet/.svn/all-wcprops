@@ -1,0 +1,209 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/repos/!svn/ver/11351/smack/trunk/source/org/jivesoftware/smackx/packet
+END
+VCard.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/repos/!svn/ver/9526/smack/trunk/source/org/jivesoftware/smackx/packet/VCard.java
+END
+MUCOwner.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/MUCOwner.java
+END
+OfflineMessageRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/OfflineMessageRequest.java
+END
+OfflineMessageInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/OfflineMessageInfo.java
+END
+PrivateData.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/PrivateData.java
+END
+PEPPubSub.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/10853/smack/trunk/source/org/jivesoftware/smackx/packet/PEPPubSub.java
+END
+AdHocCommandData.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/10865/smack/trunk/source/org/jivesoftware/smackx/packet/AdHocCommandData.java
+END
+DefaultPrivateData.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/DefaultPrivateData.java
+END
+DelayInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/11348/smack/trunk/source/org/jivesoftware/smackx/packet/DelayInfo.java
+END
+ChatStateExtension.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/ChatStateExtension.java
+END
+DiscoverItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/DiscoverItems.java
+END
+LastActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/LastActivity.java
+END
+SharedGroupsInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/4538/smack/trunk/source/org/jivesoftware/smackx/packet/SharedGroupsInfo.java
+END
+StreamInitiation.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/4547/smack/trunk/source/org/jivesoftware/smackx/packet/StreamInitiation.java
+END
+Version.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/Version.java
+END
+PEPEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/10853/smack/trunk/source/org/jivesoftware/smackx/packet/PEPEvent.java
+END
+DataForm.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/DataForm.java
+END
+Time.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/7407/smack/trunk/source/org/jivesoftware/smackx/packet/Time.java
+END
+PEPItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/10853/smack/trunk/source/org/jivesoftware/smackx/packet/PEPItem.java
+END
+DelayInformation.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/DelayInformation.java
+END
+HeadersExtension.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/11347/smack/trunk/source/org/jivesoftware/smackx/packet/HeadersExtension.java
+END
+IBBExtensions.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/4538/smack/trunk/source/org/jivesoftware/smackx/packet/IBBExtensions.java
+END
+SyncPacketSend.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/11351/smack/trunk/source/org/jivesoftware/smackx/packet/SyncPacketSend.java
+END
+package.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/repos/!svn/ver/2058/smack/trunk/source/org/jivesoftware/smackx/packet/package.html
+END
+Bytestream.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/7616/smack/trunk/source/org/jivesoftware/smackx/packet/Bytestream.java
+END
+RosterExchange.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/RosterExchange.java
+END
+MUCUser.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/MUCUser.java
+END
+MUCInitialPresence.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/MUCInitialPresence.java
+END
+MessageEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/MessageEvent.java
+END
+Header.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/repos/!svn/ver/11347/smack/trunk/source/org/jivesoftware/smackx/packet/Header.java
+END
+MultipleAddresses.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/4538/smack/trunk/source/org/jivesoftware/smackx/packet/MultipleAddresses.java
+END
+XHTMLExtension.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/XHTMLExtension.java
+END
+DiscoverInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/DiscoverInfo.java
+END
+MUCAdmin.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smackx/packet/MUCAdmin.java
+END

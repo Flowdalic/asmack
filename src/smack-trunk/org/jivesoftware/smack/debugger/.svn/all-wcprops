@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smack/debugger
+END
+LiteDebugger.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smack/debugger/LiteDebugger.java
+END
+SmackDebugger.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smack/debugger/SmackDebugger.java
+END
+ConsoleDebugger.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/6106/smack/trunk/source/org/jivesoftware/smack/debugger/ConsoleDebugger.java
+END
+package.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/2366/smack/trunk/source/org/jivesoftware/smack/debugger/package.html
+END

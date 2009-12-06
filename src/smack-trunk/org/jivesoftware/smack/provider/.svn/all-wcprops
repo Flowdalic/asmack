@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smack/provider
+END
+PacketExtensionProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smack/provider/PacketExtensionProvider.java
+END
+IQProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smack/provider/IQProvider.java
+END
+ProviderManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/7071/smack/trunk/source/org/jivesoftware/smack/provider/ProviderManager.java
+END
+PrivacyProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/6616/smack/trunk/source/org/jivesoftware/smack/provider/PrivacyProvider.java
+END
+package.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/1973/smack/trunk/source/org/jivesoftware/smack/provider/package.html
+END

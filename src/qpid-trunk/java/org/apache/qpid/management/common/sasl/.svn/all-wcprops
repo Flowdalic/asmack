@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/repos/asf/!svn/ver/732330/qpid/trunk/qpid/java/management/common/src/main/java/org/apache/qpid/management/common/sasl
+END
+CRAMMD5HashedSaslClientFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/repos/asf/!svn/ver/732330/qpid/trunk/qpid/java/management/common/src/main/java/org/apache/qpid/management/common/sasl/CRAMMD5HashedSaslClientFactory.java
+END
+PlainSaslClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/asf/!svn/ver/732330/qpid/trunk/qpid/java/management/common/src/main/java/org/apache/qpid/management/common/sasl/PlainSaslClient.java
+END
+JCAProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/repos/asf/!svn/ver/732330/qpid/trunk/qpid/java/management/common/src/main/java/org/apache/qpid/management/common/sasl/JCAProvider.java
+END
+ClientSaslFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/asf/!svn/ver/732330/qpid/trunk/qpid/java/management/common/src/main/java/org/apache/qpid/management/common/sasl/ClientSaslFactory.java
+END
+UsernameHashedPasswordCallbackHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/repos/asf/!svn/ver/732330/qpid/trunk/qpid/java/management/common/src/main/java/org/apache/qpid/management/common/sasl/UsernameHashedPasswordCallbackHandler.java
+END
+Constants.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/asf/!svn/ver/732330/qpid/trunk/qpid/java/management/common/src/main/java/org/apache/qpid/management/common/sasl/Constants.java
+END
+UserPasswordCallbackHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/repos/asf/!svn/ver/732330/qpid/trunk/qpid/java/management/common/src/main/java/org/apache/qpid/management/common/sasl/UserPasswordCallbackHandler.java
+END
+SaslProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/repos/asf/!svn/ver/732330/qpid/trunk/qpid/java/management/common/src/main/java/org/apache/qpid/management/common/sasl/SaslProvider.java
+END

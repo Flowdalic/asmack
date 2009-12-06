@@ -1,0 +1,16 @@
+K 13
+svn:eol-style
+V 6
+native
+K 12
+svn:keywords
+V 8
+Rev Date
+K 13
+svn:mergeinfo
+V 676
+/qpid/branches/0.5-release/qpid/java/broker/src/main/java/org/apache/qpid/server/management/MBeanOperationParameter.java:757268
+/qpid/branches/java-broker-0-10/qpid/java/management/common/src/main/java/org/apache/qpid/management/common/mbeans/annotations/MBeanOperationParameter.java:795950-829653
+/qpid/branches/java-network-refactor/qpid/java/management/common/src/main/java/org/apache/qpid/management/common/mbeans/annotations/MBeanOperationParameter.java:805429-821809
+/qpid/trunk/qpid/java/broker/src/main/java/org/apache/qpid/server/management/MBeanOperationParameter.java:753219-753220,753253,758730,759097,760919,761721,762365,762992,763959,764026,764109,764140,764790
+END

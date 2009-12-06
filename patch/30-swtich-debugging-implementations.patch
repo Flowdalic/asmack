@@ -1,0 +1,17 @@
+--- org/jivesoftware/smack/XMPPConnection.java	2009-12-06 21:02:51.000000000 +0100
++++ ../../src-unpatched/trunk/org/jivesoftware/smack/XMPPConnection.java	2009-12-06 20:59:23.000000000 +0100
+@@ -1027,12 +1027,12 @@
+                 if (debuggerClass == null) {
+                     try {
+                         debuggerClass =
+-                                Class.forName("org.jivesoftware.smackx.debugger.EnhancedDebugger");
++                                Class.forName("de.measite.smack.AndroidDebugger");
+                     }
+                     catch (Exception ex) {
+                         try {
+                             debuggerClass =
+-                                    Class.forName("org.jivesoftware.smack.debugger.LiteDebugger");
++                                    Class.forName("org.jivesoftware.smack.debugger.ConsoleDebugger");
+                         }
+                         catch (Exception ex2) {
+                             ex2.printStackTrace();

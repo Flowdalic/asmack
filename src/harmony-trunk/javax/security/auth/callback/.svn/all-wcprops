@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/repos/asf/!svn/ver/768124/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/callback
+END
+PasswordCallback.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/repos/asf/!svn/ver/768124/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/callback/PasswordCallback.java
+END
+LanguageCallback.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/callback/LanguageCallback.java
+END
+TextInputCallback.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/callback/TextInputCallback.java
+END
+TextOutputCallback.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/callback/TextOutputCallback.java
+END
+UnsupportedCallbackException.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/repos/asf/!svn/ver/768124/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/callback/UnsupportedCallbackException.java
+END
+ConfirmationCallback.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/callback/ConfirmationCallback.java
+END
+ChoiceCallback.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/callback/ChoiceCallback.java
+END
+CallbackHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/repos/asf/!svn/ver/768124/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/callback/CallbackHandler.java
+END
+Callback.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/repos/asf/!svn/ver/768124/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/callback/Callback.java
+END
+NameCallback.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/asf/!svn/ver/476395/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/javax/security/auth/callback/NameCallback.java
+END

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/repos/!svn/ver/10674/smack/trunk/source/org/jivesoftware/smack/proxy
+END
+ProxyException.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/10674/smack/trunk/source/org/jivesoftware/smack/proxy/ProxyException.java
+END
+HTTPProxySocketFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/10674/smack/trunk/source/org/jivesoftware/smack/proxy/HTTPProxySocketFactory.java
+END
+Socks4ProxySocketFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/10674/smack/trunk/source/org/jivesoftware/smack/proxy/Socks4ProxySocketFactory.java
+END
+Socks5ProxySocketFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/10674/smack/trunk/source/org/jivesoftware/smack/proxy/Socks5ProxySocketFactory.java
+END
+DirectSocketFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/10674/smack/trunk/source/org/jivesoftware/smack/proxy/DirectSocketFactory.java
+END
+ProxyInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/10674/smack/trunk/source/org/jivesoftware/smack/proxy/ProxyInfo.java
+END
