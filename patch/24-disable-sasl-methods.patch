@@ -10,10 +10,10 @@
 -        supportSASLMechanism("PLAIN",3);
 -        supportSASLMechanism("ANONYMOUS",4);
 +//        supportSASLMechanism("GSSAPI",0);
-+//        supportSASLMechanism("DIGEST-MD5",1);
++        supportSASLMechanism("DIGEST-MD5",0);
 +//        supportSASLMechanism("CRAM-MD5",2);
-+        supportSASLMechanism("PLAIN",0);
-+        supportSASLMechanism("ANONYMOUS",1);
++        supportSASLMechanism("PLAIN",1);
++        supportSASLMechanism("ANONYMOUS",2);
  
      }
  

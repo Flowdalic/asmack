@@ -1,0 +1,13 @@
+--- ../../src-unpatched/trunk/com/novell/sasl/client/DigestMD5SaslClient.java	2009-12-07 19:14:10.000000000 +0100
++++ com/novell/sasl/client/DigestMD5SaslClient.java	2009-12-07 19:19:07.000000000 +0100
+@@ -673,8 +673,8 @@
+         digestResponse.append("00000001"); //nounce count
+         digestResponse.append(",qop=");
+         digestResponse.append(m_qopValue);
+-        digestResponse.append(",digest-uri=\"ldap/");
+-        digestResponse.append(m_serverName);
++        digestResponse.append(",digest-uri=\"");
++	digestResponse.append(m_digestURI);
+         digestResponse.append("\",response=");
+         digestResponse.append(response);
+         digestResponse.append(",charset=utf-8,nonce=\"");
