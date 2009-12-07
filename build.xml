@@ -13,7 +13,14 @@
     <jar
       basedir="build/classes/trunk"
       destfile="build/asmack-jse.jar"
-      filesonly="false"
+      filesonly="true"
+      level="9"
+    />
+    <zip
+      basedir="build/src/trunk"
+      destfile="build/asmack-jse-source.zip"
+      excludes="**/de/measite/smack/AndroidDebugger.java"
+      filesonly="true"
       level="9"
     />
 </target>
@@ -30,8 +37,110 @@
     />
     <jar
       basedir="build/classes/trunk"
-      destfile="build/asmack-android.jar"
-      filesonly="false"
+      destfile="build/asmack-android-2.0.1.jar"
+      filesonly="true"
+      level="9"
+    />
+    <zip
+      basedir="build/src/trunk"
+      destfile="build/asmack-android-2.0.1-source.zip"
+      filesonly="true"
+      level="9"
+    />
+</target>
+
+<target name="compile-a20" description="Compile for android 2.0">
+    <delete dir="build/classes" failonerror="false" />
+    <mkdir dir="build/classes" />
+    <mkdir dir="build/classes/trunk" />
+    <javac
+      srcdir="build/src/trunk"
+      destdir="build/classes/trunk"
+      classpath="lib/xmlpull_1_1_3_4c.jar"
+      bootclasspath="lib/android-2.0.jar"
+    />
+    <jar
+      basedir="build/classes/trunk"
+      destfile="build/asmack-android-2.0.jar"
+      filesonly="true"
+      level="9"
+    />
+    <zip
+      basedir="build/src/trunk"
+      destfile="build/asmack-android-2.0-source.zip"
+      filesonly="true"
+      level="9"
+    />
+</target>
+
+<target name="compile-a16" description="Compile for android 1.6">
+    <delete dir="build/classes" failonerror="false" />
+    <mkdir dir="build/classes" />
+    <mkdir dir="build/classes/trunk" />
+    <javac
+      srcdir="build/src/trunk"
+      destdir="build/classes/trunk"
+      classpath="lib/xmlpull_1_1_3_4c.jar"
+      bootclasspath="lib/android-1.6.jar"
+    />
+    <jar
+      basedir="build/classes/trunk"
+      destfile="build/asmack-android-1.6.jar"
+      filesonly="true"
+      level="9"
+    />
+    <zip
+      basedir="build/src/trunk"
+      destfile="build/asmack-android-1.6-source.zip"
+      filesonly="true"
+      level="9"
+    />
+</target>
+
+<target name="compile-a15" description="Compile for android 1.5">
+    <delete dir="build/classes" failonerror="false" />
+    <mkdir dir="build/classes" />
+    <mkdir dir="build/classes/trunk" />
+    <javac
+      srcdir="build/src/trunk"
+      destdir="build/classes/trunk"
+      classpath="lib/xmlpull_1_1_3_4c.jar"
+      bootclasspath="lib/android-1.5.jar"
+    />
+    <jar
+      basedir="build/classes/trunk"
+      destfile="build/asmack-android-1.5.jar"
+      filesonly="true"
+      level="9"
+    />
+    <zip
+      basedir="build/src/trunk"
+      destfile="build/asmack-android-1.5-source.zip"
+      filesonly="true"
+      level="9"
+    />
+</target>
+
+<target name="compile-a11" description="Compile for android 1.1">
+    <delete dir="build/classes" failonerror="false" />
+    <mkdir dir="build/classes" />
+    <mkdir dir="build/classes/trunk" />
+    <javac
+      srcdir="build/src/trunk"
+      destdir="build/classes/trunk"
+      classpath="lib/xmlpull_1_1_3_4c.jar"
+      bootclasspath="lib/android-1.1.jar"
+    />
+    <jar
+      basedir="build/classes/trunk"
+      destfile="build/asmack-android-1.1.jar"
+      filesonly="true"
+      level="9"
+    />
+    <zip
+      basedir="build/src/trunk"
+      destfile="build/asmack-android-1.1-source.zip"
+      filesonly="true"
       level="9"
     />
 </target>
@@ -39,7 +148,7 @@
 <target
   name="compile"
   description="Compile for all targets"
-  depends="compile-jse,compile-a201"
+  depends="compile-jse,compile-a201,compile-a20,compile-a16,compile-a15,compile-a11"
 />
 
 </project>
