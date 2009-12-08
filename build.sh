@@ -52,6 +52,17 @@ echo "## Step 12: fetch harmony"
   fi
 )
 
+echo "## Step 13: fetch dnsjava"
+(
+  cd src
+  if ! [ -d dnsjava ]; then
+    svn co https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk dnsjava
+  else
+    cd dnsjava
+    svn cleanup && svn up
+  fi
+)
+
 }
 
 buildsrc() {
@@ -61,13 +72,6 @@ buildsrc() {
   mkdir build/src/trunk
   (
     cd src/smack-trunk/
-    tar -cSsp --exclude-vcs .
-  ) | (
-    cd build/src/trunk/
-    tar -xSsp
-  )
-  (
-    cd src/custom/
     tar -cSsp --exclude-vcs .
   ) | (
     cd build/src/trunk/
@@ -88,12 +92,27 @@ buildsrc() {
     tar -xSsp
   )
   (
+    cd src/dnsjava
+    tar -cSsp --exclude-vcs org
+  ) | (
+    cd build/src/trunk/
+    tar -xSsp
+  )
+  (
     cd src/harmony-trunk/
     tar -cSsp --exclude-vcs .
   ) | (
     cd build/src/trunk/
     tar -xSsp
   )
+  (
+    cd src/custom/
+    tar -cSsp --exclude-vcs .
+  ) | (
+    cd build/src/trunk/
+    tar -xSsp
+  )
+
 }
 
 patchsrc() {
