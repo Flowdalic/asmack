@@ -8,6 +8,8 @@
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
+      debug="true"
+      debuglevel="source,lines"
       excludes="**/de/measite/smack/AndroidDebugger.java"
     />
     <jar
@@ -34,6 +36,8 @@
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
       bootclasspath="lib/android-2.0.1.jar"
+      debug="true"
+      debuglevel="source,lines"
     />
     <jar
       basedir="build/classes/trunk"
@@ -58,6 +62,8 @@
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
       bootclasspath="lib/android-2.0.jar"
+      debug="true"
+      debuglevel="source,lines"
     />
     <jar
       basedir="build/classes/trunk"
@@ -82,6 +88,8 @@
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
       bootclasspath="lib/android-1.6.jar"
+      debug="true"
+      debuglevel="source,lines"
     />
     <jar
       basedir="build/classes/trunk"
@@ -106,6 +114,8 @@
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
       bootclasspath="lib/android-1.5.jar"
+      debug="true"
+      debuglevel="source,lines"
     />
     <jar
       basedir="build/classes/trunk"
@@ -130,6 +140,8 @@
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
       bootclasspath="lib/android-1.1.jar"
+      debug="true"
+      debuglevel="source,lines"
     />
     <jar
       basedir="build/classes/trunk"
