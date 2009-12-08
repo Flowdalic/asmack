@@ -51,27 +51,31 @@ public class DNSUtil {
 		Lookup lookup;
 		try {
 			lookup = new Lookup(domain, Type.SRV);
-			for (Record rec : lookup.run()) {
+			Record recs[] = lookup.run();
+			if (recs == null) { return null; }
+			for (Record rec : recs) {
 				SRVRecord record = (SRVRecord) rec;
-				int weight = (int) (record.getWeight() * record.getWeight() * Math
-						.random());
-				if (record.getPriority() < bestPriority) {
-					bestPriority = record.getPriority();
-					bestWeight = weight;
-					bestHost = record.getTarget().toString();
-					bestPort = record.getPort();
-				} else if (record.getPriority() == bestPriority) {
-					if (weight > bestWeight) {
+				if (record != null && record.getTarget() != null) {
+					int weight = (int) (record.getWeight() * record.getWeight() * Math
+							.random());
+					if (record.getPriority() < bestPriority) {
 						bestPriority = record.getPriority();
 						bestWeight = weight;
 						bestHost = record.getTarget().toString();
 						bestPort = record.getPort();
+					} else if (record.getPriority() == bestPriority) {
+						if (weight > bestWeight) {
+							bestPriority = record.getPriority();
+							bestWeight = weight;
+							bestHost = record.getTarget().toString();
+							bestPort = record.getPort();
+						}
 					}
-				}
+                                }
 			}
 		} catch (TextParseException e) {
-			e.printStackTrace();
-		}
+		} catch (NullPointerException e) {
+                }
 		if (bestHost == null) {
 			return null;
 		}
