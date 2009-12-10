@@ -142,3 +142,7 @@ buildsrc
 patchsrc
 build
 
+if which advzip; then
+  find build/*.jar -exec advzip -z4 '{}' ';'
+  find build/*.zip -exec advzip -z4 '{}' ';'
+fi
