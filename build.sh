@@ -2,9 +2,6 @@
 
 echo "## Step 00: initialize"
 (
-  if ! [ -d src ]; then
-    mkdir src || ( echo "can't create source folder" ; exit 1 )
-  fi
   if ! [ -d build ]; then
     mkdir build
     mkdir build/src
@@ -13,56 +10,37 @@ echo "## Step 00: initialize"
 )
 
 fetch() {
-
-echo "## Step 10: fetch smack"
 (
   cd src
-  if ! [ -d smack-trunk ]; then
-    svn co http://svn.igniterealtime.org/svn/repos/smack/trunk/source/ smack-trunk || (
-      echo "could not fetch smack/trunk"
-      exit 11
-    )
+  if ! [ -f "${2}/.svn/entries" ]; then
+    mkdir "${2}"
+    cd "${2}"
+    svn co --non-interactive --trust-server-cert "${1}" "."
   else
-    (
-      cd smack-trunk
-      svn cleanup && svn up
-    )
+    cd "${2}"
+    svn cleanup
+    svn up
   fi
 )
+}
 
-echo "## Step 11: fetch qpid"
+fetchall() {
+  fetch "http://svn.igniterealtime.org/svn/repos/smack/trunk/source/" "smack"
+  fetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid"
+  fetch "http://svn.apache.org/repos/asf/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/" "harmony"
+  fetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava"
+}
+
+copyfolder() {
 (
-  cd src
-  if ! [ -d qpid-trunk ]; then
-    svn co http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/ qpid-trunk
-  else
-    cd qpid-trunk
-    svn cleanup && svn up
-  fi
+  (
+    cd "${1}"
+    tar -cSsp --exclude-vcs "${3}"
+  ) | (
+    cd "${2}"
+    tar -xSsp
+  )
 )
-
-echo "## Step 12: fetch harmony"
-(
-  cd src
-  if ! [ -d harmony-trunk ]; then
-    svn co http://svn.apache.org/repos/asf/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/ harmony-trunk
-  else
-    cd harmony-trunk
-    svn cleanup && svn up
-  fi
-)
-
-echo "## Step 13: fetch dnsjava"
-(
-  cd src
-  if ! [ -d dnsjava ]; then
-    svn co https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk dnsjava
-  else
-    cd dnsjava
-    svn cleanup && svn up
-  fi
-)
-
 }
 
 buildsrc() {
@@ -70,49 +48,12 @@ buildsrc() {
   rm -rf build/src
   mkdir build/src
   mkdir build/src/trunk
-  (
-    cd src/smack-trunk/
-    tar -cSsp --exclude-vcs .
-  ) | (
-    cd build/src/trunk/
-    tar -xSsp
-  )
-  (
-    cd src/qpid-trunk/java
-    tar -cSsp --exclude-vcs org/apache/qpid/management/common/sasl/
-  ) | (
-    cd build/src/trunk/
-    tar -xSsp
-  )
-  (
-    cd src/novell-openldap-jldap
-    tar -cSsp --exclude-vcs .
-  ) | (
-    cd build/src/trunk/
-    tar -xSsp
-  )
-  (
-    cd src/dnsjava
-    tar -cSsp --exclude-vcs org
-  ) | (
-    cd build/src/trunk/
-    tar -xSsp
-  )
-  (
-    cd src/harmony-trunk/
-    tar -cSsp --exclude-vcs .
-  ) | (
-    cd build/src/trunk/
-    tar -xSsp
-  )
-  (
-    cd src/custom/
-    tar -cSsp --exclude-vcs .
-  ) | (
-    cd build/src/trunk/
-    tar -xSsp
-  )
-
+  copyfolder "src/smack" "build/src/trunk" "."
+  copyfolder "src/qpid/java" "build/src/trunk" "org/apache/qpid/management/common/sasl"
+  copyfolder "src/novell-openldap-jldap" "build/src/trunk" "."
+  copyfolder "src/dnsjava"  "build/src/trunk" "org"
+  copyfolder "src/harmony" "build/src/trunk" "."
+  copyfolder "src/custom" "build/src/trunk" "."
 }
 
 patchsrc() {
@@ -137,7 +78,7 @@ build() {
   ant
 }
 
-fetch
+fetchall
 buildsrc
 patchsrc
 build
