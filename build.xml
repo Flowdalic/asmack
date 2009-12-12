@@ -1,5 +1,27 @@
 <project name="asmack" default="compile" basedir=".">
 
+<property file="local.properties" />
+
+<condition property="build-1.1">
+    <available file="${sdk-location}/platforms/android-1.1/android.jar" />
+</condition>
+
+<condition property="build-1.5">
+    <available file="${sdk-location}/platforms/android-1.5/android.jar" />
+</condition>
+
+<condition property="build-1.6">
+    <available file="${sdk-location}/platforms/android-1.6/android.jar" />
+</condition>
+
+<condition property="build-2.0">
+    <available file="${sdk-location}/platforms/android-2.0/android.jar" />
+</condition>
+
+<condition property="build-2.0.1">
+    <available file="${sdk-location}/platforms/android-2.0.1/android.jar" />
+</condition>
+
 <target name="compile-jse"  description="Compile for java se">
     <delete dir="build/classes" failonerror="false" />
     <mkdir dir="build/classes" />
@@ -27,7 +49,7 @@
     />
 </target>
 
-<target name="compile-a201" description="Compile for android 2.0.1">
+<target name="compile-a201" description="Compile for android 2.0.1" if="build-2.0.1">
     <delete dir="build/classes" failonerror="false" />
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
@@ -35,7 +57,7 @@
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
-      bootclasspath="lib/android-2.0.1.jar"
+      bootclasspath="${sdk-location}/platforms/android-2.0.1/android.jar"
       debug="true"
       debuglevel="source,lines"
     />
@@ -53,7 +75,7 @@
     />
 </target>
 
-<target name="compile-a20" description="Compile for android 2.0">
+<target name="compile-a20" description="Compile for android 2.0" if="build-2.0">
     <delete dir="build/classes" failonerror="false" />
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
@@ -61,7 +83,7 @@
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
-      bootclasspath="lib/android-2.0.jar"
+      bootclasspath="${sdk-location}/platforms/android-2.0/android.jar"
       debug="true"
       debuglevel="source,lines"
     />
@@ -79,7 +101,7 @@
     />
 </target>
 
-<target name="compile-a16" description="Compile for android 1.6">
+<target name="compile-a16" description="Compile for android 1.6" if="build-1.6">
     <delete dir="build/classes" failonerror="false" />
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
@@ -87,7 +109,7 @@
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
-      bootclasspath="lib/android-1.6.jar"
+      bootclasspath="${sdk-location}/platforms/android-1.6/android.jar"
       debug="true"
       debuglevel="source,lines"
     />
@@ -105,7 +127,7 @@
     />
 </target>
 
-<target name="compile-a15" description="Compile for android 1.5">
+<target name="compile-a15" description="Compile for android 1.5" if="build-1.5">
     <delete dir="build/classes" failonerror="false" />
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
@@ -113,7 +135,7 @@
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
-      bootclasspath="lib/android-1.5.jar"
+      bootclasspath="${sdk-location}/platforms/android-1.5/android.jar"
       debug="true"
       debuglevel="source,lines"
     />
@@ -131,7 +153,7 @@
     />
 </target>
 
-<target name="compile-a11" description="Compile for android 1.1">
+<target name="compile-a11" description="Compile for android 1.1" if="build-1.1">
     <delete dir="build/classes" failonerror="false" />
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
@@ -139,7 +161,7 @@
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
-      bootclasspath="lib/android-1.1.jar"
+      bootclasspath="${sdk-location}/platforms/android-1.1/android.jar"
       debug="true"
       debuglevel="source,lines"
     />
