@@ -60,7 +60,7 @@ patchsrc() {
   echo "## Step 21: patch build/src"
   (
     cd build/src/trunk/
-    for PATCH in `(cd ../../../patch ; find -maxdepth 1 -type f ; cd trunk ; find -maxdepth 1 -type f)|sort` ; do
+    for PATCH in `(cd ../../../patch ; find -maxdepth 1 -type f)|sort` ; do
       if echo $PATCH | grep '\.sh$'; then
         if [ -f ../../../patch/$PATCH ]; then ../../../patch/$PATCH ; fi
         if [ -f ../../../patch/trunk/$PATCH ]; then ../../../patch/trunk/$PATCH ; fi
