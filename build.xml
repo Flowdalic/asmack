@@ -27,6 +27,7 @@
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
     <javac
+      target="1.5"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
@@ -54,6 +55,7 @@
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
     <javac
+      target="1.5"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
@@ -80,6 +82,7 @@
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
     <javac
+      target="1.5"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
@@ -106,6 +109,7 @@
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
     <javac
+      target="1.5"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
@@ -132,6 +136,7 @@
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
     <javac
+      target="1.5"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
@@ -158,6 +163,7 @@
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
     <javac
+      target="1.5"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xmlpull_1_1_3_4c.jar"
