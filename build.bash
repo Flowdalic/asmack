@@ -60,14 +60,12 @@ patchsrc() {
   echo "## Step 21: patch build/src"
   (
     cd build/src/trunk/
-    for PATCH in `(cd ../../../patch ; find -maxdepth 1 -type f)|sort` ; do
+    for PATCH in `(cd "../../../${1}" ; find -maxdepth 1 -type f)|sort` ; do
       if echo $PATCH | grep '\.sh$'; then
-        if [ -f ../../../patch/$PATCH ]; then ../../../patch/$PATCH ; fi
-        if [ -f ../../../patch/trunk/$PATCH ]; then ../../../patch/trunk/$PATCH ; fi
+        if [ -f "../../../${1}/$PATCH" ]; then "../../../${1}/$PATCH" ; fi
       fi
       if echo $PATCH | grep '\.patch$'; then
-        if [ -f ../../../patch/$PATCH ]; then patch -p0 < ../../../patch/$PATCH ; fi
-        if [ -f ../../../patch/trunk/$PATCH ]; then patch -p0 < ../../../patch/trunk/$PATCH ; fi
+        if [ -f "../../../${1}/$PATCH" ]; then patch -p0 < "../../../${1}/$PATCH" ; fi
       fi
     done
   )
@@ -75,13 +73,23 @@ patchsrc() {
 
 build() {
   echo "## Step 30: compile"
-  ant
+  ant -Dbuild.all=true
 }
 
-fetchall
+buildcustom() {
+  for dir in `find patch -maxdepth 1 -mindepth 1 -type d`; do
+    buildsrc
+    patchsrc "patch"
+    patchsrc "${dir}"
+    ant -Djar.suffix=`echo ${dir}|sed 's:patch/:-:'`
+  done
+}
+
+#fetchall
 buildsrc
-patchsrc
+patchsrc "patch"
 build
+buildcustom
 
 if which advzip; then
   find build/*.jar -exec advzip -z4 '{}' ';'

@@ -1,0 +1,9 @@
+This is an example of custom jar building.
+
+This sample addes a few patches to the pubsub engine.
+This leads to the -buddycloud jar used by http://code.google.com/p/buddycloud/
+
+Feel free to create your custom spinoffs,
+http://www.igniterealtime.org/issues/browse/SMACK
+and the community pages are great places to look for patches :-)
+

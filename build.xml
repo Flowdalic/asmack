@@ -1,25 +1,39 @@
 <project name="asmack" default="compile" basedir=".">
 
 <property file="local.properties" />
+<property name="jar.suffix" value="" />
+<property name="build.all" value="false" />
 
 <condition property="build-1.1">
     <available file="${sdk-location}/platforms/android-1.1/android.jar" />
 </condition>
 
 <condition property="build-1.5">
-    <available file="${sdk-location}/platforms/android-1.5/android.jar" />
+    <and>
+        <istrue value="${build.all}" />
+        <available file="${sdk-location}/platforms/android-1.5/android.jar" />
+    </and>
 </condition>
 
 <condition property="build-1.6">
-    <available file="${sdk-location}/platforms/android-1.6/android.jar" />
+    <and>
+        <istrue value="${build.all}" />
+        <available file="${sdk-location}/platforms/android-1.6/android.jar" />
+    </and>
 </condition>
 
 <condition property="build-2.0">
-    <available file="${sdk-location}/platforms/android-2.0/android.jar" />
+    <and>
+        <istrue value="${build.all}" />
+        <available file="${sdk-location}/platforms/android-2.0/android.jar" />
+    </and>
 </condition>
 
 <condition property="build-2.0.1">
-    <available file="${sdk-location}/platforms/android-2.0.1/android.jar" />
+    <and>
+        <istrue value="${build.all}" />
+        <available file="${sdk-location}/platforms/android-2.0.1/android.jar" />
+    </and>
 </condition>
 
 <target name="compile-jse"  description="Compile for java se">
@@ -37,13 +51,13 @@
     />
     <jar
       basedir="build/classes/trunk"
-      destfile="build/asmack-jse.jar"
+      destfile="build/asmack-jse${jar.suffix}.jar"
       filesonly="true"
       level="9"
     />
     <zip
       basedir="build/src/trunk"
-      destfile="build/asmack-jse-source.zip"
+      destfile="build/asmack-jse-source${jar.suffix}.zip"
       excludes="**/de/measite/smack/AndroidDebugger.java"
       filesonly="true"
       level="9"
@@ -65,13 +79,13 @@
     />
     <jar
       basedir="build/classes/trunk"
-      destfile="build/asmack-android-2.0.1.jar"
+      destfile="build/asmack-android-2.0.1${jar.suffix}.jar"
       filesonly="true"
       level="9"
     />
     <zip
       basedir="build/src/trunk"
-      destfile="build/asmack-android-2.0.1-source.zip"
+      destfile="build/asmack-android-2.0.1-source${jar.suffix}.zip"
       filesonly="true"
       level="9"
     />
@@ -92,13 +106,13 @@
     />
     <jar
       basedir="build/classes/trunk"
-      destfile="build/asmack-android-2.0.jar"
+      destfile="build/asmack-android-2.0${jar.suffix}.jar"
       filesonly="true"
       level="9"
     />
     <zip
       basedir="build/src/trunk"
-      destfile="build/asmack-android-2.0-source.zip"
+      destfile="build/asmack-android-2.0-source${jar.suffix}.zip"
       filesonly="true"
       level="9"
     />
@@ -119,13 +133,13 @@
     />
     <jar
       basedir="build/classes/trunk"
-      destfile="build/asmack-android-1.6.jar"
+      destfile="build/asmack-android-1.6${jar.suffix}.jar"
       filesonly="true"
       level="9"
     />
     <zip
       basedir="build/src/trunk"
-      destfile="build/asmack-android-1.6-source.zip"
+      destfile="build/asmack-android-1.6-source${jar.suffix}.zip"
       filesonly="true"
       level="9"
     />
@@ -146,13 +160,13 @@
     />
     <jar
       basedir="build/classes/trunk"
-      destfile="build/asmack-android-1.5.jar"
+      destfile="build/asmack-android-1.5${jar.suffix}.jar"
       filesonly="true"
       level="9"
     />
     <zip
       basedir="build/src/trunk"
-      destfile="build/asmack-android-1.5-source.zip"
+      destfile="build/asmack-android-1.5-source${jar.suffix}.zip"
       filesonly="true"
       level="9"
     />
@@ -173,13 +187,13 @@
     />
     <jar
       basedir="build/classes/trunk"
-      destfile="build/asmack-android-1.1.jar"
+      destfile="build/asmack-android-1.1${jar.suffix}.jar"
       filesonly="true"
       level="9"
     />
     <zip
       basedir="build/src/trunk"
-      destfile="build/asmack-android-1.1-source.zip"
+      destfile="build/asmack-android-1.1-source${jar.suffix}.zip"
       filesonly="true"
       level="9"
     />
