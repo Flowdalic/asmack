@@ -85,7 +85,7 @@ buildcustom() {
   done
 }
 
-#fetchall
+fetchall
 buildsrc
 patchsrc "patch"
 build
