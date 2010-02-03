@@ -24,11 +24,24 @@ fetch() {
 )
 }
 
+gitfetch() {
+(
+  cd src
+  if ! [ -f "${2}/.git/config" ]; then
+    git clone "${1}" "${2}"
+  else
+    cd "${2}"
+    git pull
+  fi
+)
+}
+
 fetchall() {
-  fetch "http://svn.igniterealtime.org/svn/repos/smack/trunk/source/" "smack"
+  gitfetch "git://github.com/rtreffer/smack.git" "smack"
   fetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid"
   fetch "http://svn.apache.org/repos/asf/harmony/enhanced/classlib/trunk/modules/auth/src/main/java/common/" "harmony"
   fetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava"
+  fetch "https://kenai.com/svn/jbosh~main/trunk/jbosh/src/main/java" "jbosh"
 }
 
 copyfolder() {
@@ -48,12 +61,13 @@ buildsrc() {
   rm -rf build/src
   mkdir build/src
   mkdir build/src/trunk
-  copyfolder "src/smack" "build/src/trunk" "."
+  copyfolder "src/smack/source/" "build/src/trunk" "."
   copyfolder "src/qpid/java" "build/src/trunk" "org/apache/qpid/management/common/sasl"
   copyfolder "src/novell-openldap-jldap" "build/src/trunk" "."
   copyfolder "src/dnsjava"  "build/src/trunk" "org"
   copyfolder "src/harmony" "build/src/trunk" "."
   copyfolder "src/custom" "build/src/trunk" "."
+  copyfolder "src/jbosh" "build/src/trunk" "."
 }
 
 patchsrc() {
@@ -62,10 +76,10 @@ patchsrc() {
     cd build/src/trunk/
     for PATCH in `(cd "../../../${1}" ; find -maxdepth 1 -type f)|sort` ; do
       if echo $PATCH | grep '\.sh$'; then
-        if [ -f "../../../${1}/$PATCH" ]; then "../../../${1}/$PATCH" ; fi
+        if [ -f "../../../${1}/$PATCH" ]; then "../../../${1}/$PATCH" || exit 1 ; fi
       fi
       if echo $PATCH | grep '\.patch$'; then
-        if [ -f "../../../${1}/$PATCH" ]; then patch -p0 < "../../../${1}/$PATCH" ; fi
+        if [ -f "../../../${1}/$PATCH" ]; then patch -p0 < "../../../${1}/$PATCH" || exit 1 ; fi
       fi
     done
   )
