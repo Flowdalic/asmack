@@ -1,0 +1,11 @@
+--- com/kenai/jbosh/BOSHClient.java	2010-01-13 20:57:36.000000000 +0100
++++ com/kenai/jbosh/BOSHClient.java	2010-02-04 17:40:45.678169320 +0100
+@@ -232,7 +232,7 @@
+      * HTTPSender instance.
+      */
+     private final HTTPSender httpSender =
+-            ServiceLib.loadService(HTTPSender.class);
++            new ApacheHTTPSender();
+ 
+     /**
+      * Storage for test hook implementation.

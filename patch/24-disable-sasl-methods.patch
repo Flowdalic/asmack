@@ -17,10 +17,4 @@
  
      }
  
-@@ -553,4 +553,4 @@
-         resourceBinded = false;
-         sessionSupported = false;
-     }
--}
-\ No newline at end of file
-+}
+

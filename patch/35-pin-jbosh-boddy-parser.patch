@@ -1,0 +1,11 @@
+--- com/kenai/jbosh/StaticBody.java	2010-01-13 20:57:36.000000000 +0100
++++ com/kenai/jbosh/StaticBody.java	2010-02-04 17:59:06.037770746 +0100
+@@ -42,7 +42,7 @@
+      * Selected parser to be used to process raw XML messages.
+      */
+     private static final BodyParser PARSER =
+-            ServiceLib.loadService(BodyParser.class);
++            new BodyParserXmlPull();
+ 
+     /**
+      * Size of the internal buffer when copying from a stream.

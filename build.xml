@@ -44,11 +44,12 @@
       target="1.5"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
-      classpath="lib/xmlpull_1_1_3_4c.jar"
+      classpath="lib/xmlpull_1_1_3_4c.jar:lib/httpclient-4.0.jar:lib/httpcore-4.0.1.jar"
       debug="true"
       debuglevel="source,lines"
       excludes="**/de/measite/smack/AndroidDebugger.java"
     />
+    <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="**/*" /></copy>
     <jar
       basedir="build/classes/trunk"
       destfile="build/asmack-jse${jar.suffix}.jar"
@@ -77,6 +78,7 @@
       debug="true"
       debuglevel="source,lines"
     />
+    <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="**/*" /></copy>
     <jar
       basedir="build/classes/trunk"
       destfile="build/asmack-android-2.0.1${jar.suffix}.jar"
@@ -131,6 +133,7 @@
       debug="true"
       debuglevel="source,lines"
     />
+    <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="**/*" /></copy>
     <jar
       basedir="build/classes/trunk"
       destfile="build/asmack-android-1.6${jar.suffix}.jar"
@@ -158,6 +161,7 @@
       debug="true"
       debuglevel="source,lines"
     />
+    <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="**/*" /></copy>
     <jar
       basedir="build/classes/trunk"
       destfile="build/asmack-android-1.5${jar.suffix}.jar"
@@ -185,6 +189,7 @@
       debug="true"
       debuglevel="source,lines"
     />
+    <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="**/*" /></copy>
     <jar
       basedir="build/classes/trunk"
       destfile="build/asmack-android-1.1${jar.suffix}.jar"

@@ -27,10 +27,4 @@
              }
              else if (eventType == XmlPullParser.END_TAG) {
                  if (parser.getName().equals(elementName)) {
-@@ -484,4 +483,4 @@
-         }
-         return null;
-     }
--}
-\ No newline at end of file
-+}
+
