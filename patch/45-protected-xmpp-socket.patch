@@ -1,0 +1,11 @@
+--- org/jivesoftware/smack/XMPPConnection.java	2010-02-13 11:13:16.478541616 +0100
++++ org/jivesoftware/smack/XMPPConnection.java	2010-02-13 11:58:49.798590947 +0100
+@@ -55,7 +55,7 @@
+     /**
+      * The socket which is used for this connection.
+      */
+-    Socket socket;
++    protected Socket socket;
+ 
+     String connectionID = null;
+     private String user = null;
