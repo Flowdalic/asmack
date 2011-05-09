@@ -29,15 +29,17 @@ gitfetch() {
   cd src
   if ! [ -f "${2}/.git/config" ]; then
     git clone "${1}" "${2}"
+    git checkout origin/"${3}"
   else
     cd "${2}"
     git pull
+    git checkout origin/"${3}"
   fi
 )
 }
 
 fetchall() {
-  gitfetch "git://github.com/Flowdalic/smack.git" "smack"
+  gitfetch "git://github.com/Flowdalic/smack.git" "smack" "master"
   fetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid"
   fetch "http://svn.apache.org/repos/asf/harmony/enhanced/java/trunk/classlib/modules/auth/src/main/java/common/" "harmony"
   fetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava"
