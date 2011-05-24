@@ -448,14 +448,12 @@ diff --git com/kenai/jbosh/ComposableBody.java com/kenai/jbosh/ComposableBody.ja
 index d375478..7f3b159 100644
 --- com/kenai/jbosh/ComposableBody.java
 +++ com/kenai/jbosh/ComposableBody.java
-@@ -58,8 +58,8 @@ public final class ComposableBody extends AbstractBody {
+@@ -58,7 +58,7 @@ public final class ComposableBody extends AbstractBody {
       * BOSH message.
       */
      private static final Pattern BOSH_START =
--            Pattern.compile("<" + "(?:(?:[^:\t\n\r >]+:)|(?:\\{[^\\}>]*?}))?"
--            + "body" + "(?:[\t\n\r ][^>]*?)?" + "(/>|>)");
-+            Pattern.compile("<" 
-+            + "body" + "(?:[\t\n\r ][^>]*?)?" + "(/>|>)", Pattern.UNICODE_CASE);
+-            Pattern.compile("<(?:[^:\t\n\r >]+:)?body(?:[\t\n\r ][^>]*?)?(/>|>)");
++            Pattern.compile("<(?:[^:\t\n\r >]+:)?body(?:[\t\n\r ][^>]*?)?(/>|>)", Pattern.UNICODE_CASE);
  
      /**
       * Map of all attributes to their values.
