@@ -39,11 +39,12 @@ gitfetch() {
 }
 
 fetchall() {
-  gitfetch "git://github.com/Flowdalic/smack.git" "smack" "master"
+  gitfetch "git://github.com/Flowdalic/smack.git" "smack" "experimental"
   fetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid"
   fetch "http://svn.apache.org/repos/asf/harmony/enhanced/java/trunk/classlib/modules/auth/src/main/java/common/" "harmony"
   fetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava"
-  fetch "https://kenai.com/svn/jbosh~main/trunk/jbosh/src/main/java" "jbosh"
+#  fetch "https://kenai.com/svn/jbosh~main/trunk/jbosh/src/main/java" "jbosh"
+  gitfetch "git://kenai.com/jbosh~origin" "jbosh" "master"
 }
 
 copyfolder() {
@@ -69,7 +70,7 @@ buildsrc() {
   copyfolder "src/dnsjava"  "build/src/trunk" "org"
   copyfolder "src/harmony" "build/src/trunk" "."
   copyfolder "src/custom" "build/src/trunk" "."
-  copyfolder "src/jbosh" "build/src/trunk" "."
+  copyfolder "src/jbosh/src/main/java" "build/src/trunk" "."
 }
 
 patchsrc() {
