@@ -11,10 +11,18 @@ This repository contains a source fetching, patching and building script.
 As well as all the minor changes to make an Android version fly.
 See the patches/ folder for a detailed list of changes and scripts.
 
+Compiling aSmack
+================
+
+1. copy local.properties.example to local.properties and set the Android SDK path (e.g. sdk-location=/opt/android-sdk-update-manager/ on a gentoo system)
+
+2. Run build.bash
+
+
 ProviderManager
 ===============
 
-In order to work correctly on Android, you need to register the Providers manually. E.g. like this:
+In order to work correctly on Android, you need to register the Providers manually before you doing any XMPP activty. E.g. like this:
 
     private static void configure(ProviderManager pm) {
         //  Private Data Storage
