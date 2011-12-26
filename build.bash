@@ -11,6 +11,7 @@ echo "## Step 00: initialize"
 
 fetch() {
 (
+  echo "Fetching from ${1} to ${2}"
   cd src
   if ! [ -f "${2}/.svn/entries" ]; then
     mkdir "${2}"
@@ -26,6 +27,7 @@ fetch() {
 
 gitfetch() {
 (
+  echo "Fetching ${3} branch from ${1} to ${2} via git"
   cd src
   if ! [ -f "${2}/.git/config" ]; then
     git clone "${1}" "${2}"
@@ -43,9 +45,8 @@ fetchall() {
   fetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid"
   fetch "http://svn.apache.org/repos/asf/harmony/enhanced/java/trunk/classlib/modules/auth/src/main/java/common/" "harmony"
   fetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava"
-#  fetch "https://kenai.com/svn/jbosh~main/trunk/jbosh/src/main/java" "jbosh"
   gitfetch "git://kenai.com/jbosh~origin" "jbosh" "master"
-  gitfetch "git://git.openldap.org/openldap-jldap.git" "novell-openldap-jldap" "master"
+#  gitfetch "git://git.openldap.org/openldap-jldap.git" "novell-openldap-jldap" "master"
 }
 
 copyfolder() {
