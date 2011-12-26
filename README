@@ -18,6 +18,16 @@ Compiling aSmack
 
 2. Run build.bash
 
+Precompiled JARs
+================
+If you are for whatever reason not able to compile aSmack you can use the precompiled ones from GTalkSMS. They are located in the lib directory of the GTalkSMS repository: http://code.google.com/p/gtalksms/source/browse/#hg%2Flib
+
+GTalkSMS uses many features of Smack and XMPP on Android:
+- File Transfer
+- DNS SRV
+- MUC
+- Entity Caps
+just to name a few. 
 
 ProviderManager
 ===============
