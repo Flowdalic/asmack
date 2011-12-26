@@ -130,14 +130,11 @@ Remove your credentials (usually a base64 block inside <auth></auth>)
 Your issue should contain
 1. a logcat
 2. a server to reproduce
-3. the code you are using (for fl/oss project we'll accept reposituroy URLs)
+3. the code you are using (for FOSS project we'll accept reposituroy URLs)
 
 There is no guarantee that we will reply immediatly. But we will try to
 investigate the problem.
 
-Problems that would disclose projects can be to treffer(?)measite.de
-Please add asmack and confidential in the subject, and only use this if the
-tracker isn't an option for you.
 
 Licences / Used libraries
 =========================
