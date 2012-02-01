@@ -11,6 +11,11 @@ This repository contains a source fetching, patching and building script.
 As well as all the minor changes to make an Android version fly.
 See the patches/ folder for a detailed list of changes and scripts.
 
+Compiled JARs
+================
+Can be found here: https://github.com/Flowdalic/asmack/downloads
+But be aware, they may be outdated!
+
 Compiling aSmack
 ================
 
@@ -18,16 +23,17 @@ Compiling aSmack
 
 2. Run build.bash
 
-Precompiled JARs
-================
-If you are for whatever reason not able to compile aSmack you can use the precompiled ones from GTalkSMS. They are located in the lib directory of the GTalkSMS repository: http://code.google.com/p/gtalksms/source/browse/#hg%2Flib
+Apps that use this fork of aSmack
+=================================
+- GTalkSMS ( http://code.google.com/p/gtalksms/ ) uses many features of Smack and XMPP on Android:
+    - File Transfer
+    - DNS SRV
+    - MUC
+    - Entity Caps
+    just to name a few. 
 
-GTalkSMS uses many features of Smack and XMPP on Android:
-- File Transfer
-- DNS SRV
-- MUC
-- Entity Caps
-just to name a few. 
+- yaxim ( https://github.com/ge0rg/yaxim )
+- your app?
 
 ProviderManager
 ===============
