@@ -12,9 +12,9 @@ As well as all the minor changes to make an Android version fly.
 See the patches/ folder for a detailed list of changes and scripts.
 
 Compiled JARs
-================
+=============
 Can be found here: https://github.com/Flowdalic/asmack/downloads
-But be aware, they may be outdated!
+But be aware, they may be *outdated!*
 
 Compiling aSmack
 ================
@@ -150,7 +150,7 @@ We are currently using code from
 
  * Apache Harmony (sasl/xml) (Apache Licence)
  * smack (xmpp) (Apache Licence)
- * novell-openldap-jldap (sasl) ( [OpenLDAP Licence] [1] )
+ * novell-openldap-jldap (sasl) ( [OpenLDAP Licence][1] )
  * Apache qpid (sasl) (Apache Licence)
  * jbosh (BOSH) (Apache Licence)
  * dnsjava (dns srv lookups) (BSD)
