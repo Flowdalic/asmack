@@ -38,77 +38,7 @@ Apps that use this fork of aSmack
 ProviderManager
 ===============
 
-In order to work correctly on Android, you need to register the Providers manually before you doing any XMPP activty. E.g. like this:
-
-    private static void configure(ProviderManager pm) {
-        //  Private Data Storage
-        pm.addIQProvider("query","jabber:iq:private", new PrivateDataManager.PrivateDataIQProvider());
- 
-        //  Time
-        try {
-            pm.addIQProvider("query","jabber:iq:time", Class.forName("org.jivesoftware.smackx.packet.Time"));
-        } catch (ClassNotFoundException e) {
-            Log.w("Can't load class for org.jivesoftware.smackx.packet.Time");
-        }
- 
-        //  XHTML
-        pm.addExtensionProvider("html","http://jabber.org/protocol/xhtml-im", new XHTMLExtensionProvider());
-
-        //  Roster Exchange
-        pm.addExtensionProvider("x","jabber:x:roster", new RosterExchangeProvider());
-        //  Message Events
-        pm.addExtensionProvider("x","jabber:x:event", new MessageEventProvider());
-        //  Chat State
-        pm.addExtensionProvider("active","http://jabber.org/protocol/chatstates", new ChatStateExtension.Provider());
-        pm.addExtensionProvider("composing","http://jabber.org/protocol/chatstates", new ChatStateExtension.Provider());
-        pm.addExtensionProvider("paused","http://jabber.org/protocol/chatstates", new ChatStateExtension.Provider());
-        pm.addExtensionProvider("inactive","http://jabber.org/protocol/chatstates", new ChatStateExtension.Provider());
-        pm.addExtensionProvider("gone","http://jabber.org/protocol/chatstates", new ChatStateExtension.Provider());
-        
-        //   FileTransfer
-        pm.addIQProvider("si","http://jabber.org/protocol/si", new StreamInitiationProvider());
-        pm.addIQProvider("query","http://jabber.org/protocol/bytestreams", new BytestreamsProvider());
-        pm.addIQProvider("open","http://jabber.org/protocol/ibb", new OpenIQProvider());
-        pm.addIQProvider("close","http://jabber.org/protocol/ibb", new CloseIQProvider());
-        pm.addExtensionProvider("data","http://jabber.org/protocol/ibb", new DataPacketProvider());
-        
-        //  Group Chat Invitations
-        pm.addExtensionProvider("x","jabber:x:conference", new GroupChatInvitation.Provider());
-        //  Service Discovery # Items    
-        pm.addIQProvider("query","http://jabber.org/protocol/disco#items", new DiscoverItemsProvider());
-        //  Service Discovery # Info
-        pm.addIQProvider("query","http://jabber.org/protocol/disco#info", new DiscoverInfoProvider());
-        //  Data Forms
-        pm.addExtensionProvider("x","jabber:x:data", new DataFormProvider());
-        //  MUC User
-        pm.addExtensionProvider("x","http://jabber.org/protocol/muc#user", new MUCUserProvider());
-        //  MUC Admin    
-        pm.addIQProvider("query","http://jabber.org/protocol/muc#admin", new MUCAdminProvider());
-        //  MUC Owner    
-        pm.addIQProvider("query","http://jabber.org/protocol/muc#owner", new MUCOwnerProvider());
-        //  Delayed Delivery
-        pm.addExtensionProvider("x","jabber:x:delay", new DelayInformationProvider());
-        //  Version
-        try {
-            pm.addIQProvider("query","jabber:iq:version", Class.forName("org.jivesoftware.smackx.packet.Version"));
-        } catch (ClassNotFoundException e) {
-            Log.w("Can't load class for org.jivesoftware.smackx.packet.Version");
-        }
-        //  VCard
-        pm.addIQProvider("vCard","vcard-temp", new VCardProvider());
-        //  Offline Message Requests
-        pm.addIQProvider("offline","http://jabber.org/protocol/offline", new OfflineMessageRequest.Provider());
-        //  Offline Message Indicator
-        pm.addExtensionProvider("offline","http://jabber.org/protocol/offline", new OfflineMessageInfo.Provider());
-        //  Last Activity
-        pm.addIQProvider("query","jabber:iq:last", new LastActivity.Provider());
-        //  User Search
-        pm.addIQProvider("query","jabber:iq:search", new UserSearch.Provider());
-        //  SharedGroupsInfo
-        pm.addIQProvider("sharedgroup","http://www.jivesoftware.org/protocol/sharedgroup", new SharedGroupsInfo.Provider());
-        //  JEP-33: Extended Stanza Addressing
-        pm.addExtensionProvider("addresses","http://jabber.org/protocol/address", new MultipleAddressesProvider());
-    }
+IMPORTANT: In order to work correctly on Android, you need to register the Providers manually before you doing any XMPP activty. A example can be found here: http://goo.gl/wXg6v
 
 Contribution
 ============
