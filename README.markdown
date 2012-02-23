@@ -13,7 +13,7 @@ See the patches/ folder for a detailed list of changes and scripts.
 
 Compiled JARs
 =============
-Can be found [here](https://github.com/Flowdalic/asmack/downloads)
+Can be found [here](https://github.com/Flowdalic/asmack/downloads).
 But be aware, they may be *outdated!*
 
 Compiling aSmack
