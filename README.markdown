@@ -30,7 +30,7 @@ Apps that use this fork of aSmack
     - DNS SRV
     - MUC
     - Entity Caps
-    just to name a few. 
+    - and many more 
 
 - yaxim ( https://github.com/ge0rg/yaxim )
 - your app?
@@ -38,7 +38,7 @@ Apps that use this fork of aSmack
 ProviderManager
 ===============
 
-IMPORTANT: In order to work correctly on Android, you need to register the Providers manually before you doing any XMPP activty. A example can be found here: http://goo.gl/wXg6v
+**IMPORTANT:** In order to work correctly on Android, you need to register the Providers manually before you doing any XMPP activty. An example can be found here: http://goo.gl/wXg6v
 
 Contribution
 ============
