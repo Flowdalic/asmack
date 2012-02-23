@@ -23,6 +23,8 @@ Compiling aSmack
 
 2. Run build.bash
 
+aSmack uses a [special fork of smack](https://github.com/Flowdalic/smack). You can read about the results you will get when using one of the various branches provides in the [README](https://github.com/Flowdalic/smack/blob/smack_extended/README.markdown).
+
 Apps that use this fork of aSmack
 =================================
 - GTalkSMS ( http://code.google.com/p/gtalksms/ ) uses many features of Smack and XMPP on Android:
