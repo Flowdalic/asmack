@@ -13,7 +13,7 @@ See the patches/ folder for a detailed list of changes and scripts.
 
 Compiled JARs
 =============
-Can be found here: https://github.com/Flowdalic/asmack/downloads
+Can be found [here](https://github.com/Flowdalic/asmack/downloads)
 But be aware, they may be *outdated!*
 
 Compiling aSmack
@@ -27,14 +27,14 @@ aSmack uses a [special fork of smack](https://github.com/Flowdalic/smack). You c
 
 Apps that use this fork of aSmack
 =================================
-- GTalkSMS ( http://code.google.com/p/gtalksms/ ) uses many features of Smack and XMPP on Android:
+- [GTalkSMS](http://code.google.com/p/gtalksms/) uses many features of Smack and XMPP on Android:
     - File Transfer
     - DNS SRV
     - MUC
     - Entity Caps
     - and many more 
 
-- yaxim ( https://github.com/ge0rg/yaxim )
+- [yaxim](https://github.com/ge0rg/yaxim)
 - your app?
 
 ProviderManager
