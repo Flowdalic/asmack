@@ -93,6 +93,19 @@ patchsrc() {
 build() {
   echo "## Step 30: compile"
   ant -Dbuild.all=true
+  buildandroid 
+}
+
+buildandroid() {
+    sdklocation=$(grep sdk-location local.properties| cut -d= -f2)
+    if [ -z "$sdklocation" ] ; then
+	echo "Android SDK not found. Don't build android version"
+	return
+    fi
+    for f in $sdklocation/platforms/* ; do
+	version=`basename $f`
+	ant -Dandroid.version=${version}  -Djar.suffix="$1" compile-android
+    done
 }
 
 buildcustom() {
@@ -100,7 +113,9 @@ buildcustom() {
     buildsrc
     patchsrc "patch"
     patchsrc "${dir}"
-    ant -Djar.suffix=`echo ${dir}|sed 's:patch/:-:'`
+    custom=`echo ${dir}|sed 's:patch/:-:'`
+    ant -Djar.suffix="$custom"
+    buildandroid `echo ${dir}|sed 's:patch/:-:'`
   done
 }
 

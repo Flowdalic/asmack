@@ -1,20 +1,8 @@
 <project name="asmack" default="compile" basedir=".">
 
 <property name="jar.suffix" value="" />
-<property name="build.all" value="false" />
 <property file="local.properties" />
-
-<condition property="build-4">
-	<available file="${sdk-location}/platforms/android-4/android.jar" />
-</condition>
-
-<condition property="build-5">
-	<available file="${sdk-location}/platforms/android-5/android.jar" />
-</condition>
-
-<condition property="build-6">
-	<available file="${sdk-location}/platforms/android-6/android.jar" />
-</condition>
+<property name="android.version" value="" />
 
 <condition property="build-7">
 	<available file="${sdk-location}/platforms/android-7/android.jar" />
@@ -25,7 +13,8 @@
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
     <javac
-      target="1.6"
+      target="6"
+      source="6"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xpp3-1.1.4c.jar:lib/httpclient-4.0.jar:lib/httpcore-4.0.1.jar"
@@ -49,12 +38,46 @@
     />
 </target>
 
+<target name="check-android-exists" >
+    <available property="android.exists" file="${sdk-location}/platforms/${android.version}/android.jar" />
+    <fail unless="${android.exists}" message="Android version ${android.version} does not is not available : ${sdk-location}/platforms/${android.version}/android.jar is not found" />
+</target>
+
+<target name="compile-android" description="Compile for android" depends="check-android-exists" >
+    <delete dir="build/classes" failonerror="false" />
+    <mkdir dir="build/classes" />
+    <mkdir dir="build/classes/trunk" />
+    <javac
+      target="6"
+      source="6"
+      srcdir="build/src/trunk"
+      destdir="build/classes/trunk"
+      bootclasspath="${sdk-location}/platforms/${android.version}/android.jar"
+      debug="true"
+      debuglevel="source,lines"
+    />
+    <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="META-INF/**" /></copy>
+    <jar
+      basedir="build/classes/trunk"
+      destfile="build/asmack-${android.version}${jar.suffix}.jar"
+      filesonly="true"
+      level="9"
+    />
+    <zip
+      basedir="build/src/trunk"
+      destfile="build/asmack-${android.version}-source${jar.suffix}.zip"
+      filesonly="true"
+      level="9"
+    />
+</target>
+
 <target name="compile-a7" description="Compile for android API level 7" if="build-7">
     <delete dir="build/classes" failonerror="false" />
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
     <javac
-      target="1.6"
+      target="6"
+      source="6"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       bootclasspath="${sdk-location}/platforms/android-7/android.jar"
@@ -76,92 +99,10 @@
     />
 </target>
 
-<target name="compile-a6" description="Compile for android API level 6" if="build-6">
-    <delete dir="build/classes" failonerror="false" />
-    <mkdir dir="build/classes" />
-    <mkdir dir="build/classes/trunk" />
-    <javac
-      target="1.6"
-      srcdir="build/src/trunk"
-      destdir="build/classes/trunk"
-      classpath="lib/xpp3-1.1.4c.jar"
-      bootclasspath="${sdk-location}/platforms/android-6/android.jar"
-      debug="true"
-      debuglevel="source,lines"
-    />
-    <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="META-INF/**" /></copy>
-    <jar
-      basedir="build/classes/trunk"
-      destfile="build/asmack-android-6${jar.suffix}.jar"
-      filesonly="true"
-      level="9"
-    />
-    <zip
-      basedir="build/src/trunk"
-      destfile="build/asmack-android-6-source${jar.suffix}.zip"
-      filesonly="true"
-      level="9"
-    />
-</target>
-
-<target name="compile-a5" description="Compile for android API level 5" if="build-5">
-    <delete dir="build/classes" failonerror="false" />
-    <mkdir dir="build/classes" />
-    <mkdir dir="build/classes/trunk" />
-    <javac
-      target="1.6"
-      srcdir="build/src/trunk"
-      destdir="build/classes/trunk"
-      bootclasspath="${sdk-location}/platforms/android-5/android.jar"
-      debug="true"
-      debuglevel="source,lines"
-    />
-    <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="META-INF/**" /></copy>
-    <jar
-      basedir="build/classes/trunk"
-      destfile="build/asmack-android-5${jar.suffix}.jar"
-      filesonly="true"
-      level="9"
-    />
-    <zip
-      basedir="build/src/trunk"
-      destfile="build/asmack-android-5-source${jar.suffix}.zip"
-      filesonly="true"
-      level="9"
-    />
-</target>
-
-<target name="compile-a4" description="Compile for android API level 4" if="build-4">
-    <delete dir="build/classes" failonerror="false" />
-    <mkdir dir="build/classes" />
-    <mkdir dir="build/classes/trunk" />
-    <javac
-      target="1.6"
-      srcdir="build/src/trunk"
-      destdir="build/classes/trunk"
-      bootclasspath="${sdk-location}/platforms/android-4/android.jar"
-      debug="true"
-      debuglevel="source,lines"
-    />
-    <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="META-INF/**" /></copy>
-    <jar
-      basedir="build/classes/trunk"
-      destfile="build/asmack-android-4${jar.suffix}.jar"
-      filesonly="true"
-      level="9"
-    />
-    <zip
-      basedir="build/src/trunk"
-      destfile="build/asmack-android-4-source${jar.suffix}.zip"
-      filesonly="true"
-      level="9"
-    />
-</target>
-
 <target
   name="compile"
   description="Compile for all targets"
-  depends="compile-jse,compile-a7,compile-a6,compile-a5,compile-a4"
+  depends="compile-jse,compile-a7"
 />
 
 </project>
