@@ -73,6 +73,9 @@ Your issue should contain
 There is no guarantee that we will reply immediatly. But we will try to
 investigate the problem.
 
+Contact
+=======
+Join us: ##smack @ freenode
 
 Licences / Used libraries
 =========================
