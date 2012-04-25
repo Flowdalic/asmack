@@ -1,10 +1,9 @@
 #!/bin/bash
-set -x
+#set -x
 
 fetch() {
-(
   echo "Fetching from ${1} to ${2}"
-  cd src
+  cd $SRC_DIR
   if ! [ -f "${2}/.svn/entries" ]; then
     mkdir "${2}"
     cd "${2}"
@@ -14,18 +13,17 @@ fetch() {
     svn cleanup
     svn up
   fi
-)
 }
 
 gitfetch() {
   echo "Fetching ${3} branch from ${1} to ${2} via git"
-  cd src
+  cd $SRC_DIR
   if ! [ -f "${2}/.git/config" ]; then
     git clone "${1}" "${2}"
     git checkout origin/"${3}"
   else
     cd "${2}"
-    git pull
+    git fetch
     git checkout origin/"${3}"
   fi
 
@@ -45,6 +43,7 @@ fetchall() {
 
 copyfolder() {
 (
+  cd ${WD}
   (
     cd "${1}"
     tar -cSsp --exclude-vcs "${3}"
@@ -57,6 +56,7 @@ copyfolder() {
 
 buildsrc() {
   echo "## Step 20: creating build/src"
+  cd "${WD}"
   rm -rf build/src
   mkdir build/src
   mkdir build/src/trunk
@@ -71,6 +71,7 @@ buildsrc() {
 
 patchsrc() {
   echo "## Step 21: patch build/src"
+  cd "${WD}"
   (
     cd build/src/trunk/
     for PATCH in `(cd "../../../${1}" ; find -maxdepth 1 -type f)|sort` ; do
@@ -87,6 +88,9 @@ patchsrc() {
 build() {
   echo "## Step 30: compile"
   ant -Dbuild.all=true
+  if [ $? -ne 0 ]; then
+      exit
+  fi
 }
 
 buildcustom() {
@@ -100,6 +104,8 @@ buildcustom() {
 
 # Default configuration
 SMACK_BRANCH=master
+SRC_DIR=$(pwd)/src
+WD=$(pwd)
 
 echo "## Step 00: initialize"
 (
