@@ -75,7 +75,7 @@ investigate the problem.
 
 Contact
 =======
-Join us: ##smack @ freenode
+Join ##smack @ freenode
 
 Licences / Used libraries
 =========================
