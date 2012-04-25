@@ -1,13 +1,5 @@
 #!/bin/bash
-
-echo "## Step 00: initialize"
-(
-  if ! [ -d build ]; then
-    mkdir build
-    mkdir build/src
-    mkdir build/src/trunk
-  fi
-)
+set -x
 
 fetch() {
 (
@@ -26,7 +18,6 @@ fetch() {
 }
 
 gitfetch() {
-(
   echo "Fetching ${3} branch from ${1} to ${2} via git"
   cd src
   if ! [ -f "${2}/.git/config" ]; then
@@ -37,11 +28,14 @@ gitfetch() {
     git pull
     git checkout origin/"${3}"
   fi
-)
+
+  if [ $? -ne 0 ]; then
+      exit
+  fi
 }
 
 fetchall() {
-  gitfetch "git://github.com/Flowdalic/smack.git" "smack" "master"
+  gitfetch "git://github.com/Flowdalic/smack.git" "smack" "$1"
   fetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid"
   fetch "http://svn.apache.org/repos/asf/harmony/enhanced/java/trunk/classlib/modules/auth/src/main/java/common/" "harmony"
   fetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava"
@@ -104,7 +98,23 @@ buildcustom() {
   done
 }
 
-fetchall
+# Default configuration
+SMACK_BRANCH=master
+
+echo "## Step 00: initialize"
+(
+  if ! [ -d build ]; then
+    mkdir build
+    mkdir build/src
+    mkdir build/src/trunk
+  fi
+)
+
+if [ -n "$1" ]; then
+    SMACK_BRANCH=$1
+fi
+
+fetchall $SMACK_BRANCH
 buildsrc
 patchsrc "patch"
 build
