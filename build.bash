@@ -2,43 +2,73 @@
 #set -x
 
 fetch() {
-  echo "Fetching from ${1} to ${2}"
-  cd $SRC_DIR
-  if ! [ -f "${2}/.svn/entries" ]; then
-    mkdir "${2}"
-    cd "${2}"
-    svn co --non-interactive --trust-server-cert "${1}" "."
-  else
-    cd "${2}"
-    svn cleanup
-    svn up
-  fi
+    echo "Fetching from ${1} to ${2}"
+    cd $SRC_DIR
+    if ! [ -f "${2}/.svn/entries" ]; then
+	mkdir "${2}"
+	cd "${2}"
+	svn co --non-interactive --trust-server-cert "${1}" "."
+    else
+	cd "${2}"
+	svn cleanup
+	svn up
+    fi
 }
 
 gitfetch() {
-  echo "Fetching ${3} branch from ${1} to ${2} via git"
-  cd $SRC_DIR
-  if ! [ -f "${2}/.git/config" ]; then
-    git clone "${1}" "${2}"
-    git checkout origin/"${3}"
-  else
-    cd "${2}"
-    git fetch
-    git checkout origin/"${3}"
-  fi
+    echo "Fetching ${2} branch from ${1} to ${3} via git"
+    cd $SRC_DIR
+    if ! [ -f "${3}/.git/config" ]; then
+	git clone "${1}" "${3}"
+	git checkout origin/"${2}"
+    else
+	cd "${3}"
+	git fetch
+	git checkout origin/"${2}"
+    fi
 
-  if [ $? -ne 0 ]; then
-      exit
-  fi
+    if [ $? -ne 0 ]; then
+	exit
+    fi
+}
+
+testsmackgit() {
+    cd $SRC_DIR
+    if [ -f .used-smack-git-repo ] ; then
+	if [ $(cat .used-smack-git-repo) != $SMACK_REPO ] ; then
+	    rm -rf smack
+	fi
+    else
+	echo "${SMACK_REPO}" > .used-smack-git-repo
+    fi
 }
 
 fetchall() {
-  gitfetch "git://github.com/Flowdalic/smack.git" "smack" "$1"
-  fetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid"
-  fetch "http://svn.apache.org/repos/asf/harmony/enhanced/java/trunk/classlib/modules/auth/src/main/java/common/" "harmony"
-  fetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava"
-  gitfetch "git://kenai.com/jbosh~origin" "jbosh" "master"
-#  gitfetch "git://git.openldap.org/openldap-jldap.git" "novell-openldap-jldap" "master"
+    if $SMACK_LOCAL ; then
+	# always clean the local copy first
+	rm -rf ${SRC_DIR}/smack
+	mkdir ${SRC_DIR}/smack
+	cd $SMACK_REPO
+	git archive $SMACK_BRANCH | tar -x -C ${SRC_DIR}/smack
+	if [ $? -ne 0 ]; then
+	    exit
+	fi
+    else
+	testsmackgit
+	gitfetch "$SMACK_REPO" "$SMACK_BRANCH" "smack"
+    fi
+
+    if ! $UPDATE_REMOTE ; then
+	echo "Won't update or fetch third party resources"
+	return
+    fi
+
+    fetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid"
+    fetch "http://svn.apache.org/repos/asf/harmony/enhanced/java/trunk/classlib/modules/auth/src/main/java/common/" "harmony"
+    fetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava"
+    gitfetch "git://kenai.com/jbosh~origin" "master" "jbosh"
+    # jldap doesn't compile with the latest version (missing deps?), therefore it's a fixed version for now
+    #  gitfetch "git://git.openldap.org/openldap-jldap.git" "master" "novell-openldap-jldap"
 }
 
 copyfolder() {
@@ -58,8 +88,8 @@ buildsrc() {
   echo "## Step 20: creating build/src"
   cd "${WD}"
   rm -rf build/src
-  mkdir build/src
-  mkdir build/src/trunk
+  mkdir -p build/src/trunk
+
   copyfolder "src/smack/source/" "build/src/trunk" "."
   copyfolder "src/qpid/java" "build/src/trunk" "org/apache/qpid/management/common/sasl"
   copyfolder "src/novell-openldap-jldap" "build/src/trunk" "."
@@ -102,25 +132,66 @@ buildcustom() {
   done
 }
 
+parseopts() {
+    while getopts r:b:duh OPTION "$@"; do
+	case $OPTION in
+	    r) 
+		SMACK_REPO="${OPTARG}"
+		;;
+	    b)
+		SMACK_BRANCH="${OPTARG}"
+		;;
+	    d)
+		set -x
+		;;
+	    u)
+		UPDATE_REMOTE=false
+		;;
+	    h)
+		echo "$0 -d -u -r <repo> -b <branch>"
+		echo "-d: Enable debug"
+		echo "-u: DON'T update remote third party resources"
+		echo "-r <repo>: Git repository (can be local or remote) for underlying smack repository"
+		echo "-b <branch>: Git branch used to build aSmack from underlying smack repository"
+		exit
+		;;
+	esac
+    done
+
+    if islocalrepo $SMACK_REPO ; then
+	SMACK_LOCAL=true
+	SMACK_REPO=`readlink -f $SMACK_REPO`
+    fi
+}
+
+islocalrepo() {
+    local R="^(git|ssh)"
+    if [[ $1 =~ $R ]]; then
+	return 1
+    else
+	return 0
+    fi
+}
+
+initialize() {
+    echo "## Step 00: initialize"
+  if ! [ -d build/src/trunk ]; then
+    mkdir -p build/src/trunk
+  fi
+}
+
 # Default configuration
+SMACK_REPO=git://github.com/Flowdalic/smack.git
 SMACK_BRANCH=master
+SMACK_LOCAL=false
+UPDATE_REMOTE=true
 SRC_DIR=$(pwd)/src
 WD=$(pwd)
 
-echo "## Step 00: initialize"
-(
-  if ! [ -d build ]; then
-    mkdir build
-    mkdir build/src
-    mkdir build/src/trunk
-  fi
-)
-
-if [ -n "$1" ]; then
-    SMACK_BRANCH=$1
-fi
-
-fetchall $SMACK_BRANCH
+parseopts $@
+echo "Using Smack git repository $SMACK_REPO with branch $SMACK_BRANCH"
+initialize
+fetchall
 buildsrc
 patchsrc "patch"
 build
