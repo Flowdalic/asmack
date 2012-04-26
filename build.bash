@@ -34,13 +34,13 @@ gitfetch() {
 
 testsmackgit() {
     cd $SRC_DIR
-    if [ -f .used-smack-git-repo ] ; then
-	if [ $(cat .used-smack-git-repo) != $SMACK_REPO ] ; then
+    if [ -f .used-smack-git-repo ] && [ $(cat .used-smack-git-repo) != $SMACK_REPO ] ; then
+	    echo "Used smack repository has changed!"
+	    echo "Old: $(cat .used-smack-git-repo) New: ${SMACK_REPO}."
+	    echo "Deleting old local copy"
 	    rm -rf smack
-	fi
-    else
-	echo "${SMACK_REPO}" > .used-smack-git-repo
     fi
+    echo "${SMACK_REPO}" > .used-smack-git-repo
 }
 
 fetchall() {
@@ -54,7 +54,6 @@ fetchall() {
 	    exit
 	fi
     else
-	testsmackgit
 	gitfetch "$SMACK_REPO" "$SMACK_BRANCH" "smack"
     fi
 
@@ -191,6 +190,7 @@ WD=$(pwd)
 parseopts $@
 echo "Using Smack git repository $SMACK_REPO with branch $SMACK_BRANCH"
 initialize
+testsmackgit
 fetchall
 buildsrc
 patchsrc "patch"
