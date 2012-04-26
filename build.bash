@@ -20,6 +20,7 @@ gitfetch() {
     cd $SRC_DIR
     if ! [ -f "${3}/.git/config" ]; then
 	git clone "${1}" "${3}"
+	cd "${3}"
 	git checkout origin/"${2}"
     else
 	cd "${3}"
