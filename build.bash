@@ -175,11 +175,17 @@ islocalrepo() {
 
 initialize() {
     echo "## Step 00: initialize"
-  if ! [ -d build/src/trunk ]; then
-    mkdir -p build/src/trunk
-  fi
+    if ! [ -d build/src/trunk ]; then
+	mkdir -p build/src/trunk
+    fi
+    if [ ! -d src/ ]; then
+	mkdir src
+    fi
 }
 
+copystaticsrc() {
+    cp -ur static-src/* src/
+}
 # Default configuration
 SMACK_REPO=git://github.com/Flowdalic/smack.git
 SMACK_BRANCH=master
@@ -191,6 +197,7 @@ WD=$(pwd)
 parseopts $@
 echo "Using Smack git repository $SMACK_REPO with branch $SMACK_BRANCH"
 initialize
+copystaticsrc
 testsmackgit
 fetchall
 buildsrc
