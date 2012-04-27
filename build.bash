@@ -133,9 +133,9 @@ buildcustom() {
 }
 
 parseopts() {
-    while getopts r:b:duh OPTION "$@"; do
+    while getopts r:b:duch OPTION "$@"; do
 	case $OPTION in
-	    r) 
+	    r)
 		SMACK_REPO="${OPTARG}"
 		;;
 	    b)
@@ -146,6 +146,9 @@ parseopts() {
 		;;
 	    u)
 		UPDATE_REMOTE=false
+		;;
+	    c)
+		BUILD_CUSTOM=true
 		;;
 	    h)
 		echo "$0 -d -u -r <repo> -b <branch>"
@@ -181,21 +184,26 @@ initialize() {
     if [ ! -d src/ ]; then
 	mkdir src
     fi
+    rm build/*.jar
+    rm build/*.zip
 }
 
 copystaticsrc() {
     cp -ur static-src/* src/
 }
+
 # Default configuration
 SMACK_REPO=git://github.com/Flowdalic/smack.git
 SMACK_BRANCH=master
 SMACK_LOCAL=false
 UPDATE_REMOTE=true
+BUILD_CUSTOM=false
 SRC_DIR=$(pwd)/src
 WD=$(pwd)
 
 parseopts $@
 echo "Using Smack git repository $SMACK_REPO with branch $SMACK_BRANCH"
+echo "SMACK_LOCAL: $SMACK_LOCAL UPDATE_REMOTE: $UPDATE_REMOTE BUILD_CUSTOM: $BUILD_CUSTOM"
 initialize
 copystaticsrc
 testsmackgit
@@ -203,7 +211,10 @@ fetchall
 buildsrc
 patchsrc "patch"
 build
-buildcustom
+
+if $BUILD_CUSTOM ; then
+    buildcustom
+fi
 
 if which advzip; then
   find build/*.jar -exec advzip -z4 '{}' ';'
