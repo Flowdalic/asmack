@@ -84,7 +84,6 @@
       target="1.6"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
-      classpath="lib/xpp3-1.1.4c.jar"
       bootclasspath="${sdk-location}/platforms/android-6/android.jar"
       debug="true"
       debuglevel="source,lines"
