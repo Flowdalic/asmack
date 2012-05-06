@@ -11,6 +11,12 @@ This repository contains a source fetching, patching and building script.
 As well as all the minor changes to make an Android version fly.
 See the patches/ folder for a detailed list of changes and scripts.
 
+ProviderManager
+===============
+
+**IMPORTANT:** In order to work correctly on Android, you need to register the Providers manually before you doing any XMPP activty. *Make sure to call `org.jivesoftware.smackx.ConfigureProviderManager.configureProviderManager()` prior any XMPP activity*
+
+
 Compiled JARs
 =============
 Can be found [here](https://github.com/Flowdalic/asmack/downloads).
@@ -36,11 +42,6 @@ Apps that use this fork of aSmack
 
 - [yaxim](https://github.com/ge0rg/yaxim)
 - your app?
-
-ProviderManager
-===============
-
-**IMPORTANT:** In order to work correctly on Android, you need to register the Providers manually before you doing any XMPP activty. An example can be found here: http://goo.gl/wXg6v
 
 Contribution
 ============
