@@ -160,7 +160,7 @@
 <target
   name="compile"
   description="Compile for all targets"
-  depends="compile-jse,compile-a7,compile-a6,compile-a5,compile-a4"
+  depends="compile-a7,compile-a6,compile-a5,compile-a4"
 />
 
 </project>
