@@ -97,6 +97,9 @@ buildsrc() {
   copyfolder "src/harmony" "build/src/trunk" "."
   copyfolder "src/custom" "build/src/trunk" "."
   copyfolder "src/jbosh/src/main/java" "build/src/trunk" "."
+  if $BUILD_JINGLE ; then
+    copyfolder "src/smack/jingle/extension/source/" "build/src/trunk" "."
+  fi
 }
 
 patchsrc() {
@@ -117,7 +120,7 @@ patchsrc() {
 
 build() {
   echo "## Step 30: compile"
-  ant -Dbuild.all=true
+  ant -Dbuild.all=true $JINGLE_ARGS
   if [ $? -ne 0 ]; then
       exit
   fi
@@ -127,13 +130,17 @@ buildcustom() {
   for dir in `find patch -maxdepth 1 -mindepth 1 -type d`; do
     buildsrc
     patchsrc "patch"
+    if $BUILD_JINGLE ; then
+      patchsrc "jingle"
+      JINGLE_ARGS="-Djingle=lib/jstun.jar"
+    fi
     patchsrc "${dir}"
-    ant -Djar.suffix=`echo ${dir}|sed 's:patch/:-:'`
+    ant -Djar.suffix=`echo ${dir}|sed 's:patch/:-:'` $JINGLE_ARGS
   done
 }
 
 parseopts() {
-    while getopts r:b:duch OPTION "$@"; do
+    while getopts r:b:duchj OPTION "$@"; do
 	case $OPTION in
 	    r)
 		SMACK_REPO="${OPTARG}"
@@ -144,6 +151,9 @@ parseopts() {
 	    d)
 		set -x
 		;;
+	    j)
+		BUILD_JINGLE=true
+		;;
 	    u)
 		UPDATE_REMOTE=false
 		;;
@@ -151,8 +161,10 @@ parseopts() {
 		BUILD_CUSTOM=true
 		;;
 	    h)
-		echo "$0 -d -u -r <repo> -b <branch>"
+		echo "$0 -d -c -u -j -r <repo> -b <branch>"
 		echo "-d: Enable debug"
+		echo "-j: Build jingle code"
+		echo "-c: Apply custom patchs from patch directory"
 		echo "-u: DON'T update remote third party resources"
 		echo "-r <repo>: Git repository (can be local or remote) for underlying smack repository"
 		echo "-b <branch>: Git branch used to build aSmack from underlying smack repository"
@@ -198,18 +210,24 @@ SMACK_BRANCH=master
 SMACK_LOCAL=false
 UPDATE_REMOTE=true
 BUILD_CUSTOM=false
+BUILD_JINGLE=false
+JINGLE_ARGS=""
 SRC_DIR=$(pwd)/src
 WD=$(pwd)
 
 parseopts $@
 echo "Using Smack git repository $SMACK_REPO with branch $SMACK_BRANCH"
-echo "SMACK_LOCAL: $SMACK_LOCAL UPDATE_REMOTE: $UPDATE_REMOTE BUILD_CUSTOM: $BUILD_CUSTOM"
+echo "SMACK_LOCAL: $SMACK_LOCAL UPDATE_REMOTE: $UPDATE_REMOTE BUILD_CUSTOM: $BUILD_CUSTOM BUILD_JINGLE: $BUILD_JINGLE"
 initialize
 copystaticsrc
 testsmackgit
 fetchall
 buildsrc
 patchsrc "patch"
+if $BUILD_JINGLE ; then
+  patchsrc "jingle"
+  JINGLE_ARGS="-Djingle=lib/jstun.jar"
+fi
 build
 
 if $BUILD_CUSTOM ; then
