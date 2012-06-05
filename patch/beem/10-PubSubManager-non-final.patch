@@ -1,0 +1,13 @@
+Index: org/jivesoftware/smackx/pubsub/PubSubManager.java
+===================================================================
+--- org/jivesoftware/smackx/pubsub/PubSubManager.java	(revision 11464)
++++ org/jivesoftware/smackx/pubsub/PubSubManager.java	(working copy)
+@@ -41,7 +41,7 @@
+  * 
+  * @author Robin Collier
+  */
+-final public class PubSubManager
++public class PubSubManager
+ {
+ 	private XMPPConnection con;
+ 	private String to;
