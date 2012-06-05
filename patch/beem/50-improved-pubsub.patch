@@ -1,0 +1,46 @@
+--- ../../../src/smack/org/jivesoftware/smackx/pubsub/provider/ItemProvider.java	(révision 11644)
++++ org/jivesoftware/smackx/pubsub/provider/ItemProvider.java	(copie de travail)
+@@ -45,6 +45,8 @@
+ 		}
+ 		else
+ 		{
++		    while (tag != XmlPullParser.START_TAG)
++			tag = parser.next();
+ 			String payloadElemName = parser.getName();
+ 			String payloadNS = parser.getNamespace();
+ 			
+--- ../../../src/org/jivesoftware/smackx/pubsub/Node.java	(révision 11644)
++++ org/jivesoftware/smackx/pubsub/Node.java	(copie de travail)
+@@ -60,7 +60,7 @@
+ 	 * 
+ 	 *   For example, OpenFire requires the server to be prefixed by <b>pubsub</b>
+ 	 */
+-	void setTo(String toAddress)
++	public void setTo(String toAddress)
+ 	{
+ 		to = toAddress;
+ 	}
+--- ../../../src/org/jivesoftware/smackx/pubsub/LeafNode.java	(révision 11644)
++++ org/jivesoftware/smackx/pubsub/LeafNode.java	(copie de travail)
+@@ -34,7 +34,7 @@
+  */
+ public class LeafNode extends Node
+ {
+-	LeafNode(Connection connection, String nodeName)
++	public LeafNode(Connection connection, String nodeName)
+ 	{
+ 		super(connection, nodeName);
+ 	}
+--- ../../../src/org/jivesoftware/smackx/pubsub/PubSubManager.java	(révision 11644)
++++ org/jivesoftware/smackx/pubsub/PubSubManager.java	(copie de travail)
+@@ -43,8 +43,8 @@
+  */
+ final public class PubSubManager
+ {
+-	private Connection con;
+-	private String to;
++	protected Connection con;
++	protected String to;
+ 	private Map<String, Node> nodeMap = new ConcurrentHashMap<String, Node>();
+ 	
+ 	/**
