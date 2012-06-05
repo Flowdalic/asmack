@@ -1,4 +1,4 @@
-package com.googlecode.gtalksms;
+package org.jivesoftware.smack;
 
 import org.jivesoftware.smackx.ConfigureProviderManager;
 import org.xbill.DNS.ResolverConfig;
