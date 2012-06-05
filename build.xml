@@ -2,6 +2,7 @@
 
 <property name="jar.suffix" value="" />
 <property name="build.all" value="false" />
+<property name="jingle" value="" />
 <property file="local.properties" />
 
 <condition property="build-3">
@@ -80,7 +81,7 @@
       target="1.6"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
-      bootclasspath="${sdk-location}/platforms/android-@{version}/android.jar"
+      bootclasspath="${sdk-location}/platforms/android-@{version}/android.jar:${jingle}"
       debug="true"
       debuglevel="source,lines"
     />
