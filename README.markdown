@@ -11,10 +11,11 @@ This repository contains a source fetching, patching and building script.
 As well as all the minor changes to make an Android version fly.
 See the patches/ folder for a detailed list of changes and scripts.
 
-ProviderManager
-===============
+Static Code
+===========
 
-**IMPORTANT:** In order to work correctly on Android, you need to register the Providers manually before you doing any XMPP activty. *Make sure to call `org.jivesoftware.smackx.ConfigureProviderManager.configureProviderManager()` prior any XMPP activity*
+**IMPORTANT:** In order to work correctly on Android, you need to register the Providers manually and init some static code blocks before you doing any XMPP activty. *Make sure to call `org.jivesoftware.smackx.ConfigureProviderManager.configureProviderManager()` and `org.jivesoftware.smackx.InitStaticCode.initStaticCode(Context)` prior any XMPP activity*
+You could also call `org.jivesoftware.smack.SmackAndroid.init(Context)`, which will call both methods.
 
 
 Compiled JARs
