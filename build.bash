@@ -140,7 +140,7 @@ buildcustom() {
 }
 
 parseopts() {
-    while getopts r:b:duchj OPTION "$@"; do
+    while getopts b:r:cdhjpu OPTION "$@"; do
 	case $OPTION in
 	    r)
 		SMACK_REPO="${OPTARG}"
@@ -160,6 +160,9 @@ parseopts() {
 	    c)
 		BUILD_CUSTOM=true
 		;;
+	    p)
+		XARGS_ARGS="-P4"
+		;;
 	    h)
 		echo "$0 -d -c -u -j -r <repo> -b <branch>"
 		echo "-d: Enable debug"
@@ -168,6 +171,7 @@ parseopts() {
 		echo "-u: DON'T update remote third party resources"
 		echo "-r <repo>: Git repository (can be local or remote) for underlying smack repository"
 		echo "-b <branch>: Git branch used to build aSmack from underlying smack repository"
+		echo "-p use parallel build"
 		exit
 		;;
 	esac
@@ -212,6 +216,7 @@ UPDATE_REMOTE=true
 BUILD_CUSTOM=false
 BUILD_JINGLE=false
 JINGLE_ARGS=""
+XARGS_ARGS=""
 SRC_DIR=$(pwd)/src
 WD=$(pwd)
 
@@ -235,6 +240,5 @@ if $BUILD_CUSTOM ; then
 fi
 
 if which advzip; then
-  find build/*.jar -exec advzip -z4 '{}' ';'
-  find build/*.zip -exec advzip -z4 '{}' ';'
+  find build \( -name '*.jar' -or -name '*.zip' \) -print0 | xargs -n 1 -0 $XARGS_ARGS advzip -z4 
 fi
