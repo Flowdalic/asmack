@@ -161,7 +161,7 @@ parseopts() {
 		BUILD_CUSTOM=true
 		;;
 	    p)
-		XARGS_ARGS="-P4"
+		XARGS_ARGS=""
 		;;
 	    h)
 		echo "$0 -d -c -u -j -r <repo> -b <branch>"
@@ -171,7 +171,7 @@ parseopts() {
 		echo "-u: DON'T update remote third party resources"
 		echo "-r <repo>: Git repository (can be local or remote) for underlying smack repository"
 		echo "-b <branch>: Git branch used to build aSmack from underlying smack repository"
-		echo "-p use parallel build"
+		echo "-p DON'T use parallel build when possible"
 		exit
 		;;
 	esac
@@ -220,7 +220,7 @@ UPDATE_REMOTE=true
 BUILD_CUSTOM=false
 BUILD_JINGLE=false
 JINGLE_ARGS=""
-XARGS_ARGS=""
+XARGS_ARGS="-P4"
 SRC_DIR=$(pwd)/src
 WD=$(pwd)
 
@@ -244,5 +244,10 @@ if $BUILD_CUSTOM; then
 fi
 
 if $(cmdExists advzip); then
+  echo "advzip found, compressing files"
   find build \( -name '*.jar' -or -name '*.zip' \) -print0 | xargs -n 1 -0 $XARGS_ARGS advzip -z4 
+else
+  echo "Could not find the advzip command."
+  echo "advzip will further reduce the size of the generated jar and zip files,"
+  echo "consider installing advzip"
 fi
