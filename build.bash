@@ -208,6 +208,11 @@ copystaticsrc() {
     cp -ur static-src/* src/
 }
 
+cmdExists() {
+    command -v $1 &> /dev/null
+    return $?
+}
+
 # Default configuration
 SMACK_REPO=git://github.com/Flowdalic/smack.git
 SMACK_BRANCH=master
@@ -235,10 +240,10 @@ if $BUILD_JINGLE ; then
 fi
 build
 
-if $BUILD_CUSTOM ; then
+if $BUILD_CUSTOM; then
     buildcustom
 fi
 
-if which advzip; then
+if $(cmdExists advzip); then
   find build \( -name '*.jar' -or -name '*.zip' \) -print0 | xargs -n 1 -0 $XARGS_ARGS advzip -z4 
 fi
