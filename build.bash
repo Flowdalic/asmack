@@ -1,5 +1,4 @@
 #!/bin/bash
-#set -x
 
 fetch() {
     echo "Fetching from ${1} to ${2}"
@@ -45,6 +44,7 @@ testsmackgit() {
 }
 
 fetchall() {
+    echo "## Step 15: fetching sources"
     if $SMACK_LOCAL ; then
 	# always clean the local copy first
 	rm -rf ${SRC_DIR}/smack
@@ -55,25 +55,26 @@ fetchall() {
 	    exit
 	fi
     else
-	gitfetch "$SMACK_REPO" "$SMACK_BRANCH" "smack"
+	execute gitfetch "$SMACK_REPO" "$SMACK_BRANCH" "smack"
     fi
 
     if ! $UPDATE_REMOTE ; then
 	echo "Won't update or fetch third party resources"
+	wait
 	return
     fi
 
-    fetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid"
-    fetch "http://svn.apache.org/repos/asf/harmony/enhanced/java/trunk/classlib/modules/auth/src/main/java/common/" "harmony"
-    fetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava"
-    gitfetch "git://kenai.com/jbosh~origin" "master" "jbosh"
+    execute fetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid" 
+    execute fetch "http://svn.apache.org/repos/asf/harmony/enhanced/java/trunk/classlib/modules/auth/src/main/java/common/" "harmony" 
+    execute fetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava" 
+    execute gitfetch "git://kenai.com/jbosh~origin" "master" "jbosh" 
     # jldap doesn't compile with the latest version (missing deps?), therefore it's a fixed version for now
-    #  gitfetch "git://git.openldap.org/openldap-jldap.git" "master" "novell-openldap-jldap"
+    #  execute gitfetch "git://git.openldap.org/openldap-jldap.git" "master" "novell-openldap-jldap"
+    wait
 }
 
 copyfolder() {
-(
-  cd ${WD}
+  cd ${ASMACK_BASE}
   (
     cd "${1}"
     tar -cSsp --exclude-vcs "${3}"
@@ -81,30 +82,31 @@ copyfolder() {
     cd "${2}"
     tar -xSsp
   )
-)
+  wait
 }
 
-buildsrc() {
+createbuildsrc() {
   echo "## Step 20: creating build/src"
-  cd "${WD}"
+  cd "${ASMACK_BASE}"
   rm -rf build/src
   mkdir -p build/src/trunk
 
-  copyfolder "src/smack/source/" "build/src/trunk" "."
-  copyfolder "src/qpid/java" "build/src/trunk" "org/apache/qpid/management/common/sasl"
-  copyfolder "src/novell-openldap-jldap" "build/src/trunk" "."
-  copyfolder "src/dnsjava"  "build/src/trunk" "org"
-  copyfolder "src/harmony" "build/src/trunk" "."
-  copyfolder "src/custom" "build/src/trunk" "."
-  copyfolder "src/jbosh/src/main/java" "build/src/trunk" "."
+  execute copyfolder "src/smack/source/" "build/src/trunk" "." 
+  execute copyfolder "src/qpid/java" "build/src/trunk" "org/apache/qpid/management/common/sasl" 
+  execute copyfolder "src/novell-openldap-jldap" "build/src/trunk" "." 
+  execute copyfolder "src/dnsjava"  "build/src/trunk" "org" 
+  execute copyfolder "src/harmony" "build/src/trunk" "." 
+  execute copyfolder "src/custom" "build/src/trunk" "." 
+  execute copyfolder "src/jbosh/src/main/java" "build/src/trunk" "." 
   if $BUILD_JINGLE ; then
-    copyfolder "src/smack/jingle/extension/source/" "build/src/trunk" "."
+    execute copyfolder "src/smack/jingle/extension/source/" "build/src/trunk" "." 
   fi
+  wait
 }
 
 patchsrc() {
-  echo "## Step 21: patch build/src"
-  cd "${WD}"
+  echo "## Step 25: patch build/src"
+  cd "${ASMACK_BASE}"
   (
     cd build/src/trunk/
     for PATCH in `(cd "../../../${1}" ; find -maxdepth 1 -type f)|sort` ; do
@@ -162,6 +164,7 @@ parseopts() {
 		;;
 	    p)
 		XARGS_ARGS=""
+		BACKGROUND=""
 		;;
 	    h)
 		echo "$0 -d -c -u -j -r <repo> -b <branch>"
@@ -203,6 +206,12 @@ initialize() {
     find build \( -name '*.jar' -or -name '*.zip' \) -print0 | xargs -0 rm -f
 }
 
+cleanup() {
+    echo "## Deleting all temporary files"
+    rm -rf build
+    rm -rf src
+}
+
 copystaticsrc() {
     cp -ur static-src/* src/
 }
@@ -210,6 +219,24 @@ copystaticsrc() {
 cmdExists() {
     command -v $1 &> /dev/null
     return $?
+}
+
+prettyPrintSeconds() {
+    local ttime
+    if (( $1 > 59 )); then
+	ttime=$(printf "%dm %ds\n" $(($1/60%60)) $(($1%60)) )
+    else
+	ttime=$(printf "%ds\n" $(($1)) )
+    fi
+    echo "Execution took $ttime"
+}
+
+execute() { 
+    if [ -n "$BACKGROUND" ]; then
+	"$@" &
+    else
+	"$@"
+    fi
 }
 
 # Default configuration
@@ -221,17 +248,19 @@ BUILD_CUSTOM=false
 BUILD_JINGLE=false
 JINGLE_ARGS=""
 XARGS_ARGS="-P4"
-SRC_DIR=$(pwd)/src
-WD=$(pwd)
+BACKGROUND="&"
+ASMACK_BASE=$(pwd)
+SRC_DIR=$ASMACK_BASE/src
+STARTTIME=$(date -u "+%s")
 
 parseopts $@
 echo "Using Smack git repository $SMACK_REPO with branch $SMACK_BRANCH"
-echo "SMACK_LOCAL: $SMACK_LOCAL UPDATE_REMOTE: $UPDATE_REMOTE BUILD_CUSTOM: $BUILD_CUSTOM BUILD_JINGLE: $BUILD_JINGLE"
+echo "SMACK_LOCAL:$SMACK_LOCAL UPDATE_REMOTE:$UPDATE_REMOTE BUILD_CUSTOM:$BUILD_CUSTOM BUILD_JINGLE:$BUILD_JINGLE"
 initialize
 copystaticsrc
 testsmackgit
 fetchall
-buildsrc
+createbuildsrc
 patchsrc "patch"
 if $BUILD_JINGLE ; then
   patchsrc "jingle"
@@ -251,3 +280,7 @@ else
   echo "advzip will further reduce the size of the generated jar and zip files,"
   echo "consider installing advzip"
 fi
+
+STOPTIME=$(date -u "+%s")
+RUNTIME=$(( $STOPTIME - $STARTTIME ))
+prettyPrintSeconds $RUNTIME
