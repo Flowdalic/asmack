@@ -200,8 +200,7 @@ initialize() {
     if [ ! -d src/ ]; then
 	mkdir src
     fi
-    rm build/*.jar
-    rm build/*.zip
+    find build \( -name '*.jar' -or -name '*.zip' \) -print0 | xargs -0 rm -f
 }
 
 copystaticsrc() {
