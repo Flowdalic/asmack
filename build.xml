@@ -74,20 +74,20 @@
   <attribute name="version" />
   <sequential>
     <echo>Compile for Android-@{version}</echo>
-    <delete dir="build/classes" failonerror="false" />
-    <mkdir dir="build/classes" />
-    <mkdir dir="build/classes/trunk" />
+    <delete dir="build/classes-@{version}" failonerror="false" />
+    <mkdir dir="build/classes-@{version}" />
+    <mkdir dir="build/classes-@{version}/trunk" />
     <javac
       target="1.6"
       srcdir="build/src/trunk"
-      destdir="build/classes/trunk"
+      destdir="build/classes-@{version}/trunk"
       bootclasspath="${sdk-location}/platforms/android-@{version}/android.jar:${jingle}"
       debug="true"
       debuglevel="source,lines"
     />
-    <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="META-INF/**" /></copy>
+    <copy todir="build/classes-@{version}/trunk"><fileset dir="build/src/trunk" includes="META-INF/**" /></copy>
     <jar
-      basedir="build/classes/trunk"
+      basedir="build/classes-@{version}/trunk"
       destfile="build/asmack-android-@{version}${jar.suffix}.jar"
       filesonly="true"
       level="9"
