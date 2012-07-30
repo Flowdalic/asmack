@@ -96,12 +96,13 @@ createbuildsrc() {
   execute copyfolder "src/novell-openldap-jldap" "build/src/trunk" "." 
   execute copyfolder "src/dnsjava"  "build/src/trunk" "org" 
   execute copyfolder "src/harmony" "build/src/trunk" "." 
-  execute copyfolder "src/custom" "build/src/trunk" "." 
   execute copyfolder "src/jbosh/src/main/java" "build/src/trunk" "." 
   if $BUILD_JINGLE ; then
     execute copyfolder "src/smack/jingle/extension/source/" "build/src/trunk" "." 
   fi
   wait
+  # custom overwrites some files from smack, so this has to be done as last
+  copyfolder "src/custom" "build/src/trunk" "." 
 }
 
 patchsrc() {
