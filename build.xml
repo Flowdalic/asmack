@@ -5,9 +5,9 @@
 <property name="jingle" value="" />
 <property file="local.properties" />
 
-<condition property="build-3">
-	<available file="${sdk-location}/platforms/android-3/android.jar" />
-</condition>
+<!-- <condition property="build-3"> -->
+<!-- 	<available file="${sdk-location}/platforms/android-3/android.jar" /> -->
+<!-- </condition> -->
 
 <condition property="build-4">
 	<available file="${sdk-location}/platforms/android-4/android.jar" />

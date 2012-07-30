@@ -23,6 +23,10 @@ Compiled JARs
 Can be found [here](https://github.com/Flowdalic/asmack/downloads).
 But be aware, they may be *outdated!*
 
+ConnectionConfiguration
+=======================
+Please use the provided org.jivesoftware.smack.AndroidConnectionConfiguration class if possible to create a new connection.
+
 Compression
 ===========
 In order to enable compressed XMPP streams you have to add [jzlib](http://www.jcraft.com/jzlib/) to your project.

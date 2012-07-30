@@ -1,5 +1,9 @@
 package org.jivesoftware.smack;
 
+import java.io.File;
+
+import android.os.Build;
+
 import org.jivesoftware.smack.proxy.ProxyInfo;
 import org.jivesoftware.smack.util.DNSUtil;
 
@@ -36,7 +40,29 @@ public class AndroidConnectionConfiguration extends ConnectionConfiguration {
         super();
         AndroidInit(serviceName, timeout);
     }
-    
+
+    public AndroidConnectionConfiguration(String host, int port, String name) {
+	super(host, port, name);
+	AndroidInit();
+    }
+
+    private void AndroidInit() {
+    	// API 14 is Ice Cream Sandwich
+	if (Build.VERSION.SDK_INT >= 14) {
+	    setTruststoreType("AndroidCAStore");
+	    setTruststorePassword(null);
+	    setTruststorePath(null);
+	} else {
+	    setTruststoreType("BKS");
+	    String path = System.getProperty("javax.net.ssl.trustStore");
+	    if (path == null)
+		path = System.getProperty("java.home") + File.separator + "etc"
+		    + File.separator + "security" + File.separator
+		    + "cacerts.bks";
+	    setTruststorePath(path);
+	}
+    }
+
     /**
      * 
      * @param serviceName
@@ -44,6 +70,7 @@ public class AndroidConnectionConfiguration extends ConnectionConfiguration {
      * @throws XMPPException
      */
     private void AndroidInit(String serviceName, int timeout) throws XMPPException {
+	AndroidInit();
         class DnsSrvLookupRunnable implements Runnable {
             String serviceName;
             volatile DNSUtil.HostAddress address;
