@@ -163,8 +163,8 @@ parseopts() {
 		BUILD_CUSTOM=true
 		;;
 	    p)
-		XARGS_ARGS=""
-		BACKGROUND=""
+		XARGS_ARGS="-P4"
+		BACKGROUND="true"
 		;;
 	    h)
 		echo "$0 -d -c -u -j -r <repo> -b <branch>"
@@ -174,7 +174,7 @@ parseopts() {
 		echo "-u: DON'T update remote third party resources"
 		echo "-r <repo>: Git repository (can be local or remote) for underlying smack repository"
 		echo "-b <branch>: Git branch used to build aSmack from underlying smack repository"
-		echo "-p DON'T use parallel build when possible"
+		echo "-p use parallel build where possible"
 		exit
 		;;
 	esac
@@ -247,8 +247,8 @@ UPDATE_REMOTE=true
 BUILD_CUSTOM=false
 BUILD_JINGLE=false
 JINGLE_ARGS=""
-XARGS_ARGS="-P4"
-BACKGROUND="&"
+XARGS_ARGS=""
+BACKGROUND=""
 ASMACK_BASE=$(pwd)
 SRC_DIR=$ASMACK_BASE/src
 STARTTIME=$(date -u "+%s")
