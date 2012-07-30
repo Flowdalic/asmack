@@ -164,8 +164,7 @@ parseopts() {
 		BUILD_CUSTOM=true
 		;;
 	    p)
-		XARGS_ARGS="-P4"
-		BACKGROUND="true"
+		PARALLEL_BUILD=true
 		;;
 	    h)
 		echo "$0 -d -c -u -j -r <repo> -b <branch>"
@@ -180,11 +179,6 @@ parseopts() {
 		;;
 	esac
     done
-
-    if islocalrepo $SMACK_REPO ; then
-	SMACK_LOCAL=true
-	SMACK_REPO=`readlink -f $SMACK_REPO`
-    fi
 }
 
 islocalrepo() {
@@ -240,23 +234,50 @@ execute() {
     fi
 }
 
+setdefaults() {
 # Default configuration
-SMACK_REPO=git://github.com/Flowdalic/smack.git
-SMACK_BRANCH=master
-SMACK_LOCAL=false
-UPDATE_REMOTE=true
-BUILD_CUSTOM=false
-BUILD_JINGLE=false
-JINGLE_ARGS=""
-XARGS_ARGS=""
-BACKGROUND=""
-ASMACK_BASE=$(pwd)
-SRC_DIR=$ASMACK_BASE/src
-STARTTIME=$(date -u "+%s")
+    SMACK_REPO=git://github.com/Flowdalic/smack.git
+    SMACK_BRANCH=master
+    SMACK_LOCAL=false
+    UPDATE_REMOTE=true
+    BUILD_CUSTOM=false
+    BUILD_JINGLE=false
+    JINGLE_ARGS=""
+    PARALLEL_BUILD=false
+    ASMACK_BASE=$(pwd)
+    SRC_DIR=$ASMACK_BASE/src
+    STARTTIME=$(date -u "+%s")
+}
 
+parseconfig() {
+    if [ -f ${ASMACK_BASE}/config ]; then
+	source ${ASMACK_BASE}/config
+    fi
+}
+
+setconfig() {
+    if [ ${PARALLEL_BUILD} == "true" ]; then
+	XARGS_ARGS="-P4"
+	BACKGROUND="true"
+    else
+	XARGS_ARGS=""
+	BACKGROUND=""
+    fi
+
+    if islocalrepo $SMACK_REPO ; then
+	SMACK_LOCAL=true
+	SMACK_REPO=`readlink -f $SMACK_REPO`
+    fi
+}
+
+setdefaults
 parseopts $@
+parseconfig
+setconfig
 echo "Using Smack git repository $SMACK_REPO with branch $SMACK_BRANCH"
-echo "SMACK_LOCAL:$SMACK_LOCAL UPDATE_REMOTE:$UPDATE_REMOTE BUILD_CUSTOM:$BUILD_CUSTOM BUILD_JINGLE:$BUILD_JINGLE"
+echo -e "SMACK_LOCAL:$SMACK_LOCAL\tUPDATE_REMOTE:$UPDATE_REMOTE\tBUILD_CUSTOM:$BUILD_CUSTOM\tBUILD_JINGLE:$BUILD_JINGLE"
+echo -e "PARALLEL_BUILD:$PARALLEL_BUILD\tBASE:$ASMACK_BASE"
+
 initialize
 copystaticsrc
 testsmackgit
