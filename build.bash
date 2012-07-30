@@ -270,13 +270,17 @@ setconfig() {
     fi
 }
 
+printconfig() {
+    echo "Smack git repository $SMACK_REPO with branch $SMACK_BRANCH"
+    echo -e "SMACK_LOCAL:$SMACK_LOCAL\tUPDATE_REMOTE:$UPDATE_REMOTE\tBUILD_CUSTOM:$BUILD_CUSTOM\tBUILD_JINGLE:$BUILD_JINGLE"
+    echo -e "PARALLEL_BUILD:$PARALLEL_BUILD\tBASE:$ASMACK_BASE"
+}
+
 setdefaults
 parseopts $@
 parseconfig
 setconfig
-echo "Using Smack git repository $SMACK_REPO with branch $SMACK_BRANCH"
-echo -e "SMACK_LOCAL:$SMACK_LOCAL\tUPDATE_REMOTE:$UPDATE_REMOTE\tBUILD_CUSTOM:$BUILD_CUSTOM\tBUILD_JINGLE:$BUILD_JINGLE"
-echo -e "PARALLEL_BUILD:$PARALLEL_BUILD\tBASE:$ASMACK_BASE"
+printconfig
 
 initialize
 copystaticsrc
@@ -306,3 +310,4 @@ fi
 STOPTIME=$(date -u "+%s")
 RUNTIME=$(( $STOPTIME - $STARTTIME ))
 prettyPrintSeconds $RUNTIME
+printconfig
