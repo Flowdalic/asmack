@@ -1,13 +1,9 @@
 <project name="asmack" default="compile" basedir=".">
 
 <property name="jar.suffix" value="" />
+<property name="jingle" value="" />
 <property file="local.properties" />
 <property name="android.version" value="" />
-
-<condition property="build-7">
-	<available file="${sdk-location}/platforms/android-7/android.jar" />
-</condition>
-
 <target name="compile-jse"  description="Compile for java se">
     <delete dir="build/classes" failonerror="false" />
     <mkdir dir="build/classes" />
@@ -52,7 +48,7 @@
       source="6"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
-      bootclasspath="${sdk-location}/platforms/${android.version}/android.jar"
+      bootclasspath="${sdk-location}/platforms/${android.version}/android.jar:${jingle}"
       debug="true"
       debuglevel="source,lines"
     />
@@ -71,38 +67,11 @@
     />
 </target>
 
-<target name="compile-a7" description="Compile for android API level 7" if="build-7">
-    <delete dir="build/classes" failonerror="false" />
-    <mkdir dir="build/classes" />
-    <mkdir dir="build/classes/trunk" />
-    <javac
-      target="6"
-      source="6"
-      srcdir="build/src/trunk"
-      destdir="build/classes/trunk"
-      bootclasspath="${sdk-location}/platforms/android-7/android.jar"
-      debug="true"
-      debuglevel="source,lines"
-    />
-    <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="META-INF/**" /></copy>
-    <jar
-      basedir="build/classes/trunk"
-      destfile="build/asmack-android-7${jar.suffix}.jar"
-      filesonly="true"
-      level="9"
-    />
-    <zip
-      basedir="build/src/trunk"
-      destfile="build/asmack-android-7-source${jar.suffix}.zip"
-      filesonly="true"
-      level="9"
-    />
-</target>
 
 <target
   name="compile"
-  description="Compile for all targets"
-  depends="compile-jse,compile-a7"
+  description="Compile for jse targets"
+  depends="compile-jse"
 />
 
 </project>
