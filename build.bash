@@ -32,6 +32,24 @@ gitfetch() {
     fi
 }
 
+hgfetch() {
+(
+  echo "Fetching ${2} branch from ${1} to ${3} via mercurial"
+  cd src
+  if [ -e "${2}/.hg" ] ; then
+      cd ${2}
+      hg pull
+  else
+      hg clone "${1}" "${2}"
+  fi
+  hg up -r ${3}
+)
+    if [ $? -ne 0 ]; then
+	exit
+    fi
+}
+
+
 testsmackgit() {
     cd $SRC_DIR
     if [ -f .used-smack-git-repo ] && [ $(cat .used-smack-git-repo) != $SMACK_REPO ] ; then
