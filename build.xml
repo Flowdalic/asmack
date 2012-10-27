@@ -13,7 +13,7 @@
       source="6"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
-      classpath="lib/xpp3-1.1.4c.jar:lib/httpclient-4.0.jar:lib/httpcore-4.0.1.jar"
+      classpath="lib/xpp3-1.1.4c.jar:lib/httpclient-4.1.3.jar:lib/httpcore-4.1.4.jar"
       debug="true"
       debuglevel="source,lines"
       excludes="**/de/measite/smack/AndroidDebugger.java"

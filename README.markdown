@@ -11,10 +11,25 @@ This repository contains a source fetching, patching and building script.
 As well as all the minor changes to make an Android version fly.
 See the patches/ folder for a detailed list of changes and scripts.
 
+Static Code
+===========
+
+**IMPORTANT:** In order to work correctly on Android, you need to register the Providers manually and init some static code blocks before you doing any XMPP activty. *Make sure to call `org.jivesoftware.smackx.ConfigureProviderManager.configureProviderManager()` and `org.jivesoftware.smackx.InitStaticCode.initStaticCode(Context)` prior any XMPP activity*
+You could also call `org.jivesoftware.smack.SmackAndroid.init(Context)`, which will call both methods.
+
+
 Compiled JARs
 =============
 Can be found [here](https://github.com/Flowdalic/asmack/downloads).
 But be aware, they may be *outdated!*
+
+ConnectionConfiguration
+=======================
+Please use the provided org.jivesoftware.smack.AndroidConnectionConfiguration class if possible to create a new connection.
+
+Compression
+===========
+In order to enable compressed XMPP streams you have to add [jzlib](http://www.jcraft.com/jzlib/) to your project.
 
 Compiling aSmack
 ================
@@ -36,11 +51,6 @@ Apps that use this fork of aSmack
 
 - [yaxim](https://github.com/ge0rg/yaxim)
 - your app?
-
-ProviderManager
-===============
-
-**IMPORTANT:** In order to work correctly on Android, you need to register the Providers manually before you doing any XMPP activty. An example can be found here: http://goo.gl/wXg6v
 
 Contribution
 ============
@@ -73,6 +83,9 @@ Your issue should contain
 There is no guarantee that we will reply immediatly. But we will try to
 investigate the problem.
 
+Contact
+=======
+Join ##smack @ freenode
 
 Licences / Used libraries
 =========================

@@ -1,0 +1,171 @@
+Index: org/jivesoftware/smackx/packet/JingleContentInfo.java
+===================================================================
+--- org/jivesoftware/smackx/packet/JingleContentInfo.java	(revision 11644)
++++ org/jivesoftware/smackx/packet/JingleContentInfo.java	(working copy)
+@@ -96,7 +96,7 @@
+      */
+     public static class Audio extends JingleContentInfo {
+ 
+-        public static final String NAMESPACE = "urn:xmpp:tmp:jingle:apps:rtp";
++        public static final String NAMESPACE = "urn:xmpp:jingle:apps:rtp:1";
+ 
+         public Audio(final ContentInfo mi) {
+             super(mi);
+Index: org/jivesoftware/smackx/packet/JingleError.java
+===================================================================
+--- org/jivesoftware/smackx/packet/JingleError.java	(revision 11644)
++++ org/jivesoftware/smackx/packet/JingleError.java	(working copy)
+@@ -27,7 +27,7 @@
+ 
+ public class JingleError implements PacketExtension {
+ 
+-    public static String NAMESPACE = "urn:xmpp:tmp:jingle:errors";
++    public static String NAMESPACE = "urn:xmpp:jingle:errors:1";
+ 
+     public static final JingleError OUT_OF_ORDER = new JingleError("out-of-order");
+ 
+Index: org/jivesoftware/smackx/packet/JingleTransport.java
+===================================================================
+--- org/jivesoftware/smackx/packet/JingleTransport.java	(revision 11644)
++++ org/jivesoftware/smackx/packet/JingleTransport.java	(working copy)
+@@ -270,7 +270,7 @@
+      * RTP-ICE profile
+      */
+     public static class Ice extends JingleTransport {
+-        public static final String NAMESPACE = "urn:xmpp:tmp:jingle:transports:ice-udp";
++        public static final String NAMESPACE = "urn:xmpp:jingle:transports:ice-udp:1";
+ 
+         public Ice() {
+             super();
+@@ -352,7 +352,7 @@
+      * Raw UDP profile.
+      */
+     public static class RawUdp extends JingleTransport {
+-        public static final String NAMESPACE = "http://www.xmpp.org/extensions/xep-0177.html#ns";
++        public static final String NAMESPACE = "urn:xmpp:jingle:transports:raw-udp:1";
+ 
+         public RawUdp() {
+             super();
+Index: org/jivesoftware/smackx/packet/JingleContentDescription.java
+===================================================================
+--- org/jivesoftware/smackx/packet/JingleContentDescription.java	(revision 11644)
++++ org/jivesoftware/smackx/packet/JingleContentDescription.java	(working copy)
+@@ -66,6 +66,13 @@
+     public abstract String getNamespace();
+ 
+     /**
++     * Return the media type.
++     *
++     * @return The media type
++     */
++    public abstract String getMediaType();
++
++    /**
+      * Adds a audio payload type to the packet.
+      *
+      * @param pt the audio payload type to add.
+@@ -153,7 +160,8 @@
+         synchronized (payloads) {
+             if (payloads.size() > 0) {
+                 buf.append("<").append(getElementName());
+-                buf.append(" xmlns=\"").append(getNamespace()).append("\" >");
++                buf.append(" xmlns=\"").append(getNamespace()).append("\"");
++                buf.append(" media=\"").append(getMediaType()).append("\" >");
+ 
+                 Iterator pt = payloads.listIterator();
+                 while (pt.hasNext()) {
+@@ -172,7 +180,8 @@
+      */
+     public static class Audio extends JingleContentDescription {
+ 
+-        public static final String NAMESPACE = "urn:xmpp:tmp:jingle:apps:rtp";
++        public static final String NAMESPACE = "urn:xmpp:jingle:apps:rtp:1";
++        public static final String MEDIA_TYPE = "audio";
+ 
+         public Audio() {
+             super();
+@@ -189,6 +198,10 @@
+         public String getNamespace() {
+             return NAMESPACE;
+         }
++
++        public String getMediaType() {
++            return MEDIA_TYPE;
++        }
+     }
+ 
+     /**
+Index: org/jivesoftware/smackx/packet/Jingle.java
+===================================================================
+--- org/jivesoftware/smackx/packet/Jingle.java	(revision 11644)
++++ org/jivesoftware/smackx/packet/Jingle.java	(working copy)
+@@ -44,7 +44,7 @@
+ 
+     // static
+ 
+-    public static final String NAMESPACE = "urn:xmpp:tmp:jingle";
++    public static final String NAMESPACE = "urn:xmpp:jingle:1";
+ 
+     public static final String NODENAME = "jingle";
+ 
+Index: org/jivesoftware/smackx/packet/JingleDescription.java
+===================================================================
+--- org/jivesoftware/smackx/packet/JingleDescription.java	(revision 11644)
++++ org/jivesoftware/smackx/packet/JingleDescription.java	(working copy)
+@@ -69,6 +69,13 @@
+     public abstract String getNamespace();
+ 
+     /**
++     * Return the media type.
++     *
++     * @return The media type
++     */
++    public abstract String getMediaType();
++
++    /**
+      * Adds a audio payload type to the packet.
+      *
+      * @param pt the audio payload type to add.
+@@ -160,7 +167,8 @@
+         synchronized (payloads) {
+             if (payloads.size() > 0) {
+                 buf.append("<").append(getElementName());
+-                buf.append(" xmlns=\"").append(getNamespace()).append("\" >");
++                buf.append(" xmlns=\"").append(getNamespace()).append("\"");
++                buf.append(" media=\"").append(getMediaType()).append("\" >");
+ 
+                 for (PayloadType payloadType : payloads) {
+                     if (payloadType != null) {
+@@ -179,7 +187,8 @@
+      */
+     public static class Audio extends JingleDescription {
+ 
+-        public static final String NAMESPACE = "urn:xmpp:tmp:jingle:apps:rtp";
++        public static final String NAMESPACE = "urn:xmpp:jingle:apps:rtp:1";
++        public static final String MEDIA_TYPE = "audio";
+ 
+         public Audio() {
+             super();
+@@ -196,5 +205,9 @@
+         public String getNamespace() {
+             return NAMESPACE;
+         }
++
++        public String getMediaType() {
++            return MEDIA_TYPE;
++        }
+     }
+ }
+Index: org/jivesoftware/smackx/jingle/JingleManager.java
+===================================================================
+--- org/jivesoftware/smackx/jingle/JingleManager.java	(revision 11644)
++++ org/jivesoftware/smackx/jingle/JingleManager.java	(working copy)
+@@ -255,7 +255,7 @@
+      */
+     public static void setJingleServiceEnabled() {
+         ProviderManager providerManager = ProviderManager.getInstance();
+-        providerManager.addIQProvider("jingle", "urn:xmpp:tmp:jingle", new JingleProvider());
++        providerManager.addIQProvider("jingle", "urn:xmpp:jingle:1", new JingleProvider());
+ 
+         // Enable the Jingle support on every established connection
+         // The ServiceDiscoveryManager class should have been already
