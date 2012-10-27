@@ -1,16 +1,17 @@
 #!/bin/bash
 
-fetch() {
-    echo "Fetching from ${1} to ${2}"
+svnfetch() {
+    REV="${3:-HEAD}"
+    echo "Fetching from ${1} to ${2} at revision ${REV}"
     cd $SRC_DIR
     if ! [ -f "${2}/.svn/entries" ]; then
 	mkdir "${2}"
 	cd "${2}"
-	svn co --non-interactive --trust-server-cert "${1}" "."
+	svn co --non-interactive --trust-server-cert "${1}" -r "${REV}" "."
     else
 	cd "${2}"
 	svn cleanup
-	svn up
+	svn up -r "${REV}"
     fi
 }
 
@@ -82,9 +83,9 @@ fetchall() {
 	return
     fi
 
-    execute fetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid" 
-    execute fetch "http://svn.apache.org/repos/asf/harmony/enhanced/java/trunk/classlib/modules/auth/src/main/java/common/" "harmony" 
-    execute fetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava" 
+    execute svnfetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid" 
+    execute svnfetch "http://svn.apache.org/repos/asf/harmony/enhanced/java/trunk/classlib/modules/auth/src/main/java/common/" "harmony" 
+    execute svnfetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava" 
     execute gitfetch "git://kenai.com/jbosh~origin" "master" "jbosh" 
     # jldap doesn't compile with the latest version (missing deps?), therefore it's a fixed version for now
     #  execute gitfetch "git://git.openldap.org/openldap-jldap.git" "master" "novell-openldap-jldap"
