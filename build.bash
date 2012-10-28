@@ -1,16 +1,17 @@
 #!/bin/bash
 
-fetch() {
-    echo "Fetching from ${1} to ${2}"
+svnfetch() {
+    REV="${3:-HEAD}"
+    echo "Fetching from ${1} to ${2} at revision ${REV}"
     cd $SRC_DIR
     if ! [ -f "${2}/.svn/entries" ]; then
 	mkdir "${2}"
 	cd "${2}"
-	svn co --non-interactive --trust-server-cert "${1}" "."
+	svn co --non-interactive --trust-server-cert "${1}" -r "${REV}" "."
     else
 	cd "${2}"
 	svn cleanup
-	svn up
+	svn up -r "${REV}"
     fi
 }
 
@@ -31,6 +32,24 @@ gitfetch() {
 	exit
     fi
 }
+
+hgfetch() {
+(
+  echo "Fetching ${2} branch from ${1} to ${3} via mercurial"
+  cd src
+  if [ -e "${2}/.hg" ] ; then
+      cd ${2}
+      hg pull
+  else
+      hg clone "${1}" "${2}"
+  fi
+  hg up -r ${3}
+)
+    if [ $? -ne 0 ]; then
+	exit
+    fi
+}
+
 
 testsmackgit() {
     cd $SRC_DIR
@@ -64,9 +83,9 @@ fetchall() {
 	return
     fi
 
-    execute fetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid" 
-    execute fetch "http://svn.apache.org/repos/asf/harmony/enhanced/java/trunk/classlib/modules/auth/src/main/java/common/" "harmony" 
-    execute fetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava" 
+    execute svnfetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid" 
+    execute svnfetch "http://svn.apache.org/repos/asf/harmony/enhanced/java/trunk/classlib/modules/auth/src/main/java/common/" "harmony" 
+    execute svnfetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava" 
     execute gitfetch "git://kenai.com/jbosh~origin" "master" "jbosh" 
     # jldap doesn't compile with the latest version (missing deps?), therefore it's a fixed version for now
     #  execute gitfetch "git://git.openldap.org/openldap-jldap.git" "master" "novell-openldap-jldap"
@@ -123,10 +142,23 @@ patchsrc() {
 
 build() {
   echo "## Step 30: compile"
-  ant -Dbuild.all=true $JINGLE_ARGS
+  ant $JINGLE_ARGS
+  buildandroid 
   if [ $? -ne 0 ]; then
       exit
   fi
+}
+
+buildandroid() {
+    sdklocation=$(grep sdk-location local.properties| cut -d= -f2)
+    if [ -z "$sdklocation" ] ; then
+	echo "Android SDK not found. Don't build android version"
+	return
+    fi
+    for f in $sdklocation/platforms/* ; do
+	version=`basename $f`
+	ant -Dandroid.version=${version}  -Djar.suffix="$1" compile-android
+    done
 }
 
 buildcustom() {
@@ -138,7 +170,9 @@ buildcustom() {
       JINGLE_ARGS="-Djingle=lib/jstun.jar"
     fi
     patchsrc "${dir}"
-    ant -Djar.suffix=`echo ${dir}|sed 's:patch/:-:'` $JINGLE_ARGS
+    custom=`echo ${dir}|sed 's:patch/:-:'`
+    ant -Djar.suffix="$custom" $JINGLE_ARGS
+    buildandroid `echo ${dir}|sed 's:patch/:-:'`
   done
 }
 

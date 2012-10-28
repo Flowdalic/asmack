@@ -1,52 +1,16 @@
 <project name="asmack" default="compile" basedir=".">
 
 <property name="jar.suffix" value="" />
-<property name="build.all" value="false" />
 <property name="jingle" value="" />
 <property file="local.properties" />
-
-<!-- <condition property="build-3"> -->
-<!-- 	<available file="${sdk-location}/platforms/android-3/android.jar" /> -->
-<!-- </condition> -->
-
-<condition property="build-4">
-	<available file="${sdk-location}/platforms/android-4/android.jar" />
-</condition>
-
-<condition property="build-7">
-	<available file="${sdk-location}/platforms/android-7/android.jar" />
-</condition>
-
-<condition property="build-8">
-	<available file="${sdk-location}/platforms/android-8/android.jar" />
-</condition>
-
-<condition property="build-10">
-	<available file="${sdk-location}/platforms/android-10/android.jar" />
-</condition>
-
-<condition property="build-11">
-	<available file="${sdk-location}/platforms/android-11/android.jar" />
-</condition>
-
-<condition property="build-12">
-	<available file="${sdk-location}/platforms/android-12/android.jar" />
-</condition>
-
-<condition property="build-13">
-	<available file="${sdk-location}/platforms/android-13/android.jar" />
-</condition>
-
-<condition property="build-14">
-	<available file="${sdk-location}/platforms/android-14/android.jar" />
-</condition>
-
+<property name="android.version" value="" />
 <target name="compile-jse"  description="Compile for java se">
     <delete dir="build/classes" failonerror="false" />
     <mkdir dir="build/classes" />
     <mkdir dir="build/classes/trunk" />
     <javac
-      target="1.6"
+      target="6"
+      source="6"
       srcdir="build/src/trunk"
       destdir="build/classes/trunk"
       classpath="lib/xpp3-1.1.4c.jar:lib/httpclient-4.1.3.jar:lib/httpcore-4.1.4.jar"
@@ -70,48 +34,45 @@
     />
 </target>
 
-<macrodef name="android-build">
-  <attribute name="version" />
-  <sequential>
-    <echo>Compile for Android-@{version}</echo>
-    <delete dir="build/classes-@{version}" failonerror="false" />
-    <mkdir dir="build/classes-@{version}" />
-    <mkdir dir="build/classes-@{version}/trunk" />
+<target name="check-android-exists" >
+    <available property="android.exists" file="${sdk-location}/platforms/${android.version}/android.jar" />
+    <fail unless="${android.exists}" message="Android version ${android.version} does not is not available : ${sdk-location}/platforms/${android.version}/android.jar is not found" />
+</target>
+
+<target name="compile-android" description="Compile for android" depends="check-android-exists" >
+    <delete dir="build/classes" failonerror="false" />
+    <mkdir dir="build/classes" />
+    <mkdir dir="build/classes/trunk" />
     <javac
-      target="1.6"
+      target="6"
+      source="6"
       srcdir="build/src/trunk"
-      destdir="build/classes-@{version}/trunk"
-      bootclasspath="${sdk-location}/platforms/android-@{version}/android.jar:${jingle}"
+      destdir="build/classes/trunk"
+      bootclasspath="${sdk-location}/platforms/${android.version}/android.jar:${jingle}"
       debug="true"
       debuglevel="source,lines"
     />
-    <copy todir="build/classes-@{version}/trunk"><fileset dir="build/src/trunk" includes="META-INF/**" /></copy>
+    <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="META-INF/**" /></copy>
     <jar
-      basedir="build/classes-@{version}/trunk"
-      destfile="build/asmack-android-@{version}${jar.suffix}.jar"
+      basedir="build/classes/trunk"
+      destfile="build/asmack-${android.version}${jar.suffix}.jar"
       filesonly="true"
       level="9"
     />
     <zip
       basedir="build/src/trunk"
-      destfile="build/asmack-android-@{version}-source${jar.suffix}.zip"
+      destfile="build/asmack-${android.version}-source${jar.suffix}.zip"
       filesonly="true"
       level="9"
     />
-  </sequential>
-</macrodef>
+</target>
 
-<target name="compile-a3" if="build-3"><android-build version="3" /></target>
-<target name="compile-a4" if="build-4"><android-build version="4" /></target>
-<target name="compile-a7" if="build-7"><android-build version="7" /></target>
-<target name="compile-a8" if="build-8"><android-build version="8" /></target>
-<target name="compile-a10" if="build-10"><android-build version="10" /></target>
-<target name="compile-a11" if="build-11"><android-build version="11" /></target>
-<target name="compile-a12" if="build-12"><android-build version="12" /></target>
-<target name="compile-a13" if="build-13"><android-build version="13" /></target>
-<target name="compile-a14" if="build-14"><android-build version="14" /></target>
 
-<target name="compile" depends="compile-a14,compile-a13,compile-a12,compile-a11,compile-a10,compile-a8,compile-a7,compile-a4,compile-a3" />
+<target
+  name="compile"
+  description="Compile for jse targets"
+  depends="compile-jse"
+/>
 
 </project>
 
