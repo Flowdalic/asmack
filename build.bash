@@ -21,11 +21,11 @@ gitfetch() {
     if ! [ -f "${3}/.git/config" ]; then
 	git clone "${1}" "${3}"
 	cd "${3}"
-	git checkout origin/"${2}"
+	git checkout "${2}"
     else
 	cd "${3}"
 	git fetch
-	git checkout origin/"${2}"
+	git checkout "${2}"
     fi
 
     if [ $? -ne 0 ]; then
@@ -271,7 +271,7 @@ execute() {
 setdefaults() {
 # Default configuration
     SMACK_REPO=git://github.com/Flowdalic/smack.git
-    SMACK_BRANCH=master
+    SMACK_BRANCH=origin/master
     SMACK_LOCAL=false
     UPDATE_REMOTE=true
     BUILD_CUSTOM=false
