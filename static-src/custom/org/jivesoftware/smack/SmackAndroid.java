@@ -36,10 +36,14 @@ public class SmackAndroid {
         return sSmackAndroid;
     }
 
-    public void exit() {
-        if (mReg) {	
-            mCtx.unregisterReceiver(mConnectivityChangedReceiver);
-	    mReg = false;
+    public static void exit() {
+        if (sSmackAndroid == null)
+            return;
+
+        if (sSmackAndroid.mReg) {
+            sSmackAndroid.mCtx.unregisterReceiver(
+                sSmackAndroid.mConnectivityChangedReceiver);
+	    sSmackAndroid.mReg = false;
 	}
     }
 
