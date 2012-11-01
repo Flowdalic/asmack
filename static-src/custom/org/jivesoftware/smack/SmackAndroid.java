@@ -14,24 +14,37 @@ public class SmackAndroid {
 
     private BroadcastReceiver mConnectivityChangedReceiver;
     private Context mCtx;
+    private boolean mReg;
 
     private SmackAndroid(Context ctx) {
+        mReg = false;
         ConfigureProviderManager.configureProviderManager();
         InitStaticCode.initStaticCode(ctx);
         mConnectivityChangedReceiver = new ConnectivtyChangedReceiver();
-        ctx.registerReceiver(mConnectivityChangedReceiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
-        mCtx = ctx;
     }
 
     public static SmackAndroid init(Context ctx) {
         if (sSmackAndroid == null) {
             sSmackAndroid = new SmackAndroid(ctx);
         }
+	if (!sSmackAndroid.mReg) {
+	    ctx.registerReceiver(sSmackAndroid.mConnectivityChangedReceiver, 
+                new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+            sSmackAndroid.mCtx = ctx;
+	    sSmackAndroid.mReg = true;
+	}
         return sSmackAndroid;
     }
 
-    public void exit() {
-        mCtx.unregisterReceiver(mConnectivityChangedReceiver);
+    public static void exit() {
+        if (sSmackAndroid == null)
+            return;
+
+        if (sSmackAndroid.mReg) {
+            sSmackAndroid.mCtx.unregisterReceiver(
+                sSmackAndroid.mConnectivityChangedReceiver);
+	    sSmackAndroid.mReg = false;
+	}
     }
 
     class ConnectivtyChangedReceiver extends BroadcastReceiver {
