@@ -83,10 +83,10 @@ fetchall() {
 	return
     fi
 
-    execute svnfetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid" 
+    execute svnfetch "http://svn.apache.org/repos/asf/qpid/trunk/qpid/java/management/common/src/main/" "qpid"
     execute svnfetch "http://svn.apache.org/repos/asf/harmony/enhanced/java/trunk/classlib/modules/auth/src/main/java/common/" "harmony" 
-    execute svnfetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava" 
-    execute gitfetch "git://kenai.com/jbosh~origin" "master" "jbosh" 
+    execute svnfetch "https://dnsjava.svn.sourceforge.net/svnroot/dnsjava/trunk" "dnsjava"
+    execute gitfetch "git://kenai.com/jbosh~origin" "master" "jbosh"
     # jldap doesn't compile with the latest version (missing deps?), therefore it's a fixed version for now
     #  execute gitfetch "git://git.openldap.org/openldap-jldap.git" "master" "novell-openldap-jldap"
     wait
@@ -110,18 +110,18 @@ createbuildsrc() {
   rm -rf build/src
   mkdir -p build/src/trunk
 
-  execute copyfolder "src/smack/source/" "build/src/trunk" "." 
-  execute copyfolder "src/qpid/java" "build/src/trunk" "org/apache/qpid/management/common/sasl" 
-  execute copyfolder "src/novell-openldap-jldap" "build/src/trunk" "." 
-  execute copyfolder "src/dnsjava"  "build/src/trunk" "org" 
-  execute copyfolder "src/harmony" "build/src/trunk" "." 
-  execute copyfolder "src/jbosh/src/main/java" "build/src/trunk" "." 
+  execute copyfolder "src/smack/source/" "build/src/trunk" "."
+  execute copyfolder "src/qpid/java" "build/src/trunk" "org/apache/qpid/management/common/sasl"
+  execute copyfolder "src/novell-openldap-jldap" "build/src/trunk" "."
+  execute copyfolder "src/dnsjava"  "build/src/trunk" "org"
+  execute copyfolder "src/harmony" "build/src/trunk" "."
+  execute copyfolder "src/jbosh/src/main/java" "build/src/trunk" "."
   if $BUILD_JINGLE ; then
-    execute copyfolder "src/smack/jingle/extension/source/" "build/src/trunk" "." 
+    execute copyfolder "src/smack/jingle/extension/source/" "build/src/trunk" "."
   fi
   wait
   # custom overwrites some files from smack, so this has to be done as last
-  copyfolder "src/custom" "build/src/trunk" "." 
+  copyfolder "src/custom" "build/src/trunk" "."
 }
 
 patchsrc() {
