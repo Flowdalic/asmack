@@ -175,9 +175,10 @@ buildcustom() {
       JINGLE_ARGS="-Djingle=lib/jstun.jar"
     fi
     patchsrc "${dir}"
-    custom=`echo ${dir}|sed 's:patch/:-:'`
-    ant -Djar.suffix="$custom" $JINGLE_ARGS
-    buildandroid `echo ${dir}|sed 's:patch/:-:'`
+    local custom
+    custom=$(echo ${dir} | sed 's:patch/:-:')
+    ant -Djar.suffix="${custom}" $JINGLE_ARGS
+    buildandroid "${custom}"
   done
 }
 
