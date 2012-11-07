@@ -40,21 +40,23 @@
 </target>
 
 <target name="compile-android" description="Compile for android" depends="check-android-exists" >
-    <delete dir="build/classes" failonerror="false" />
-    <mkdir dir="build/classes" />
-    <mkdir dir="build/classes/trunk" />
+    <delete dir="build/classes/${android.version}" failonerror="false" />
+    <mkdir dir="build/classes/${android.version}" />
+    <mkdir dir="build/classes/${android.version}/trunk" />
     <javac
       target="6"
       source="6"
       srcdir="build/src/trunk"
-      destdir="build/classes/trunk"
+      destdir="build/classes/${android.version}/trunk"
       bootclasspath="${sdk-location}/platforms/${android.version}/android.jar:${jingle}"
       debug="true"
       debuglevel="source,lines"
     />
-    <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="META-INF/**" /></copy>
+    <copy todir="build/classes/${android.version}/trunk">
+      <fileset dir="build/src/trunk" includes="META-INF/**" />
+    </copy>
     <jar
-      basedir="build/classes/trunk"
+      basedir="build/classes/${android.version}/trunk"
       destfile="build/asmack-${android.version}${jar.suffix}.jar"
       filesonly="true"
       level="9"

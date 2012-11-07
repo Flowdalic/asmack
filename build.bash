@@ -151,6 +151,7 @@ build() {
 buildandroid() {
     local sdklocation
     local version
+    local sdks
     sdklocation=$(grep sdk-location local.properties| cut -d= -f2)
     if [ -z "$sdklocation" ] ; then
 	echo "Android SDK not found. Don't build android version"
@@ -158,12 +159,20 @@ buildandroid() {
     fi
     for f in ${sdklocation/\$\{user.home\}/$HOME}/platforms/* ; do
 	version=`basename $f`
-	echo "Building for ${version}"
-	if ! ant -Dandroid.version=${version}  -Djar.suffix="$1" compile-android ; then
-	    echo "Ant build failed"
-	    exit -1
+	if [ ${version#android-} -gt 5 ] ; then
+	    echo "Building for ${version}"
+	    sdks="${sdks} ${version}\n"
 	fi
+
     done
+    if [ -z "${sdks}" ] ; then
+	echo "No SDKs found"
+	exit 1
+    fi
+    if echo -e ${sdks} | \
+	xargs -I{} -n 1 $XARGS_ARGS ant -Dandroid.version={} -Djar.suffix="${1}" compile-android ; then
+	exit 1
+    fi
 }
 
 buildcustom() {
@@ -193,6 +202,7 @@ parseopts() {
 		;;
 	    d)
 		set -x
+		XARGS_ARGS="-t"
 		;;
 	    j)
 		BUILD_JINGLE=true
@@ -297,7 +307,7 @@ parseconfig() {
 
 setconfig() {
     if [ ${PARALLEL_BUILD} == "true" ]; then
-	XARGS_ARGS="-P4"
+	XARGS_ARGS="${XARGS_ARGS} -P4"
 	BACKGROUND="true"
     else
 	XARGS_ARGS=""
