@@ -338,7 +338,7 @@ if $BUILD_CUSTOM; then
     buildcustom
 fi
 
-if $(cmdExists advzip); then
+if cmdExists advzip ; then
   echo "advzip found, compressing files"
   find build \( -name '*.jar' -or -name '*.zip' \) -print0 | xargs -n 1 -0 $XARGS_ARGS advzip -z4 
 else
