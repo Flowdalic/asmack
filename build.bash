@@ -142,7 +142,6 @@ patchsrc() {
 
 build() {
   echo "## Step 30: compile"
-  ant $JINGLE_ARGS
   buildandroid 
   if [ $? -ne 0 ]; then
       exit
