@@ -149,14 +149,20 @@ build() {
 }
 
 buildandroid() {
+    local sdklocation
+    local version
     sdklocation=$(grep sdk-location local.properties| cut -d= -f2)
     if [ -z "$sdklocation" ] ; then
 	echo "Android SDK not found. Don't build android version"
 	return
     fi
-    for f in $sdklocation/platforms/* ; do
+    for f in ${sdklocation/\$\{user.home\}/$HOME}/platforms/* ; do
 	version=`basename $f`
-	ant -Dandroid.version=${version}  -Djar.suffix="$1" compile-android
+	echo "Building for ${version}"
+	if ! ant -Dandroid.version=${version}  -Djar.suffix="$1" compile-android ; then
+	    echo "Ant build failed"
+	    exit -1
+	fi
     done
 }
 
