@@ -16,10 +16,10 @@ public class SmackAndroid {
     private Context mCtx;
 
     private SmackAndroid(Context ctx) {
+        mCtx = ctx;
         ConfigureProviderManager.configureProviderManager();
         InitStaticCode.initStaticCode(ctx);
-	maybeRegisterReceiver();
-        mCtx = ctx;
+        maybeRegisterReceiver();
     }
 
     public static SmackAndroid init(Context ctx) {
