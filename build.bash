@@ -152,13 +152,24 @@ buildandroid() {
     local sdklocation
     local version
     local sdks
+
+    if [ ! -f local.properties ] ; then
+	echo "Could not find local.properties file"
+	echo "See local.properties.example"
+	exit 1
+    fi
+
     sdklocation=$(grep sdk-location local.properties| cut -d= -f2)
     if [ -z "$sdklocation" ] ; then
 	echo "Android SDK not found. Don't build android version"
-	return
+	exit 1
     fi
     for f in ${sdklocation/\$\{user.home\}/$HOME}/platforms/* ; do
 	version=`basename $f`
+	if [[ "$version" != android-* ]] ; then
+	    echo "$sdklocation contains no Android SDKs"
+	    exit 1
+	fi
 	if [ ${version#android-} -gt 5 ] ; then
 	    echo "Building for ${version}"
 	    sdks="${sdks} ${version}\n"
