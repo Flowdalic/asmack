@@ -8,13 +8,13 @@
  import java.io.ByteArrayInputStream;
  import java.io.ObjectInputStream;
  import java.util.ArrayList;
-@@ -433,14 +432,14 @@
+@@ -828,14 +827,14 @@
              if (eventType == XmlPullParser.START_TAG) {
                  String name = parser.getName();
                  String stringValue = parser.nextText();
 -                PropertyDescriptor descriptor = new PropertyDescriptor(name, objectClass);
 -                // Load the class type of the property.
--                Class propertyType = descriptor.getPropertyType();
+-                Class<?> propertyType = descriptor.getPropertyType();
 +                Class propertyType = object.getClass().getMethod(
 +                    "get" + Character.toUpperCase(name.charAt(0)) + name.substring(1)).getReturnType();
                  // Get the value of the property by converting it from a
