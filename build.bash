@@ -125,26 +125,23 @@ createbuildsrc() {
 }
 
 patchsrc() {
-  echo "## Step 25: patch build/src"
-  cd "${ASMACK_BASE}"
-  (
-    cd build/src/trunk/
+    echo "## Step 25: patch build/src"
+    cd ${ASMACK_BASE}/build/src/trunk/
     for PATCH in `(cd "../../../${1}" ; find -maxdepth 1 -type f)|sort` ; do
-      if echo $PATCH | grep '\.sh$'; then
-        if [ -f "../../../${1}/$PATCH" ]; then "../../../${1}/$PATCH" || exit 1 ; fi
-      fi
-      if echo $PATCH | grep '\.patch$'; then
-        if [ -f "../../../${1}/$PATCH" ]; then patch -p0 < "../../../${1}/$PATCH" || exit 1 ; fi
-      fi
+	echo $PATCH
+	if [[ $PATCH == *.sh ]]; then
+	    "../../../${1}/$PATCH" || exit 1
+	elif [[ $PATCH == *.patch ]]; then
+	    patch -p0 < "../../../${1}/$PATCH" || exit 1
+	fi
     done
-  )
 }
 
 build() {
   echo "## Step 30: compile"
-  buildandroid 
+  buildandroid
   if [ $? -ne 0 ]; then
-      exit
+      exit 1
   fi
 }
 
@@ -152,6 +149,8 @@ buildandroid() {
     local sdklocation
     local version
     local sdks
+
+    cd $ASMACK_BASE
 
     if [ ! -f local.properties ] ; then
 	echo "Could not find local.properties file"
