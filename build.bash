@@ -210,6 +210,11 @@ buildandroid() {
 	    exit 1
 	fi
 	if [ ${version#android-} -gt 5 ] ; then
+	    if [ -n $BUILD_ANDROID_VERSIONS ] ; then
+		for build_version in $BUILD_ANDROID_VERSIONS ; do
+		    [ ${version#android-} != $build_version ] && continue 2
+		done
+	    fi
 	    echo "Building for ${version}"
 	    sdks="${sdks} ${version}\n"
 	fi
@@ -251,8 +256,11 @@ buildcustom() {
 }
 
 parseopts() {
-    while getopts b:r:t:cdhjpu OPTION "$@"; do
+    while getopts a:b:r:t:cdhjpux OPTION "$@"; do
 	case $OPTION in
+	    a)
+		BUILD_ANDROID_VERSIONS="${OPTARG}"
+		;;
 	    r)
 		SMACK_REPO="${OPTARG}"
 		;;
@@ -288,6 +296,8 @@ parseopts() {
 		echo "-b <branch>: Git branch used to build aSmack from underlying smack repository"
 		echo "-p use parallel build where possible"
 		echo "-t <version>: Create a new version tag. You should build aSmack before calling this"
+		echo "-x: Publish the release"
+	        echo "-a <SDK Version(s)>: Build only for the given Android SDK versions"
 		exit
 		;;
 	esac
@@ -358,6 +368,10 @@ setdefaults() {
     JINGLE_ARGS=""
     PARALLEL_BUILD=false
     VERSION_TAG=""
+    PUBLISH_RELEASE=""
+    PUBLISH_HOST=""
+    PUBLISH_DIR=""
+    BUILD_ANDROID_VERSIONS=""
 
     # Often used variables
     declare -A COMPONENT_VERSIONS
