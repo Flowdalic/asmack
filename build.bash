@@ -97,8 +97,7 @@ createVersionTag() {
     [[ -z $VERSION_TAG ]] && return
 
     local v
-    local tag_file=${VERSION_TAG_DIR}/${VERSION_TAG}
-    cat <<EOF  > $tag_file
+    cat <<EOF  > $TAG_FILE
 #!/bin/bash
 declare -A COMPONENT_VERSIONS
 EOF
@@ -111,22 +110,22 @@ EOF
 	done
 	if [[ -d $d/.git ]] ; then
 	    v=$(cd $d && git rev-parse HEAD)
-	    echo "COMPONENT_VERSIONS[$d]=$v" >> $tag_file
+	    echo "COMPONENT_VERSIONS[$d]=$v" >> $TAG_FILE
 	elif [[ -d $d/.svn ]] ; then
 	    v=$(cd $d && svn info |grep Revision |cut -f 2 -d ' ')
-	    echo "COMPONENT_VERSIONS[$d]=$v" >> $tag_file
+	    echo "COMPONENT_VERSIONS[$d]=$v" >> $TAG_FILE
 	fi
     done
 
     if $SMACK_LOCAL ; then
 	cd $SMACK_REPO
 	v=$(git rev-parse HEAD)
-	echo "COMPONENT_VERSIONS[smack]=$v" >> $tag_file
+	echo "COMPONENT_VERSIONS[smack]=$v" >> $TAG_FILE
     fi
 
     cd ${ASMACK_BASE}
     v=$(git rev-parse HEAD)
-    echo "COMPONENT_VERSIONS[asmack]=$v" >> $tag_file
+    echo "COMPONENT_VERSIONS[asmack]=$v" >> $TAG_FILE
 }
 
 copyfolder() {
@@ -382,6 +381,12 @@ setconfig() {
     if islocalrepo $SMACK_REPO ; then
 	SMACK_LOCAL=true
 	SMACK_REPO=`readlink -f $SMACK_REPO`
+    fi
+
+    if [[ -n ${VERSION_TAG} ]]; then
+	ASMACK_RELEASES=${ASMACK_BASE}/releases
+	RELEASE_DIR=${ASMACK_RELEASES}/${VERSION_TAG}
+	TAG_FILE=${VERSION_TAG_DIR}/${VERSION_TAG}
     fi
 }
 
