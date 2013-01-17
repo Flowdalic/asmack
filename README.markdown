@@ -20,8 +20,7 @@ You could also call `org.jivesoftware.smack.SmackAndroid.init(Context)`, which w
 
 Compiled JARs
 =============
-Can be found [here](https://github.com/Flowdalic/asmack/downloads).
-But be aware, they may be *outdated!*
+Can be found @ http://asmack.freakempire.de/
 
 ConnectionConfiguration
 =======================
