@@ -286,6 +286,9 @@ parseopts() {
 	    t)
 		VERSION_TAG="${OPTARG}"
 		;;
+	    x)
+		PUBLISH_RELEASE=true
+		;;
 	    h)
 		echo "$0 -d -c -u -j -r <repo> -b <branch>"
 		echo "-d: Enable debug"
@@ -302,6 +305,32 @@ parseopts() {
 		;;
 	esac
     done
+}
+
+prepareRelease() {
+    [[ -z ${VERSION_TAG} ]] && return
+
+    if [ -d $RELEASE_DIR ] ; then
+	rm -rf $RELEASE_DIR
+    fi
+    mkdir -p $RELEASE_DIR
+
+    mv ${ASMACK_BASE}/build/*.{jar,zip} ${RELEASE_DIR}/
+    cp $TAG_FILE ${RELEASE_DIR}/
+
+    if [ -n $GPG_KEY ] ; then
+	find $RELEASE_DIR -maxdepth 1 -and \( -name '*.jar' -or -name '*.zip' \) -print0 \
+	    | xargs -n 1 -0 $XARGS_ARGS gpg --local-user $GPG_KEY --detach-sign
+    fi
+}
+
+publishRelease() {
+    [[ -z $PUBLISH_HOST || -z $VERSION_TAG || ! $PUBLISH_RELEASE ]] && return
+
+    echo "rm ${PUBLISH_DIR}/${VERSION_TAG}/*; rmdir ${PUBLISH_DIR}/${VERSION_TAG}" | sftp $PUBLISH_HOST
+    
+    cd $ASMACK_RELEASES
+    echo "put -r $VERSION_TAG $PUBLISH_DIR" | sftp $PUBLISH_HOST
 }
 
 islocalrepo() {
@@ -446,6 +475,9 @@ else
   echo "advzip will further reduce the size of the generated jar and zip files,"
   echo "consider installing advzip"
 fi
+
+prepareRelease
+publishRelease
 
 STOPTIME=$(date -u "+%s")
 RUNTIME=$(( $STOPTIME - $STARTTIME ))
