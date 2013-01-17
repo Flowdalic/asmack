@@ -220,21 +220,25 @@ buildandroid() {
 	fi
 
     done
+
     if [ -z "${sdks}" ] ; then
 	echo "No SDKs found"
 	exit 1
     fi
 
     local asmack_suffix
-    if [[ ! -z ${VERSION_TAG} ]] && [[ ! -z ${1} ]] ; then
+    if [[ -n ${VERSION_TAG} ]] && [[ -n ${1} ]] ; then
 	asmack_suffix="${1}-${VERSION_TAG}"
-    elif [[ ! -z ${VERSION_TAG} ]] ; then
+    elif [[ -n ${VERSION_TAG} ]] ; then
 	asmack_suffix="-${VERSION_TAG}"
     else
 	asmack_suffix="${1}"
     fi
-    if echo -e ${sdks} | \
-	xargs -I{} -n 1 $XARGS_ARGS ant -Dandroid.version={} -Djar.suffix="${asmack_suffix}" compile-android ; then
+    if ! echo -e ${sdks} \
+	| xargs -I{} -n 1 $XARGS_ARGS ant \
+		-Dandroid.version={} \
+		-Djar.suffix="${asmack_suffix}" \
+		compile-android ; then
 	exit 1
     fi
 }
@@ -300,7 +304,7 @@ parseopts() {
 		echo "-p use parallel build where possible"
 		echo "-t <version>: Create a new version tag. You should build aSmack before calling this"
 		echo "-x: Publish the release"
-	        echo "-a <SDK Version(s)>: Build only for the given Android SDK versions"
+		echo "-a <SDK Version(s)>: Build only for the given Android SDK versions"
 		exit
 		;;
 	esac
@@ -328,7 +332,7 @@ publishRelease() {
     [[ -z $PUBLISH_HOST || -z $VERSION_TAG || ! $PUBLISH_RELEASE ]] && return
 
     echo "rm ${PUBLISH_DIR}/${VERSION_TAG}/*; rmdir ${PUBLISH_DIR}/${VERSION_TAG}" | sftp $PUBLISH_HOST
-    
+
     cd $ASMACK_RELEASES
     echo "put -r $VERSION_TAG $PUBLISH_DIR" | sftp $PUBLISH_HOST
 }
@@ -378,7 +382,7 @@ prettyPrintSeconds() {
     echo "Execution took $ttime"
 }
 
-execute() { 
+execute() {
     if [ -n "$BACKGROUND" ]; then
 	"$@" &
     else
@@ -405,6 +409,7 @@ setdefaults() {
     # Often used variables
     declare -A COMPONENT_VERSIONS
     ASMACK_BASE=$(pwd)
+    ASMACK_RELEASES=${ASMACK_BASE}/releases
     SRC_DIR=${ASMACK_BASE}/src
     VERSION_TAG_DIR=${ASMACK_BASE}/version-tags
     STARTTIME=$(date -u "+%s")
@@ -425,13 +430,12 @@ setconfig() {
 	BACKGROUND=""
     fi
 
-    if islocalrepo $SMACK_REPO ; then
+    if islocalrepo $SMACK_REPO; then
 	SMACK_LOCAL=true
 	SMACK_REPO=`readlink -f $SMACK_REPO`
     fi
 
     if [[ -n ${VERSION_TAG} ]]; then
-	ASMACK_RELEASES=${ASMACK_BASE}/releases
 	RELEASE_DIR=${ASMACK_RELEASES}/${VERSION_TAG}
 	TAG_FILE=${VERSION_TAG_DIR}/${VERSION_TAG}
     fi
