@@ -16,7 +16,7 @@ svnfetch() {
 }
 
 gitfetch() {
-    echo "Fetching ${2} branch from ${1} to ${3} via git"
+    echo "Fetching ${2} branch/commit from ${1} to ${3} via git"
     cd $SRC_DIR
     if ! [ -f "${3}/.git/config" ]; then
 	git clone "${1}" "${3}"
@@ -90,6 +90,43 @@ fetchall() {
     # jldap doesn't compile with the latest version (missing deps?), therefore it's a fixed version for now
     #  execute gitfetch "git://git.openldap.org/openldap-jldap.git" "master" "novell-openldap-jldap"
     wait
+}
+
+createVersionTag() {
+    # Skip this step is no version tag is given
+    [[ -z $VERSION_TAG ]] && return
+
+    local v
+    local tag_file=${VERSION_TAG_DIR}/${VERSION_TAG}
+    cat <<EOF  > $tag_file
+#!/bin/bash
+declare -A COMPONENT_VERSIONS
+EOF
+
+    for d in $(ls $SRC_DIR) ; do
+	cd $SRC_DIR
+	for static in $(ls ${ASMACK_BASE}/static-src) ; do
+	    # Don't record the version if it's from the static sources
+	    [ $d == $static ] && continue
+	done
+	if [[ -d $d/.git ]] ; then
+	    v=$(cd $d && git rev-parse HEAD)
+	    echo "COMPONENT_VERSIONS[$d]=$v" >> $tag_file
+	elif [[ -d $d/.svn ]] ; then
+	    v=$(cd $d && svn info |grep Revision |cut -f 2 -d ' ')
+	    echo "COMPONENT_VERSIONS[$d]=$v" >> $tag_file
+	fi
+    done
+
+    if $SMACK_LOCAL ; then
+	cd $SMACK_REPO
+	v=$(git rev-parse HEAD)
+	echo "COMPONENT_VERSIONS[smack]=$v" >> $tag_file
+    fi
+
+    cd ${ASMACK_BASE}
+    v=$(git rev-parse HEAD)
+    echo "COMPONENT_VERSIONS[asmack]=$v" >> $tag_file
 }
 
 copyfolder() {
@@ -179,8 +216,17 @@ buildandroid() {
 	echo "No SDKs found"
 	exit 1
     fi
+
+    local asmack_suffix
+    if [[ ! -z ${VERSION_TAG} ]] && [[ ! -z ${1} ]] ; then
+	asmack_suffix="${1}-${VERSION_TAG}"
+    elif [[ ! -z ${VERSION_TAG} ]] ; then
+	asmack_suffix="-${VERSION_TAG}"
+    else
+	asmack_suffix="${1}"
+    fi
     if echo -e ${sdks} | \
-	xargs -I{} -n 1 $XARGS_ARGS ant -Dandroid.version={} -Djar.suffix="${1}" compile-android ; then
+	xargs -I{} -n 1 $XARGS_ARGS ant -Dandroid.version={} -Djar.suffix="${asmack_suffix}" compile-android ; then
 	exit 1
     fi
 }
@@ -202,7 +248,7 @@ buildcustom() {
 }
 
 parseopts() {
-    while getopts b:r:cdhjpu OPTION "$@"; do
+    while getopts b:r:t:cdhjpu OPTION "$@"; do
 	case $OPTION in
 	    r)
 		SMACK_REPO="${OPTARG}"
@@ -226,6 +272,9 @@ parseopts() {
 	    p)
 		PARALLEL_BUILD=true
 		;;
+	    t)
+		VERSION_TAG="${OPTARG}"
+		;;
 	    h)
 		echo "$0 -d -c -u -j -r <repo> -b <branch>"
 		echo "-d: Enable debug"
@@ -235,6 +284,7 @@ parseopts() {
 		echo "-r <repo>: Git repository (can be local or remote) for underlying smack repository"
 		echo "-b <branch>: Git branch used to build aSmack from underlying smack repository"
 		echo "-p use parallel build where possible"
+		echo "-t <version>: Create a new version tag. You should build aSmack before calling this"
 		exit
 		;;
 	esac
@@ -295,7 +345,7 @@ execute() {
 }
 
 setdefaults() {
-# Default configuration
+    # Default configuration, can be changed with script arguments
     SMACK_REPO=git://github.com/Flowdalic/smack.git
     SMACK_BRANCH=origin/master
     SMACK_LOCAL=false
@@ -304,8 +354,13 @@ setdefaults() {
     BUILD_JINGLE=false
     JINGLE_ARGS=""
     PARALLEL_BUILD=false
+    VERSION_TAG=""
+
+    # Often used variables
+    declare -A COMPONENT_VERSIONS
     ASMACK_BASE=$(pwd)
-    SRC_DIR=$ASMACK_BASE/src
+    SRC_DIR=${ASMACK_BASE}/src
+    VERSION_TAG_DIR=${ASMACK_BASE}/version-tags
     STARTTIME=$(date -u "+%s")
 }
 
@@ -336,16 +391,18 @@ printconfig() {
     echo -e "PARALLEL_BUILD:$PARALLEL_BUILD\tBASE:$ASMACK_BASE"
 }
 
+# Main
+
 setdefaults
 parseopts $@
 parseconfig
 setconfig
 printconfig
-
 initialize
 copystaticsrc
 testsmackgit
 fetchall
+createVersionTag
 createbuildsrc
 patchsrc "patch"
 if $BUILD_JINGLE ; then
