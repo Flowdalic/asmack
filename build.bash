@@ -312,7 +312,10 @@ parseopts() {
 }
 
 prepareRelease() {
-    [[ -z ${VERSION_TAG} ]] && return
+    if [[ -z ${VERSION_TAG} ]]; then
+	echo "Version tag is not set. Not going to prepare a release"
+	return
+    fi
 
     if [ -d $RELEASE_DIR ] ; then
 	rm -rf $RELEASE_DIR
@@ -332,7 +335,20 @@ prepareRelease() {
 }
 
 publishRelease() {
-    [[ -z $PUBLISH_HOST || -z $VERSION_TAG || ! $PUBLISH_RELEASE ]] && return
+    if [[ -z ${VERSION_TAG} ]]; then
+	echo "Version tag is not set. Not going to prepare a release"
+	return
+    fi
+
+    if [[ -z ${PUBLISH_RELEASE} ]]; then
+	echo "User doesn't want to publish this release"
+	return
+    fi
+
+    if [[ -z $PUBLISH_HOST || -z $PUBLISH_DIR ]]; then
+	echo "WARNING: Not going to publish this release as either $PUBLISH_HOST or $PUBLISH_DIR is not set"
+	return
+    fi
 
     echo "rm ${PUBLISH_DIR}/${VERSION_TAG}/*; rmdir ${PUBLISH_DIR}/${VERSION_TAG}" | sftp $PUBLISH_HOST
 
