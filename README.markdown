@@ -105,9 +105,10 @@ the 'upstream' branch from [smack @
 github](https://github.com/Flowdalic/smack). Only in some cases the
 'master' branch should be used.
 
-If your code follows Smack's contributor guidelines, is good
-documented and comes with some testcases, then it's possible to commit
-it upstream. Simply join ##smack @ freenode and ask for a code review.
+If your code follows [Smack's contributor guidelines](
+http://community.igniterealtime.org/docs/DOC-1984), is good documented
+and comes with some testcases, then it's possible to commit it
+upstream. Simply join ##smack @ freenode and ask for a code review.
 
 Contributors
 ============
