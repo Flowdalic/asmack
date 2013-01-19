@@ -333,6 +333,7 @@ prepareRelease() {
 
     mv ${ASMACK_BASE}/build/*.{jar,zip} ${RELEASE_DIR}/
     cp $TAG_FILE ${RELEASE_DIR}/
+    cp ${ASMACK_BASE}/CHANGELOG ${RELEASE_DIR}
 
     if [ -n $GPG_KEY ] ; then
 	find $RELEASE_DIR -maxdepth 1 -and \( -name '*.jar' -or -name '*.zip' \) -print0 \
