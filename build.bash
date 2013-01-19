@@ -380,10 +380,12 @@ publishRelease() {
 	return
     fi
 
-    echo "rm ${PUBLISH_DIR}/${VERSION_TAG}/*; rmdir ${PUBLISH_DIR}/${VERSION_TAG}" | sftp $PUBLISH_HOST
-
-    cd $ASMACK_RELEASES
-    echo "put -r $VERSION_TAG $PUBLISH_DIR" | sftp $PUBLISH_HOST
+    cd ${ASMACK_RELEASES}
+    cat <<EOF | sftp $PUBLISH_HOST
+rm ${PUBLISH_DIR}/${VERSION_TAG}/*
+mkdir ${PUBLISH_DIR}/${VERSION_TAG}
+put -r $VERSION_TAG $PUBLISH_DIR
+EOF
 }
 
 islocalrepo() {
