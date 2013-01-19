@@ -12,63 +12,10 @@ script.  As well as all the minor changes to make an Android version
 fly.  See the patches/ folder for a detailed list of changes and
 scripts.
 
-README First - Or you will have problems with aSmack
-====================================================
-
-Static Code
------------
-
-**IMPORTANT:** In order to work correctly on Android, you need to
-register the Providers manually and init some static code blocks
-before you doing any XMPP activty. *Make sure to call
-`org.jivesoftware.smackx.ConfigureProviderManager.configureProviderManager()`
-and `org.jivesoftware.smackx.InitStaticCode.initStaticCode(Context)`
-prior any XMPP activity* You could also call
-`org.jivesoftware.smack.SmackAndroid.init(Context)`, which will call
-both methods.
-
-ConnectionConfiguration
------------------------
-
-Please use the provided
-org.jivesoftware.smack.AndroidConnectionConfiguration class if
-possible to create a new connection.
-
-Compression
------------
-
-In order to enable compressed XMPP streams you have to add
-[jzlib](http://www.jcraft.com/jzlib/) to your project.
-
 Compiled JARs
 =============
 
 Can be found @ http://asmack.freakempire.de/
-
-Problems / Debugging
-==============================
-
-How to debug your problem
--------------------------
-
-We always provide source zips. Attach them to the jar in your favorite
-IDE.  Enable debugging mode (BOSH/XMPPConnection.DEBUG and
-config.setDebug). See also:
-http://www.igniterealtime.org/builds/smack/docs/latest/documentation/debugging.html
-
-Reporting a bug
----------------
-
-Record a logcat
-Remove your credentials (usually a base64 block inside <auth></auth>)
-
-Your issue should contain
-1. a logcat
-2. a server to reproduce
-3. the code you are using (for FOSS project we'll accept reposituroy URLs)
-
-There is no guarantee that we will reply immediatly. But we will try to
-investigate the problem. Feel free to join ##smack @ freenode and ask for help (you may have to idle for some time before you get a reply).
 
 Compiling aSmack
 ================

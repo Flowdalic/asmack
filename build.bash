@@ -103,33 +103,42 @@ createVersionTag() {
 # This file contains the version information of the components that
 # were used to build this aSmack version
 
-declare -A COMPONENT_VERSIONS
+declare -g -A COMPONENT_VERSIONS
 EOF
 
     for d in $(ls $SRC_DIR) ; do
 	cd $SRC_DIR
+
+	# Don't record the components version for static-src
 	for static in $(ls ${ASMACK_BASE}/static-src) ; do
 	    # Don't record the version if it's from the static sources
 	    [ $d == $static ] && continue
 	done
+
 	if [[ -d $d/.git ]] ; then
 	    v=$(cd $d && git rev-parse HEAD)
-	    echo "COMPONENT_VERSIONS[$d]=$v" >> $TAG_FILE
+	    key=$d
+	    COMPONENT_VERSIONS["$d"]=$v
 	elif [[ -d $d/.svn ]] ; then
 	    v=$(cd $d && svn info |grep Revision |cut -f 2 -d ' ')
-	    echo "COMPONENT_VERSIONS[$d]=$v" >> $TAG_FILE
+	    key=$d
+	    COMPONENT_VERSIONS["$d"]=$v
 	fi
     done
 
     if $SMACK_LOCAL ; then
 	cd $SMACK_REPO
 	v=$(git rev-parse HEAD)
-	echo "COMPONENT_VERSIONS[smack]=$v" >> $TAG_FILE
+	COMPONENT_VERSIONS[smack]=$v
     fi
 
     cd ${ASMACK_BASE}
     v=$(git rev-parse HEAD)
-    echo "COMPONENT_VERSIONS[asmack]=$v" >> $TAG_FILE
+    COMPONENT_VERSIONS[asmack]=$v
+
+    for i in "${!COMPONENT_VERSIONS[@]}" ; do
+	echo "COMPONENT_VERSIONS[$i]=${COMPONENT_VERSIONS[$i]}" >> $TAG_FILE
+    done
 }
 
 copyfolder() {
@@ -332,6 +341,27 @@ prepareRelease() {
 
     find $RELEASE_DIR -maxdepth 1 -and \( -name '*.jar' -or -name '*.zip' \) -print0 \
 	| xargs -I{} -n 1 -0 $XARGS_ARGS sh -c 'md5sum {} > {}.md5'
+
+    local release_readme
+    release_readme=${RELEASE_DIR}/README
+
+    sed \
+	-e "s/\$VERSION_TAG/${VERSION_TAG}/" \
+	-e "s/\$BUILD_DATE/${BUILD_DATE}/" \
+	README.asmack > $release_readme
+
+    # Pretty print the component versions at the end of README
+    # Note that there is an exclamation mark at the beginning of the
+    # associative array to access the keys
+    for i in "${!COMPONENT_VERSIONS[@]}" ; do
+	local tabs
+	if [[ ${#i} -le 6 ]] ; then
+	    tabs="\t\t"
+	else
+	    tabs="\t"
+	fi
+	echo -e "${i}:${tabs}${COMPONENT_VERSIONS[$i]}" >> $release_readme
+    done
 }
 
 publishRelease() {
@@ -426,12 +456,14 @@ setdefaults() {
     BUILD_ANDROID_VERSIONS=""
 
     # Often used variables
-    declare -A COMPONENT_VERSIONS
     ASMACK_BASE=$(pwd)
     ASMACK_RELEASES=${ASMACK_BASE}/releases
     SRC_DIR=${ASMACK_BASE}/src
     VERSION_TAG_DIR=${ASMACK_BASE}/version-tags
     STARTTIME=$(date -u "+%s")
+    BUILD_DATE=$(date)
+    # Declare an associative array that is in global scope ('-g')
+    declare -g -A COMPONENT_VERSIONS
 }
 
 parseconfig() {
@@ -456,7 +488,7 @@ setconfig() {
 
     if [[ -n ${VERSION_TAG} ]]; then
 	RELEASE_DIR=${ASMACK_RELEASES}/${VERSION_TAG}
-	TAG_FILE=${VERSION_TAG_DIR}/${VERSION_TAG}
+	TAG_FILE=${VERSION_TAG_DIR}/${VERSION_TAG}.tag
     fi
 }
 
@@ -486,13 +518,13 @@ if $BUILD_JINGLE ; then
 fi
 build
 
-if $BUILD_CUSTOM; then
+if $BUILD_CUSTOM ; then
     buildcustom
 fi
 
 if cmdExists advzip ; then
   echo "advzip found, compressing files"
-  find build \( -name '*.jar' -or -name '*.zip' \) -print0 | xargs -n 1 -0 $XARGS_ARGS advzip -z4 
+  find build \( -name '*.jar' -or -name '*.zip' \) -print0 | xargs -n 1 -0 $XARGS_ARGS advzip -z4
 else
   echo "Could not find the advzip command."
   echo "advzip will further reduce the size of the generated jar and zip files,"
