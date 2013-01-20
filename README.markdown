@@ -15,7 +15,9 @@ scripts.
 Compiled JARs
 =============
 
-Can be found @ http://asmack.freakempire.de/ Make sure to [*read the
+Can be found @ http://asmack.freakempire.de/ 
+
+Make sure to [*read the
 README*](https://github.com/Flowdalic/asmack/blob/master/README.asmack)
 for every release.
 
