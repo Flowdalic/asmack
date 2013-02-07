@@ -59,6 +59,7 @@ import org.jivesoftware.smackx.pubsub.provider.RetractEventProvider;
 import org.jivesoftware.smackx.pubsub.provider.SimpleNodeProvider;
 import org.jivesoftware.smackx.pubsub.provider.SubscriptionProvider;
 import org.jivesoftware.smackx.pubsub.provider.SubscriptionsProvider;
+import org.jivesoftware.smackx.receipts.DeliveryReceipt;
 import org.jivesoftware.smackx.search.UserSearch;
 
 /**
@@ -194,5 +195,9 @@ public class ConfigureProviderManager {
 
 	// XEP-0199 XMPP Ping
 	pm.addIQProvider("ping", "urn:xmpp:ping", new PingProvider());
+
+	// XEP-184 Message Delivery Receipts
+	pm.addExtensionProvider("received", "urn:xmpp:receipts", new DeliveryReceipt.Provider());
+	pm.addExtensionProvider("request", "urn:xmpp:receipts", new DeliveryReceipt.Provider());
     }
 }
