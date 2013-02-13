@@ -23,6 +23,7 @@ import org.jivesoftware.smackx.bytestreams.ibb.provider.DataPacketProvider;
 import org.jivesoftware.smackx.bytestreams.ibb.provider.OpenIQProvider;
 import org.jivesoftware.smackx.bytestreams.socks5.provider.BytestreamsProvider;
 import org.jivesoftware.smackx.carbons.Carbon;
+import org.jivesoftware.smackx.entitycaps.provider.CapsExtensionProvider;
 import org.jivesoftware.smackx.forward.Forwarded;
 import org.jivesoftware.smackx.packet.AttentionExtension;
 import org.jivesoftware.smackx.packet.ChatStateExtension;
@@ -199,5 +200,8 @@ public class ConfigureProviderManager {
 	// XEP-184 Message Delivery Receipts
 	pm.addExtensionProvider("received", "urn:xmpp:receipts", new DeliveryReceipt.Provider());
 	pm.addExtensionProvider("request", "urn:xmpp:receipts", new DeliveryReceipt.Provider());
+
+	// XEP-0115 Entity Capabilities
+	pm.addExtensionProvider("c", "http://jabber.org/protocol/caps", new CapsExtensionProvider());
     }
 }
