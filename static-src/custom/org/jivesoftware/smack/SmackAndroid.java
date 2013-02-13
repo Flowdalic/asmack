@@ -17,8 +17,8 @@ public class SmackAndroid {
 
     private SmackAndroid(Context ctx) {
         mCtx = ctx;
-        ConfigureProviderManager.configureProviderManager();
         InitStaticCode.initStaticCode(ctx);
+        ConfigureProviderManager.configureProviderManager();
         maybeRegisterReceiver();
     }
 
