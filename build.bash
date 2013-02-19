@@ -490,6 +490,10 @@ setconfig() {
     fi
 
     if [[ -n ${VERSION_TAG} ]]; then
+	if ! grep ${VERSION_TAG} CHANGELOG; then
+	    echo "Could not find the tag in the CHANGELOG file. Please write a short summary of changes"
+	    exit 1
+	fi
 	RELEASE_DIR=${ASMACK_RELEASES}/${VERSION_TAG}
 	TAG_FILE=${VERSION_TAG_DIR}/${VERSION_TAG}.tag
     fi
