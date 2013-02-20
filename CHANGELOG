@@ -1,2 +1,6 @@
+Release 0.8.1.1
+	- Improved 'caps' XEP-0115 support
+	- Fixes in NPE in 0.8.1
+
 Release 0.8
 	- First release to test the release process
