@@ -494,6 +494,14 @@ setconfig() {
 	    echo "Could not find the tag in the CHANGELOG file. Please write a short summary of changes"
 	    exit 1
 	fi
+	if ! git diff --exit-code; then
+	    echo "Unstaged changes found, please stages your changes"
+	    exit 1
+	fi
+	if ! git diff --cached --exit-code; then
+	    echo "Staged, but uncommited changes found, please commit"
+	    exit 1
+	fi
 	RELEASE_DIR=${ASMACK_RELEASES}/${VERSION_TAG}
 	TAG_FILE=${VERSION_TAG_DIR}/${VERSION_TAG}.tag
     fi
