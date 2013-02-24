@@ -19,7 +19,7 @@ public class SmackAndroid {
 
     private SmackAndroid(Context ctx) {
         mCtx = ctx;
-        DNSUtil.setDNSResolver(DNSJavaResolver.getInstance())
+        DNSUtil.setDNSResolver(DNSJavaResolver.getInstance());
         InitStaticCode.initStaticCode(ctx);
         ConfigureProviderManager.configureProviderManager();
         maybeRegisterReceiver();

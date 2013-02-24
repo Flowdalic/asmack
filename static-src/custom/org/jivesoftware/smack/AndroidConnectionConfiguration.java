@@ -8,6 +8,8 @@ import org.jivesoftware.smack.proxy.ProxyInfo;
 import org.jivesoftware.smack.util.DNSUtil;
 import org.jivesoftware.smack.util.dns.HostAddress;
 
+import java.util.List;
+
 /**
  * This class wraps DNS SRV lookups for a new ConnectionConfiguration in a 
  * new thread, since Android API >= 11 (Honeycomb) does not allow network 
@@ -17,7 +19,7 @@ import org.jivesoftware.smack.util.dns.HostAddress;
  *
  */
 public class AndroidConnectionConfiguration extends ConnectionConfiguration {
-    private static final int DEFAULT_TIMEOUT = 1000;
+    private static final int DEFAULT_TIMEOUT = 10000;
     
     /**
      * Creates a new ConnectionConfiguration for the specified service name.
@@ -74,7 +76,7 @@ public class AndroidConnectionConfiguration extends ConnectionConfiguration {
 	AndroidInit();
         class DnsSrvLookupRunnable implements Runnable {
             String serviceName;
-            volatile HostAddress address;
+            List<HostAddress> addresses;
 
             public DnsSrvLookupRunnable(String serviceName) {
                 this.serviceName = serviceName;
@@ -82,12 +84,11 @@ public class AndroidConnectionConfiguration extends ConnectionConfiguration {
 
             @Override
             public void run() {
-                // Perform DNS lookup to get host and port to use
-                address = DNSUtil.resolveXMPPDomain(serviceName);
+                addresses = DNSUtil.resolveXMPPDomain(serviceName);
             }
 
-            public HostAddress getHostAddress() {
-                return address;
+            public List<HostAddress> getHostAddresses() {
+                return addresses;
             }
         }
 
@@ -100,15 +101,13 @@ public class AndroidConnectionConfiguration extends ConnectionConfiguration {
             throw new XMPPException("DNS lookup timeout after " + timeout + "ms", e);
         }
 
-        HostAddress address = dnsSrv.getHostAddress();
-        if (address == null) {
+        hostAddresses = dnsSrv.getHostAddresses();
+        if (hostAddresses == null) {
         	throw new XMPPException("DNS lookup failure");
         }
-        
-        String host = address.getFQDN();
-        int port = address.getPort();
+
         ProxyInfo proxy = ProxyInfo.forDefaultProxy();
-        
-        init(host, port, serviceName, proxy);       
+
+        init(serviceName, proxy);
     }
 }
