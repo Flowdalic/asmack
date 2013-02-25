@@ -407,6 +407,7 @@ initialize() {
 	mkdir src
     fi
     find build \( -name '*.jar' -or -name '*.zip' \) -print0 | xargs -0 rm -f
+    rm -rf src/custom
 }
 
 cleanup() {
