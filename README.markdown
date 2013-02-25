@@ -21,6 +21,10 @@ Make sure to [*read the
 README*](https://github.com/Flowdalic/asmack/blob/master/README.asmack)
 for every release.
 
+Support
+=======
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Flowdalic&url=https://github.com/flowdalic/asmack&title=asmack&language=&tags=github&category=software)
+
 Compiling aSmack
 ================
 
