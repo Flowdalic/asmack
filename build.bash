@@ -514,10 +514,23 @@ printconfig() {
     echo -e "PARALLEL_BUILD:$PARALLEL_BUILD\tBASE:$ASMACK_BASE"
 }
 
+checkPrerequisites() {
+    if [[ $BASH_VERSION < 4 ]] ; then
+	echo "aSmack's build.bash needs at least bash version 4"
+	exit 1
+    fi
+
+    if ! tar --version |grep GNU &> /dev/null ; then
+	echo "aSmack's build.bash needs GNU tar"
+	exit 1
+    fi
+}
+
 # Main
 
 setdefaults
 parseopts $@
+checkPrerequisites
 parseconfig
 setconfig
 printconfig
