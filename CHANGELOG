@@ -1,4 +1,7 @@
-upcoming
+Release 0.8.2
+	- Removed the whitespace ping code SMACK-412
+	- SMACK-419 PacketWriter: Only flush the BufferedWriter if the packet queue is empty
+	- SMACK-417 If both PacketReader and PacketWriter fail at the same time, connectionClosedonError() is called two times
 	- The default ping intervall is now configured in seconds and not milliseconds
 
 Release 0.8.1.1
