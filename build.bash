@@ -176,7 +176,7 @@ createbuildsrc() {
 patchsrc() {
     echo "## Step 25: patch build/src"
     cd ${ASMACK_BASE}/build/src/trunk/
-    for PATCH in `(cd "../../../${1}" ; find -maxdepth 1 -type f)|sort` ; do
+    for PATCH in `(cd "../../../${1}" ; find . -maxdepth 1 -type f)|sort` ; do
 	echo $PATCH
 	if [[ $PATCH == *.sh ]]; then
 	    "../../../${1}/$PATCH" || exit 1
@@ -225,7 +225,11 @@ buildandroid() {
 		done
 	    fi
 	    echo "Building for ${version}"
-	    sdks="${sdks} ${version}\n"
+      if [ -z "${sdks}" ] ; then
+         sdks="${version}"
+      else
+         sdks="${sdks} ${version}"
+      fi
 	fi
 
     done
@@ -417,7 +421,7 @@ cleanup() {
 }
 
 copystaticsrc() {
-    cp -ur static-src/* src/
+    rsync -ur static-src/* src/
 }
 
 cmdExists() {
