@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 svnfetch() {
     REV="${3:-HEAD}"
