@@ -38,7 +38,7 @@ aSmack uses a [special fork of
 smack](https://github.com/Flowdalic/smack). You can read about the
 results you will get when using one of the various branches provides
 in the
-[README](https://github.com/Flowdalic/smack/blob/smack_extended/README.markdown).
+[README](https://github.com/Flowdalic/smack/blob/master/README.markdown).
 
 Apps that use this fork of aSmack
 =================================
