@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 [ "Darwin" = $(uname) ] && SEDI="sed -i ''" || SEDI='sed -i'
 

@@ -98,7 +98,7 @@ createVersionTag() {
 
     local v
     cat <<EOF  > $TAG_FILE
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This file contains the version information of the components that
 # were used to build this aSmack version
