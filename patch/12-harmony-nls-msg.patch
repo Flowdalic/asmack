@@ -50,10 +50,3 @@ diff -ur ../../src-unpatched/trunk/org/apache/harmony/javax/security/auth/Subjec
                      }
  
                      if (elements.contains(o)) {
-@@ -779,4 +779,4 @@
-             }
-         }
-     }
--}
-\ No newline at end of file
-+}
