@@ -145,7 +145,7 @@ copyfolder() {
   cd ${ASMACK_BASE}
   (
     cd "${1}"
-    tar -cp --exclude=.svn --exclude=.git "${3}"
+    tar -cp --exclude=.svn --exclude=.git --exclude=.hg "${3}"
   ) | (
     cd "${2}"
     tar -xp
