@@ -225,7 +225,11 @@ buildandroid() {
 		done
 	    fi
 	    echo "Building for ${version}"
-	    sdks="${sdks} ${version}\n"
+      if [ -z "${sdks}" ]; then
+        sdks="${version}"
+      else
+        sdks="${sdks} ${version}"
+      fi
 	fi
 
     done
