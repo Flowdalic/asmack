@@ -421,7 +421,7 @@ cleanup() {
 }
 
 copystaticsrc() {
-    cp -ur static-src/* src/
+    rsync -ur static-src/* src/
 }
 
 cmdExists() {
