@@ -145,10 +145,10 @@ copyfolder() {
   cd ${ASMACK_BASE}
   (
     cd "${1}"
-    tar -cSsp --exclude-vcs "${3}"
+    tar -cp --exclude-vcs "${3}"
   ) | (
     cd "${2}"
-    tar -xSsp
+    tar -xp
   )
   wait
 }
@@ -521,11 +521,6 @@ printconfig() {
 checkPrerequisites() {
     if [[ $BASH_VERSION < 4 ]] ; then
 	echo "aSmack's build.bash needs at least bash version 4"
-	exit 1
-    fi
-
-    if ! tar --version |grep GNU &> /dev/null ; then
-	echo "aSmack's build.bash needs GNU tar"
 	exit 1
     fi
 }
