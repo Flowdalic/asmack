@@ -31,7 +31,7 @@ public class InitStaticCode {
     public static void initStaticCode(Context ctx) {
 	    // This has the be the application class loader,
 	    // *not* the system class loader
-	    ClassLoader appClassLoader = ctx.getClass().getClassLoader();
+	    ClassLoader appClassLoader = ctx.getClassLoader();
 
 	    try {
 		    Class.forName(org.jivesoftware.smackx.ServiceDiscoveryManager.class.getName(), true, appClassLoader);
