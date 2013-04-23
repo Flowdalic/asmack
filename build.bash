@@ -198,6 +198,7 @@ buildandroid() {
     local sdklocation
     local version
     local sdks
+    local minSdkVer=8
 
     cd $ASMACK_BASE
 
@@ -218,7 +219,7 @@ buildandroid() {
 	    echo "$sdklocation contains no Android SDKs"
 	    exit 1
 	fi
-	if [ ${version#android-} -gt 5 ] ; then
+	if [[ ${version#android-} -ge $minSdkVer ]] ; then
 	    if [ -n $BUILD_ANDROID_VERSIONS ] ; then
 		for build_version in $BUILD_ANDROID_VERSIONS ; do
 		    [ ${version#android-} != $build_version ] && continue 2
@@ -231,7 +232,7 @@ buildandroid() {
     done
 
     if [ -z "${sdks}" ] ; then
-	echo "No SDKs found"
+	echo "No SDKs of a suitable minimal API (${minSdkVer}) version found"
 	exit 1
     fi
 
