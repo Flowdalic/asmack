@@ -47,6 +47,7 @@ public class ItemProvider implements PacketExtensionProvider {
             if (ProviderManager.getInstance().getExtensionProvider(payloadElemName, payloadNS) == null) {
                 StringBuilder payloadText = new StringBuilder();
                 boolean done = false;
+                boolean isEmptyElement = false;
 
                 // Parse custom payload
                 while (!done) {
@@ -64,13 +65,13 @@ public class ItemProvider implements PacketExtensionProvider {
                         }
                         if (parser.isEmptyElementTag()) {
                             payloadText.append("/>");
-                            done = true;
+                            isEmptyElement = true;
                         } else {
                             payloadText.append(">");
                         }
                     } else if (parser.getEventType() == XmlPullParser.END_TAG) {
-                        if (done) {
-                            done = false;
+                        if (isEmptyElement) {
+                            isEmptyElement = false;
                         } else {
                             payloadText.append("</").append(parser.getName()).append(">");
                         }
