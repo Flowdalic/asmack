@@ -341,10 +341,8 @@ prepareRelease() {
 	    | xargs -n 1 -0 $XARGS_ARGS gpg --local-user $GPG_KEY --detach-sign
     fi
 
-    (
-    cd $RELEASE_DIR && find . -maxdepth 1 -and \( -name '*.jar' -or -name '*.zip' \) -print0 \
-	| xargs -I{} -n 1 -0 $XARGS_ARGS sh -c 'md5sum {} > {}.md5'
-    )
+    find $RELEASE_DIR -maxdepth 1 -and \( -name '*.jar' -or -name '*.zip' \) -print0 \
+	| xargs -I{} -n 1 -0 $XARGS_ARGS sh -c 'cd `dirname {}`; BASENAME=`basename {}` md5sum ${BASENAME} > ${BASENAME}.md5'
 
     local release_readme
     release_readme=${RELEASE_DIR}/README
@@ -494,17 +492,19 @@ setconfig() {
     fi
 
     if [[ -n ${VERSION_TAG} ]]; then
-	if ! grep ${VERSION_TAG} CHANGELOG; then
-	    echo "Could not find the tag in the CHANGELOG file. Please write a short summary of changes"
-	    exit 1
-	fi
-	if ! git diff --exit-code; then
-	    echo "Unstaged changes found, please stages your changes"
-	    exit 1
-	fi
-	if ! git diff --cached --exit-code; then
-	    echo "Staged, but uncommited changes found, please commit"
-	    exit 1
+	if [[ ${VERSION_TAG} != nightly* ]]; then
+	    if ! grep ${VERSION_TAG} CHANGELOG; then
+		echo "Could not find the tag in the CHANGELOG file. Please write a short summary of changes"
+		exit 1
+	    fi
+	    if ! git diff --exit-code; then
+		echo "Unstaged changes found, please stages your changes"
+		exit 1
+	    fi
+	    if ! git diff --cached --exit-code; then
+		echo "Staged, but uncommited changes found, please commit"
+		exit 1
+	    fi
 	fi
 	RELEASE_DIR=${ASMACK_RELEASES}/${VERSION_TAG}
 	TAG_FILE=${VERSION_TAG_DIR}/${VERSION_TAG}.tag
