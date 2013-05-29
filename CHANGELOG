@@ -1,3 +1,14 @@
+Release 0.8.3
+	- SMACK-369 remove try/catch block in XMPPConnection.connect()
+	- SMACK-439 Improve documentation for MultiUserChat.InvitationsListener
+	- SMACK-430 Re-activated code that throws an exception if createOutgoingFileTrans
+fer() was called with a bare JID
+	- SMACK-384 Don't use a semaphore while waiting for PacketReader to be started.
+	- SMACK-361 Changed default for filename encoding to Base 32 (which should work on all file systems) and added a Base 64 filename and url safe implementation of the StringEncoder.
+	- SMACK-438 Avoid NPE when the weak reference is null. Add InvitationsMonitor as
+strong reference within getInvitationsMonitor and return it within the block so it
+can't get gc'ed between put() and get()
+
 Release 0.8.2
 	- Removed the whitespace ping code SMACK-412
 	- SMACK-419 PacketWriter: Only flush the BufferedWriter if the packet queue is empty
