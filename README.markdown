@@ -29,6 +29,7 @@ Compiling aSmack
 ==========================
 
 Linux: https://github.com/Flowdalic/asmack/wiki/Build-Instructions-for-Linux
+
 Mac OS X: https://github.com/Flowdalic/asmack/wiki/Build-Instructions-on-Mac-OS-X
 
 Note that building on Mac OS X is a user contribution and not offically supported.
