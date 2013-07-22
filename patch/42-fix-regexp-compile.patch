@@ -1,0 +1,11 @@
+--- ../../src-unpatched/trunk/com/kenai/jbosh/ComposableBody.java	2013-07-22 15:09:34.543868532 +0400
++++ com/kenai/jbosh/ComposableBody.java	2013-07-22 15:01:52.643874225 +0400
+@@ -58,7 +58,7 @@
+      * BOSH message.
+      */
+     private static final Pattern BOSH_START =
+-            Pattern.compile("<" + "(?:(?:[^:\t\n\r >]+:)|(?:\\{[^\\}>]*?}))?"
++            Pattern.compile("<" + "(?:(?:[^:\t\n\r >]+:)|(?:\\{[^\\}>]*?\\}))?"
+             + "body" + "(?:[\t\n\r ][^>]*?)?" + "(/>|>)");
+ 
+     /**
