@@ -6,19 +6,7 @@
     <groupId>org.igniterealtime.smack</groupId>
     <artifactId>asmack</artifactId>
     <version>0.8.4-SNAPSHOT</version>
-    <packaging>apklib</packaging>
     <name>XMPP library Smack on android</name>
     <url>http://asmack.org</url>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-                <artifactId>android-maven-plugin</artifactId>
-                <version>3.6.0</version>
-                <extensions>true</extensions>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
