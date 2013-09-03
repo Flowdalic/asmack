@@ -15,15 +15,23 @@ scripts.
 Compiled JARs
 =============
 
-Can be found @ http://asmack.freakempire.de/ 
-
 Make sure to [*read the
 README*](https://github.com/Flowdalic/asmack/blob/master/README.asmack)
-for every release.
+for every release! Or else aSmack won't work for you. 95% of the
+problems people experiencing with aSmack come from the fact that they
+didn't read the README.
 
-Support
-=======
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Flowdalic&url=https://github.com/flowdalic/asmack&title=asmack&language=&tags=github&category=software)
+The JARs can be found @ http://asmack.freakempire.de/
+
+Support & Contact
+=================
+
+The best way to get support is IRC: Join ##smack @ freenode. But keep
+in mind that this is IRC, it may take a while till you get an
+answer. Up to a few days. So make sure to idle around. :)
+
+You can also use upstream's discussion forum:
+http://community.igniterealtime.org/community/developers/smack
 
 Compiling aSmack
 ==========================
@@ -74,11 +82,6 @@ and we will preserver this. Let us know if you've helped on
 non-technical stuff and we'll find a way to give you the deserved
 credit.
 
-Contact
-=======
-
-Join ##smack @ freenode
-
 Licences / Used libraries
 =========================
 
@@ -98,3 +101,8 @@ problems with the licence.
 
   [1]: http://www.openldap.org/devel/cvsweb.cgi/~checkout~/LICENSE?rev=1.23.2.1&hideattic=1&sortbydate=0  "OpenLDAP Licence"
 
+
+Flattr
+======
+
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Flowdalic&url=https://github.com/flowdalic/asmack&title=asmack&language=&tags=github&category=software)
