@@ -1,2 +1,4 @@
 build
 local.properties
+releases/
+src/
