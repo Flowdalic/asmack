@@ -202,21 +202,32 @@ buildandroid() {
 
     cd $ASMACK_BASE
 
-    if [ ! -f local.properties ] ; then
-	echo "Could not find local.properties file"
-	echo "See local.properties.example"
-	exit 1
+    if [ -z "$ANDROID_HOME" ] ; then
+        if [ ! -f local.properties ] ; then
+            echo "Could not find local.properties file"
+            echo "See local.properties.example"
+            echo "Alternatively you may define ANDROID_HOME environment variable to point to your Android SDK installation"
+            exit 1
+        fi
+
+        sdklocation=$(grep sdk-location local.properties| cut -d= -f2)
+        if [ -z "$sdklocation" ] ; then
+            echo "Android SDK not found. Don't build android version"
+            exit 1
+        fi
+        # replace ${user.home} with $HOME
+        sdklocation=${sdklocation/\$\{user.home\}/$HOME}
+    else
+       sdklocation=${ANDROID_HOME}
     fi
 
-    sdklocation=$(grep sdk-location local.properties| cut -d= -f2)
-    if [ -z "$sdklocation" ] ; then
-	echo "Android SDK not found. Don't build android version"
-	exit 1
-    fi
-    for f in ${sdklocation/\$\{user.home\}/$HOME}/platforms/* ; do
+    for f in ${sdklocation}/platforms/* ; do
 	version=`basename $f`
 	if [[ "$version" != android-* ]] ; then
 	    echo "$sdklocation contains no Android SDKs"
+            echo "You must install at least one Android SDK Platform"
+            echo "You might also check your android-sdk path in local.properties"
+            echo " or in ANDROID_HOME environment variable"
 	    exit 1
 	fi
 	if [[ ${version#android-} -ge $minSdkVer ]] ; then

@@ -4,6 +4,16 @@
 <property name="jingle" value="" />
 <property file="local.properties" />
 <property name="android.version" value="" />
+
+<!-- if sdk-location was not set from one of the property file, then
+     get it from the ANDROID_HOME env var.
+     This must be done before we load project.properties since
+     the proguard config can use sdk.dir -->
+<property environment="env" />
+<condition property="sdk-location" value="${env.ANDROID_HOME}">
+    <isset property="env.ANDROID_HOME" />
+</condition>
+
 <target name="compile-jse"  description="Compile for java se">
     <delete dir="build/classes" failonerror="false" />
     <mkdir dir="build/classes" />
