@@ -1,3 +1,8 @@
+Release 0.8.4
+	- SMACK-455 Fixed improper advance of parser when parsing multiple items in a pubsub message.
+	- Removed duplicate rosterInitialized=true block in RosterResultListener. This block already exists in RosterPacketListener.
+	- Update NS server code in dnsjava
+
 Release 0.8.3
 	- SMACK-369 remove try/catch block in XMPPConnection.connect()
 	- SMACK-439 Improve documentation for MultiUserChat.InvitationsListener
