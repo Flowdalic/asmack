@@ -1,3 +1,8 @@
+Release 0.8.5
+	- SMACK-456 Added the causing exception to exceptions throw by XMPPConnection
+	- SMACK-444 Allow 'null' for options in ServerTrustManager
+	- SMACK-452 Correctly parse stream error packets
+
 Release 0.8.4
 	- SMACK-455 Fixed improper advance of parser when parsing multiple items in a pubsub message.
 	- Removed duplicate rosterInitialized=true block in RosterResultListener. This block already exists in RosterPacketListener.
