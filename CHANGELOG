@@ -1,3 +1,8 @@
+Release 0.8.6beta
+	- SMACK-458 Managers should be kept on disconnects
+	- SMACK-411 ServiceDiscoveryManager identities should be non-static and kept in a Set to allow multiple identities as per XEP-0030
+	- SMACK-457 Remove unnecessary printStackTrace() in XMPPConnection
+
 Release 0.8.5
 	- SMACK-456 Added the causing exception to exceptions throw by XMPPConnection
 	- SMACK-444 Allow 'null' for options in ServerTrustManager
