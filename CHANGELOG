@@ -1,3 +1,8 @@
+Release 0.8.6beta3
+	- SMACK-461 Remove incorrect deprecated marker for DiscoverInfo.Identity.setType()
+	- SMACK-460 ServiceDiscoveryManager constructor usage in connectionCreated()
+	- SMACK-459 Add option to configure the default identity in ServiceDiscoveryManager
+
 Release 0.8.6beta2
 	- SMACK-443 remove duplicate notifyReconnection()
 	- SMACK-373 Don't remove listeners after a disconnect() , keep state of Connection between disconnect() and connect()/login()
