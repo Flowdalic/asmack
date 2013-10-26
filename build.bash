@@ -497,17 +497,37 @@ setconfig() {
 		echo "Could not find the tag in the CHANGELOG file. Please write a short summary of changes"
 		exit 1
 	    fi
-	    if ! git diff --exit-code; then
-		echo "Unstaged changes found, please stages your changes"
-		exit 1
-	    fi
-	    if ! git diff --cached --exit-code; then
-		echo "Staged, but uncommited changes found, please commit"
-		exit 1
-	    fi
+	fi
+	if ! git diff --exit-code; then
+	    echo "Unstaged changes found, please stages your changes"
+	    exit 1
+	fi
+	if ! git diff --cached --exit-code; then
+	    echo "Staged, but uncommited changes found, please commit"
+	    exit 1
+	fi
+	if ! grep ${VERSION_TAG} CHANGELOG; then
+	    echo "Error: Could not find the tag in the CHANGELOG file. Please write a short summary of changes"
+	    exit 1
+	fi
+	if ! git diff --exit-code; then
+	    echo "Error: Unstaged changes found, please stages your changes"
+	    exit 1
+	fi
+	if ! git diff --cached --exit-code; then
+	    echo "Error: Staged, but uncommited changes found, please commit"
+	    exit 1
 	fi
 	RELEASE_DIR=${ASMACK_RELEASES}/${VERSION_TAG}
+	if [ -d $RELEASE_DIR ]; then
+	    echo "Error: Release dir already exists"
+	    exit 1
+	fi
 	TAG_FILE=${VERSION_TAG_DIR}/${VERSION_TAG}.tag
+	if [ -f $TAG_FILE ]; then
+	    echo "Error: Tag file already exists"
+	    exit 1
+	fi
     fi
 }
 
