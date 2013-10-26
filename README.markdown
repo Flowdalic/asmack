@@ -94,12 +94,12 @@ We are currently using code from
  * Apache qpid (sasl) (Apache Licence)
  * jbosh (BOSH) (Apache Licence)
  * dnsjava (dns srv lookups) (BSD)
- * custom code (various glue stuff) (WTFPL | BSD | Apache)
+ * custom code (various glue stuff) (WTFPL, Apache Licence)
 
 This should work for just about every project. Contact us if you have
 problems with the licence.
 
-  [1]: http://www.openldap.org/devel/cvsweb.cgi/~checkout~/LICENSE?rev=1.23.2.1&hideattic=1&sortbydate=0  "OpenLDAP Licence"
+  [1]: http://www.openldap.org/devel/gitweb.cgi?p=openldap-jldap.git;a=blob_plain;f=LICENSE-2.0.1;hb=HEAD
 
 
 Flattr
