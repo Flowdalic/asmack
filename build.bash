@@ -493,18 +493,6 @@ setconfig() {
 
     if [[ -n ${VERSION_TAG} ]]; then
 	if ! grep ${VERSION_TAG} CHANGELOG; then
-	    echo "Could not find the tag in the CHANGELOG file. Please write a short summary of changes"
-	    exit 1
-	fi
-	if ! git diff --exit-code; then
-	    echo "Unstaged changes found, please stages your changes"
-	    exit 1
-	fi
-	if ! git diff --cached --exit-code; then
-	    echo "Staged, but uncommited changes found, please commit"
-	    exit 1
-	fi
-	if ! grep ${VERSION_TAG} CHANGELOG; then
 	    echo "Error: Could not find the tag in the CHANGELOG file. Please write a short summary of changes"
 	    exit 1
 	fi
