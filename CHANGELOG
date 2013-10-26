@@ -1,3 +1,7 @@
+Release 0.8.6beta2
+	- SMACK-443 remove duplicate notifyReconnection()
+	- SMACK-373 Don't remove listeners after a disconnect() , keep state of Connection between disconnect() and connect()/login()
+
 Release 0.8.6beta
 	- SMACK-458 Managers should be kept on disconnects
 	- SMACK-411 ServiceDiscoveryManager identities should be non-static and kept in a Set to allow multiple identities as per XEP-0030
