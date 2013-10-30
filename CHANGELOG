@@ -1,3 +1,6 @@
+Release 0.8.6
+	- Added support for SASL EXTERNAL to aSmack
+
 Release 0.8.6beta3
 	- SMACK-461 Remove incorrect deprecated marker for DiscoverInfo.Identity.setType()
 	- SMACK-460 ServiceDiscoveryManager constructor usage in connectionCreated()
