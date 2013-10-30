@@ -19,6 +19,7 @@ package de.measite.smack;
 import java.util.Map;
 
 import com.novell.sasl.client.DigestMD5SaslClient;
+import com.novell.sasl.client.ExternalSaslClient;
 
 import org.apache.harmony.javax.security.auth.callback.CallbackHandler;
 import org.apache.harmony.javax.security.sasl.SaslClient;
@@ -45,6 +46,15 @@ public class SaslClientFactory implements
 					cbh
 				);
 			}
+			if ("EXTERNAL".equals(mech)) {
+				return ExternalSaslClient.getClient(
+					authorizationId,
+					protocol,
+					serverName,
+					props,
+					cbh
+				);
+			}
 		}
 		return null;
 	}
@@ -53,7 +63,8 @@ public class SaslClientFactory implements
 	public String[] getMechanismNames(Map<String, ?> props) {
 		return new String[]{
 			"PLAIN",
-			"DIGEST-MD5"
+			"DIGEST-MD5",
+			"EXTERNAL"
 		};
 	}
 
