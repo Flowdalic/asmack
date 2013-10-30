@@ -352,8 +352,10 @@ prepareRelease() {
 	    | xargs -n 1 -0 $XARGS_ARGS gpg --local-user $GPG_KEY --detach-sign
     fi
 
-    find $RELEASE_DIR -maxdepth 1 -and \( -name '*.jar' -or -name '*.zip' \) -print0 \
-	| xargs -I{} -n 1 -0 $XARGS_ARGS sh -c 'cd `dirname {}`; BASENAME=`basename {}` md5sum ${BASENAME} > ${BASENAME}.md5'
+    cd $RELEASE_DIR
+    find . -maxdepth 1 -and \( -name '*.jar' -or -name '*.zip' \) -print0 \
+	| xargs -I{} -n 1 -0 $XARGS_ARGS sh -c 'md5sum {} > {}.md5'
+    cd -
 
     local release_readme
     release_readme=${RELEASE_DIR}/README
