@@ -1,3 +1,6 @@
+Release 0.8.8
+	- SMACK-339 Allow ConnectionListeners to be added before Connection is connected. Currently throws exception
+
 Release 0.8.7
 	- SMACK-459 actually add the defaultIdentity to the result of getIdentities()
 	- SMACK-459 Make it user proof by returning an unmodifiable set again
