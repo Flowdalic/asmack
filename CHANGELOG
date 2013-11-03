@@ -1,3 +1,7 @@
+Release 0.8.9beta2
+	- SMACK-361 Minor EntityCapsManager fixes
+	- SMACK-462 Use getInstace() ConnectionCreationListener
+
 Release 0.8.9beta1
 	- SMACK-403 Fixed connectionCreationListener for CarbonManager, prevents duplicate CarbonManagers for the same connection instance
 	- Minor ping manger fixes
