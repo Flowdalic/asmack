@@ -1,3 +1,6 @@
+Release 0.8.9beta3
+	- Fixed XEP-184 delivery receipts in aSmack
+
 Release 0.8.9beta2
 	- SMACK-361 Minor EntityCapsManager fixes
 	- SMACK-462 Use getInstace() ConnectionCreationListener
