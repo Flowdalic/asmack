@@ -1,3 +1,6 @@
+Release 0.8,9beta4
+	- Fixed entity caps hash calculation
+
 Release 0.8.9beta3
 	- Fixed XEP-184 delivery receipts in aSmack
 
