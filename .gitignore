@@ -1,4 +1,8 @@
 build
 local.properties
+.used-smack-git-repo
+config
+
 releases/
 src/
+version-tags/
