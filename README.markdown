@@ -42,12 +42,6 @@ Mac OS X: https://github.com/Flowdalic/asmack/wiki/Build-Instructions-on-Mac-OS-
 
 Note that building on Mac OS X is a user contribution and not offically supported.
 
-Connecting to Openfire
-==========================
-
-https://github.com/Flowdalic/asmack/wiki/Connecting-to-Openfire
-
-
 Apps that use this fork of aSmack
 =================================
 - [GTalkSMS](http://code.google.com/p/gtalksms/) uses many features of Smack and XMPP on Android:
