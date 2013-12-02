@@ -82,22 +82,18 @@ and we will preserver this. Let us know if you've helped on
 non-technical stuff and we'll find a way to give you the deserved
 credit.
 
-Licences / Used libraries
+Licenses / Used libraries
 =========================
 
-We only accept Apache and BSD-like licences.
 We are currently using code from
 
- * Apache Harmony (sasl/xml) (Apache Licence)
- * smack (xmpp) (Apache Licence)
- * novell-openldap-jldap (sasl) ([OpenLDAP Licence][1])
- * Apache qpid (sasl) (Apache Licence)
- * jbosh (BOSH) (Apache Licence)
+ * Apache Harmony (sasl/xml) (Apache License)
+ * smack (xmpp) (Apache License)
+ * novell-openldap-jldap (sasl) ([OpenLDAP License][1])
+ * Apache qpid (sasl) (Apache License)
+ * jbosh (BOSH) (Apache License)
  * dnsjava (dns srv lookups) (BSD)
- * custom code (various glue stuff) (WTFPL, Apache Licence)
-
-This should work for just about every project. Contact us if you have
-problems with the licence.
+ * custom code (various glue stuff) (WTFPL, Apache License)
 
   [1]: http://www.openldap.org/devel/gitweb.cgi?p=openldap-jldap.git;a=blob_plain;f=LICENSE-2.0.1;hb=HEAD
 
