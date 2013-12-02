@@ -44,6 +44,7 @@ Note that building on Mac OS X is a user contribution and not offically supporte
 
 Apps that use this fork of aSmack
 =================================
+- [Project MAXS](http://projectmaxs.org)
 - [GTalkSMS](http://code.google.com/p/gtalksms/) uses many features of Smack and XMPP on Android:
     - File Transfer
     - DNS SRV
