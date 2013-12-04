@@ -24,14 +24,6 @@ ConnectionConfiguration
 Please use the provided AndroidConnectionConfiguration class if
 possible to create a new connection.
 
-Compression
------------
-
-If you want compressed XMPP streams you have to add
-[jzlib-1.0.7](http://www.jcraft.com/jzlib/) to your project. Note that
-every version higher then 1.0.7 wont work.
-More Info: https://github.com/Flowdalic/smack/issues/12
-
 Problems / Debugging
 ==============================
 
