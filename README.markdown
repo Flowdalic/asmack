@@ -71,21 +71,17 @@ and we will preserver this. Let us know if you've helped on
 non-technical stuff and we'll find a way to give you the deserved
 credit.
 
-Licenses / Used libraries
-=========================
+Open Source Licenses
+====================
 
-We are currently using code from
+Please have a look at the
+[README](https://github.com/Flowdalic/asmack/README.asmack) of a
+aSmack release for detailed license information. aSmack currently
+contains code with the following licenses:
 
- * Apache Harmony (sasl/xml) (Apache License)
- * smack (xmpp) (Apache License)
- * novell-openldap-jldap (sasl) ([OpenLDAP License][1])
- * Apache qpid (sasl) (Apache License)
- * jbosh (BOSH) (Apache License)
- * dnsjava (dns srv lookups) (BSD)
- * custom code (various glue stuff) (WTFPL, Apache License)
-
-  [1]: http://www.openldap.org/devel/gitweb.cgi?p=openldap-jldap.git;a=blob_plain;f=LICENSE-2.0.1;hb=HEAD
-
+- Apache License, Version 2.0
+- BSD 2-Clause License
+- OpenLDAP Public License, Version 2.8
 
 Flattr
 ======
