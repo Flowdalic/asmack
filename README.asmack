@@ -63,36 +63,40 @@ Open Source Licenses
 
 aSmack consists of the following components:
 
- * smack (XMPP Client Library)
-   Copyright 2003-2010 Jive Software
-   Copyright 2001-2004 The Apache Software Foundation
-   Copyright 2011-2013 Florian Schmaus
-   Copyright 2013 Georg Lukas
-   Copyright 2013 Robin Collier
-   Copyright 2009 Jonas Ådahl
+ * Smack (XMPP Client Library)
+   Copyright © 2003-2010 Jive Software
+   Copyright © 2001-2004 Apache Software Foundation
+   Copyright © 2011-2013 Florian Schmaus
+   Copyright © 2013 Georg Lukas
+   Copyright © 2013 Robin Collier
+   Copyright © 2009 Jonas Ådahl
    Apache License, Version 2.0
  * Apache Harmony (SASL/XML)
-   Copyright 2006, 2010 The Apache Software Foundation
+   Copyright © 2006, 2010 Apache Software Foundation
    Apache License, Version 2.0
  * novell-openldap-jldap (SASL)
-   Copyright 2002-2003 Novell, Inc.
+   Copyright © 2002-2003 Novell, Inc.
    OpenLDAP Public License, Version 2.8
  * Apache qpid (SASL)
-   Copyright 2006-2008 Apache Software Foundation
+   Copyright © 2006-2008 Apache Software Foundation
    Apache License, Version 2.0
  * jbosh (BOSH)
-   Copyright 2009 Guenther Niess
-   Copyright 2009 Mike Cumings
-   Copyright 2001-2003 The Apache Software Foundation
+   Copyright © 2009 Guenther Niess
+   Copyright © 2009 Mike Cumings
+   Copyright © 2001-2003 Apache Software Foundation
    Apache License, Version 2.0
  * dnsjava (DNS SRV)
-   Copyright 1998-2011 Brian Wellington
-   BSD 2-Clause License (FreeBSD)
- * custom code (various glue stuff)
-   Copyright 2011-2013 Florian Schmaus
-   Copyright 2009-2010 Rene Treffer
+   Copyright © 1998-2011 Brian Wellington
+   BSD 2-Clause License
+ * aSmack custom code (various glue stuff)
+   Copyright © 2011-2013 Florian Schmaus
+   Copyright © 2009-2010 Rene Treffer
    Apache License, Version 2.0
 
+License texts:
+ * Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
+ * BSD 2-Clause License: http://opensource.org/licenses/BSD-2-Clause
+ * OpenLDAP Public License, Version 2.8: http://www.openldap.org/devel/gitweb.cgi?p=openldap-jldap.git;a=blob_plain;f=LICENSE;h=05ad7571e448b9d83ead5d4691274d9484574714;hb=HEAD
 
 Component Revision Information for this Release
 ===============================================
