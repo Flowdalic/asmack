@@ -2,7 +2,7 @@ package org.jivesoftware.smack;
 
 import org.jivesoftware.smack.util.DNSUtil;
 import org.jivesoftware.smack.util.dns.DNSJavaResolver;
-import org.jivesoftware.smackx.ConfigureProviderManager;
+//import org.jivesoftware.smackx.ConfigureProviderManager;
 import org.jivesoftware.smackx.InitStaticCode;
 import org.xbill.DNS.ResolverConfig;
 
@@ -21,7 +21,7 @@ public class SmackAndroid {
         mCtx = ctx;
         DNSUtil.setDNSResolver(DNSJavaResolver.getInstance());
         InitStaticCode.initStaticCode(ctx);
-        ConfigureProviderManager.configureProviderManager();
+//        ConfigureProviderManager.configureProviderManager();
         maybeRegisterReceiver();
     }
 
