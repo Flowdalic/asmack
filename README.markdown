@@ -26,7 +26,7 @@ The JARs can be found @ http://asmack.freakempire.de/
 Support & Contact
 =================
 
-The best way to get support is IRC: Join ##smack @ freenode. But keep
+The best way to get support is IRC: Join #smack @ freenode. But keep
 in mind that this is IRC, it may take a while till you get an
 answer. Up to a few days. So make sure to idle around. :)
 
@@ -60,7 +60,7 @@ github](https://github.com/Flowdalic/smack). Only in some cases the
 If your code follows [Smack's contributor guidelines](
 http://community.igniterealtime.org/docs/DOC-1984), is good documented
 and comes with some testcases, then it's possible to commit it
-upstream. Simply join ##smack @ freenode and ask for a code review.
+upstream. Simply join #smack @ freenode and ask for a code review.
 
 Contributors
 ============
