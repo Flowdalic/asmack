@@ -1,3 +1,6 @@
+Release 0.8.10
+	- SMACK-540: Use WeakReference in MUC NodeInformationProvider
+
 Release 0.8.9
 	- SMACK-463: catch and log exceptions in packet listeners
 
