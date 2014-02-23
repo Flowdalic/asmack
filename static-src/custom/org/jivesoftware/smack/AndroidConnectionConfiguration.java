@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class AndroidConnectionConfiguration extends ConnectionConfiguration {
     private static final int DEFAULT_TIMEOUT = 10000;
-    
+
     /**
      * Creates a new ConnectionConfiguration for the specified service name.
      * A DNS SRV lookup will be performed to find out the actual host address
@@ -32,7 +32,7 @@ public class AndroidConnectionConfiguration extends ConnectionConfiguration {
         super();
         AndroidInit(serviceName, DEFAULT_TIMEOUT);
     }
-    
+
     /**
      * 
      * @param serviceName
@@ -45,25 +45,7 @@ public class AndroidConnectionConfiguration extends ConnectionConfiguration {
     }
 
     public AndroidConnectionConfiguration(String host, int port, String name) {
-	super(host, port, name);
-	AndroidInit();
-    }
-
-    private void AndroidInit() {
-    	// API 14 is Ice Cream Sandwich
-	if (Build.VERSION.SDK_INT >= 14) {
-	    setTruststoreType("AndroidCAStore");
-	    setTruststorePassword(null);
-	    setTruststorePath(null);
-	} else {
-	    setTruststoreType("BKS");
-	    String path = System.getProperty("javax.net.ssl.trustStore");
-	    if (path == null)
-		path = System.getProperty("java.home") + File.separator + "etc"
-		    + File.separator + "security" + File.separator
-		    + "cacerts.bks";
-	    setTruststorePath(path);
-	}
+        super(host, port, name);
     }
 
     /**
@@ -73,7 +55,6 @@ public class AndroidConnectionConfiguration extends ConnectionConfiguration {
      * @throws XMPPException
      */
     private void AndroidInit(String serviceName, int timeout) throws XMPPException {
-	AndroidInit();
         class DnsSrvLookupRunnable implements Runnable {
             String serviceName;
             List<HostAddress> addresses;
@@ -103,7 +84,7 @@ public class AndroidConnectionConfiguration extends ConnectionConfiguration {
 
         hostAddresses = dnsSrv.getHostAddresses();
         if (hostAddresses == null) {
-        	throw new XMPPException("DNS lookup failure");
+            throw new XMPPException("DNS lookup failure");
         }
 
         ProxyInfo proxy = ProxyInfo.forDefaultProxy();

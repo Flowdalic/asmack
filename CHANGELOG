@@ -1,3 +1,6 @@
+Release 0.9.0alpha1
+	- Use upstream Smack repository
+
 Release 0.8.10
 	- SMACK-540: Use WeakReference in MUC NodeInformationProvider
 
