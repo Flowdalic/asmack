@@ -118,6 +118,10 @@ EOF
 			[ $d == $static ] && continue
 		done
 
+		if ! $BUILD_BOSH && [[ $SRC_DIR == "jbosh" ]]; then
+			continue;
+		fi
+
 		if [[ -d $d/.git ]] ; then
 			v=$(cd $d && git rev-parse HEAD)
 			key=$d
