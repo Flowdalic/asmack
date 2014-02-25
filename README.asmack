@@ -7,22 +7,50 @@ Build date: $BUILD_DATE
 Important Notes
 ===============
 
-Read this, or aSmack won't work for you!
+Requirements
+------------
 
-Static Code
------------
+Although not strictly necessary any more, it is still heavily
+encouraged to call SmackAndroid.init(Context) (in
+org.jivesoftware.smack).
 
-In order to work correctly on Android, you need to register Smack's
-XMPP Providers and Extensions manually and init some static code
-blocks before you doing any XMPP activty. Calling
-SmackAndroid.init(Context) (in org.jivesoftware.smack) will do this
-for you.
+Smack requires dnsjava for DNS SRV record lookup. You need to add the
+dnsjava library to your projects libraries.
 
 ConnectionConfiguration
 -----------------------
 
-Please use the provided AndroidConnectionConfiguration class if
-possible to create a new connection.
+Please use the provided AndroidConnectionConfiguration class to create
+a new connection.
+
+ProGuard
+--------
+
+If you use ProGuard, you have to configure it so that no important
+Smack classes are optimized away:
+
+# This dnsjava class uses old Sun API
+-dontnote org.xbill.DNS.spi.DNSJavaNameServiceDescriptor
+-dontwarn org.xbill.DNS.spi.DNSJavaNameServiceDescriptor
+
+# See http://stackoverflow.com/questions/5701126, happens in dnsjava
+-optimizations !code/allocation/variable
+
+# Smack specific configuration
+-keep class * implements org.jivesoftware.smack.initializer.SmackInitializer
+-keep class * implements org.jivesoftware.smack.provider.IQProvider
+-keep class * implements org.jivesoftware.smack.provider.PacketExtensionProvider
+-keep class * extends org.jivesoftware.smack.packet.Packet
+-keep class org.jivesoftware.smackx.disco.ServiceDiscoveryManager
+-keep class org.jivesoftware.smackx.xhtmlim.XHTMLManager
+-keep class org.jivesoftware.smackx.muc.MultiUserChat
+-keep class org.jivesoftware.smackx.bytestreams.ibb.InBandBytestreamManager
+-keep class org.jivesoftware.smackx.bytestreams.socks5.Socks5BytestreamManager
+-keep class org.jivesoftware.smackx.filetransfer.FileTransferManager
+-keep class org.jivesoftware.smackx.iqlast.LastActivityManager
+-keep class org.jivesoftware.smackx.commands.AdHocCommandManager
+-keep class org.jivesoftware.smackx.ping.PingManager
+-keep class org.jivesoftware.smackx.privacy.PrivacyListManager
 
 Problems / Debugging
 ==============================
@@ -38,7 +66,7 @@ How to debug your problem
 -------------------------
 
 We always provide source zips. Attach them to the jar in your favorite
-IDE. Enable debugging mode with [BOSH|XMPP]Connection.DEBUG and
+IDE. Enable debugging mode with XMPPConnection.DEBUG and
 config.setDebug. See also:
 http://www.igniterealtime.org/builds/smack/docs/latest/documentation/debugging.html
 
@@ -66,7 +94,7 @@ aSmack consists of the following components:
  * Smack (XMPP Client Library)
    Copyright © 2003-2010 Jive Software
    Copyright © 2001-2004 Apache Software Foundation
-   Copyright © 2011-2013 Florian Schmaus
+   Copyright © 2011-2014 Florian Schmaus
    Copyright © 2013 Georg Lukas
    Copyright © 2013 Robin Collier
    Copyright © 2009 Jonas Ådahl
@@ -80,16 +108,8 @@ aSmack consists of the following components:
  * Apache qpid (SASL)
    Copyright © 2006-2008 Apache Software Foundation
    Apache License, Version 2.0
- * jbosh (BOSH)
-   Copyright © 2009 Guenther Niess
-   Copyright © 2009 Mike Cumings
-   Copyright © 2001-2003 Apache Software Foundation
-   Apache License, Version 2.0
- * dnsjava (DNS SRV)
-   Copyright © 1998-2011 Brian Wellington
-   BSD 2-Clause License
  * aSmack custom code (various glue stuff)
-   Copyright © 2011-2013 Florian Schmaus
+   Copyright © 2011-2014 Florian Schmaus
    Copyright © 2009-2010 Rene Treffer
    Apache License, Version 2.0
 
