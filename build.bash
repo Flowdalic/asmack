@@ -96,8 +96,13 @@ fetchall() {
 }
 
 createVersionTag() {
+	local versionFile=build/resources/org.jivesoftware.smack/version
 	# Skip this step is no version tag is given
-	[[ -z $VERSION_TAG ]] && return
+	if [[ -z $VERSION_TAG ]]; then
+		echo "aSmack SNAPSHOT" > $versionFile
+		return
+	fi
+	echo "aSmack $VERSION_TAG" > $versionFile
 
 	local v
 	cat <<EOF  > $TAG_FILE
@@ -169,6 +174,7 @@ createbuildsrc() {
 
 	execute copyfolder "src/smack/core/src/main/java/" "build/src" "."
 	execute copyfolder "src/smack/core/src/main/resources/" "build/resources" "."
+	execute copyfolder "src/smack/tcp/src/main/java/" "build/src" "."
 	execute copyfolder "src/smack/extensions/src/main/java/" "build/src" "."
 	execute copyfolder "src/smack/extensions/src/main/resources/" "build/resources" "."
 	execute copyfolder "src/smack/experimental/src/main/java/" "build/src" "."
@@ -588,8 +594,8 @@ initialize
 copystaticsrc
 testsmackgit
 fetchall
-createVersionTag
 createbuildsrc
+createVersionTag
 patchsrc "patch"
 if $BUILD_JINGLE ; then
 	patchsrc "jingle"
