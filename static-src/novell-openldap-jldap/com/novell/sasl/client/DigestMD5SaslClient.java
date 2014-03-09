@@ -661,7 +661,7 @@ public class DigestMD5SaslClient implements SaslClient
                                       true);
 
         digestResponse.append("username=\"");
-        digestResponse.append(m_authorizationId);
+        digestResponse.append(m_name);
         if (0 != m_realm.length())
         {
             digestResponse.append("\",realm=\"");
@@ -679,8 +679,12 @@ public class DigestMD5SaslClient implements SaslClient
         digestResponse.append(response);
         digestResponse.append(",charset=utf-8,nonce=\"");
         digestResponse.append(m_dc.getNonce());
+        if (m_authorizationId != null && m_authorizationId.length() > 0)
+        {
+            digestResponse.append("\",authzid=\"");
+            digestResponse.append(m_authorizationId);
+        }
         digestResponse.append("\"");
-
         return digestResponse.toString();
      }
      
