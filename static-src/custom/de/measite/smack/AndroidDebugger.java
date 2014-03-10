@@ -3,7 +3,7 @@ package de.measite.smack;
 import org.jivesoftware.smack.debugger.SmackDebugger;
 import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.PacketListener;
-import org.jivesoftware.smack.Connection;
+import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.util.*;
 
@@ -30,7 +30,7 @@ public class AndroidDebugger implements SmackDebugger {
     public static boolean printInterpreted = false;
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("hh:mm:ss aaa");
 
-    private Connection connection = null;
+    private XMPPConnection connection = null;
 
     private PacketListener listener = null;
     private ConnectionListener connListener = null;
@@ -40,7 +40,7 @@ public class AndroidDebugger implements SmackDebugger {
     private ReaderListener readerListener;
     private WriterListener writerListener;
 
-    public AndroidDebugger(Connection connection, Writer writer, Reader reader) {
+    public AndroidDebugger(XMPPConnection connection, Writer writer, Reader reader) {
         this.connection = connection;
         this.writer = writer;
         this.reader = reader;

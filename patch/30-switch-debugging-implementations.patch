@@ -1,5 +1,5 @@
---- ../../../src/smack/org/jivesoftware/smack/Connection.java	2010-02-03 23:29:21.000000000 +0100
-+++ org/jivesoftware/smack/Connection.java	2010-02-03 23:56:56.000000000 +0100
+--- ../../../src/smack/org/jivesoftware/smack/XMPPConnection.java	2010-02-03 23:29:21.000000000 +0100
++++ org/jivesoftware/smack/XMPPConnection.java	2010-02-03 23:56:56.000000000 +0100
 @@ -743,12 +743,12 @@
                  if (debuggerClass == null) {
                      try {
