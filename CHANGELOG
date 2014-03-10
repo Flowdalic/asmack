@@ -1,3 +1,7 @@
+Release 0.9.0alpha10
+	- Cleanup PrivacyList API
+	- Refactor AMP API
+
 Release 0.9.0alpha9
 	- Rename Connection to XMPPConnection
 	- IQReplyFilter fixes
