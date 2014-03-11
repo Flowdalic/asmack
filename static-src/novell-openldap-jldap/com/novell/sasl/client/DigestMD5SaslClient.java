@@ -673,8 +673,8 @@ public class DigestMD5SaslClient implements SaslClient
         digestResponse.append("00000001"); //nounce count
         digestResponse.append(",qop=");
         digestResponse.append(m_qopValue);
-        digestResponse.append(",digest-uri=\"ldap/");
-        digestResponse.append(m_serverName);
+        digestResponse.append(",digest-uri=\"");
+        digestResponse.append(m_digestURI);
         digestResponse.append("\",response=");
         digestResponse.append(response);
         digestResponse.append(",charset=utf-8,nonce=\"");
