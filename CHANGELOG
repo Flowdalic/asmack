@@ -1,35 +1,17 @@
-Release 0.9.0alpha10
+Release 0.9.0-SNAPSHOT
 	- Cleanup PrivacyList API
 	- Refactor AMP API
-
-Release 0.9.0alpha9
 	- Rename Connection to XMPPConnection
 	- IQReplyFilter fixes
-
-Release 0.9.0alpha8
 	- NPE fixes
-
-Release 0.9.0alpha7
 	- SASL DIGEST-MD5 fixes
-
-Release 0.9.0alpha6
 	- Bunch of improvements (SMACK-543, SMACK-538, SMACK-533, SMACK-71, SMACK-357, SMACK-541, SMACK-544, SMACK-53)
-
-Release 0.9.0alpha5
 	- Use correct namespace for MUC.getAdmins() SMACK-371
 	- PingManager should notify PingFailedlisteners only once SMACK-548
-
-Release 0.9.0alpha4
 	- Renamed XMPPConnection to TCPConnection
 	- Removed non-SASL auth code
-
-Release 0.9.0alpha3
 	- Minor bugfixes
-
-Release 0.9.0alpha2
 	- Use upstream with extended PingManager
-
-Release 0.9.0alpha1
 	- Use upstream Smack repository
 
 Release 0.8.10

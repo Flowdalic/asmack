@@ -183,8 +183,6 @@ createbuildsrc() {
 
 	execute copyfolder "src/qpid/java" "build/src" "org/apache/qpid/management/common/sasl"
 	execute copyfolder "src/novell-openldap-jldap" "build/src" "."
-	# TODO dnsjava now part of bootlcasspath
-#	execute copyfolder "src/dnsjava"  "build/src/trunk" "org"
 	execute copyfolder "src/harmony" "build/src" "."
 	# if $BUILD_BOSH; then
 	# 	execute copyfolder "src/jbosh/src/main/java" "build/src/trunk" "."
@@ -306,13 +304,16 @@ buildcustom() {
 }
 
 parseopts() {
-	while getopts a:b:r:t:cdhjopux OPTION "$@"; do
+	while getopts a:b:r:st:cdhjopux OPTION "$@"; do
 		case $OPTION in
 			a)
 				BUILD_ANDROID_VERSIONS="${OPTARG}"
 				;;
 			r)
 				SMACK_REPO="${OPTARG}"
+				;;
+			s)
+				SNAPSHOT=true
 				;;
 			b)
 				SMACK_BRANCH="${OPTARG}"
@@ -363,6 +364,9 @@ parseopts() {
 				;;
 		esac
 	done
+	if $SNAPSHOT; then
+		VERSION_TAG+="-SNAPSHOT"
+	fi
 }
 
 prepareRelease() {
@@ -499,6 +503,7 @@ setdefaults() {
 	BUILD_CUSTOM=false
 	BUILD_JINGLE=false
 	BUILD_BOSH=false
+	SNAPSHOT=false
 	JINGLE_ARGS=""
 	PARALLEL_BUILD=false
 	VERSION_TAG=""
@@ -539,7 +544,7 @@ setconfig() {
 	fi
 
 	if [[ -n ${VERSION_TAG} ]]; then
-		if ! grep ${VERSION_TAG} CHANGELOG; then
+		if ! $SNAPSHOT && ! grep ${VERSION_TAG} CHANGELOG; then
 			echo "Error: Could not find the tag in the CHANGELOG file. Please write a short summary of changes"
 			exit 1
 		fi
@@ -553,13 +558,21 @@ setconfig() {
 		fi
 		RELEASE_DIR=${ASMACK_RELEASES}/${VERSION_TAG}
 		if [ -d $RELEASE_DIR ]; then
-			echo "Error: Release dir already exists"
-			exit 1
+			if $SNAPSHOT; then
+				rm -rf $RELEASE_DIR
+			else
+				echo "Error: Release dir already exists"
+				exit 1
+			fi
 		fi
 		TAG_FILE=${VERSION_TAG_DIR}/${VERSION_TAG}.tag
 		if [ -f $TAG_FILE ]; then
-			echo "Error: Tag file already exists"
-			exit 1
+			if $SNAPSHOT; then
+				rm $TAG_FILE
+			else
+				echo "Error: Tag file already exists"
+				exit 1
+			fi
 		fi
 	fi
 }
