@@ -1,20 +1,21 @@
---- ../../src-unpatched/trunk/org/jivesoftware/smack/SASLAuthentication.java	2009-12-07 00:03:46.000000000 +0100
-+++ org/jivesoftware/smack/SASLAuthentication.java	2009-12-07 00:05:46.000000000 +0100
-@@ -91,11 +91,11 @@
+--- org/jivesoftware/smack/SASLAuthentication.java
++++ org/jivesoftware/smack/SASLAuthentication.java
+@@ -84,15 +84,11 @@ public class SASLAuthentication {
+ 
+         // Register SASL mechanisms supported by Smack
+         registerSASLMechanism("EXTERNAL", SASLExternalMechanism.class);
+-        registerSASLMechanism("GSSAPI", SASLGSSAPIMechanism.class);
+         registerSASLMechanism("DIGEST-MD5", SASLDigestMD5Mechanism.class);
+-        registerSASLMechanism("CRAM-MD5", SASLCramMD5Mechanism.class);
          registerSASLMechanism("PLAIN", SASLPlainMechanism.class);
          registerSASLMechanism("ANONYMOUS", SASLAnonymous.class);
  
 -        supportSASLMechanism("GSSAPI",0);
 -        supportSASLMechanism("DIGEST-MD5",1);
++		 supportSASLMechanism("DIGEST-MD5",0);
 -        supportSASLMechanism("CRAM-MD5",2);
 -        supportSASLMechanism("PLAIN",3);
--        supportSASLMechanism("ANONYMOUS",4);
-+//        supportSASLMechanism("GSSAPI",0);
-+        supportSASLMechanism("DIGEST-MD5",0);
-+//        supportSASLMechanism("CRAM-MD5",2);
 +        supportSASLMechanism("PLAIN",1);
+-        supportSASLMechanism("ANONYMOUS",4);
 +        supportSASLMechanism("ANONYMOUS",2);
  
-     }
- 
-
