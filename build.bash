@@ -365,7 +365,7 @@ parseopts() {
 		esac
 	done
 	if $SNAPSHOT; then
-		VERSION_TAG+="-SNAPSHOT"
+		VERSION_TAG+="-SNAPSHOT-${MACHINE_DATE}"
 	fi
 }
 
@@ -432,11 +432,15 @@ publishRelease() {
 		return
 	fi
 
+	local snapshotDir=""
+	if $SNAPSHOT; then
+		snapshotDir="SNAPSHOTS/"
+	fi
 	cd ${ASMACK_RELEASES}
 	cat <<EOF | sftp $PUBLISH_HOST
-rm ${PUBLISH_DIR}/${VERSION_TAG}/*
-mkdir ${PUBLISH_DIR}/${VERSION_TAG}
-put -r $VERSION_TAG $PUBLISH_DIR
+rm ${PUBLISH_DIR}/${snapshotDir}${VERSION_TAG}/*
+mkdir ${PUBLISH_DIR}/${snapshotDir}${VERSION_TAG}
+put -r $VERSION_TAG $PUBLISH_DIR/${snapshotDir}
 EOF
 }
 
@@ -519,6 +523,7 @@ setdefaults() {
 	VERSION_TAG_DIR=${ASMACK_BASE}/version-tags
 	STARTTIME=$(date -u "+%s")
 	BUILD_DATE=$(date)
+	MACHINE_DATE=$(date "+%Y-%m-%d")
 	# Declare an associative array that is in global scope ('-g')
 	declare -g -A COMPONENT_VERSIONS
 }
