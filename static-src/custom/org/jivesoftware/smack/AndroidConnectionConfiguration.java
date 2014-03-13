@@ -28,7 +28,7 @@ public class AndroidConnectionConfiguration extends ConnectionConfiguration {
      *
      * @param serviceName the name of the service provided by an XMPP server.
      */
-    public AndroidConnectionConfiguration(String serviceName) throws XMPPException {
+    public AndroidConnectionConfiguration(String serviceName) throws SmackException {
         super();
         AndroidInit(serviceName, DEFAULT_TIMEOUT);
     }
@@ -37,9 +37,9 @@ public class AndroidConnectionConfiguration extends ConnectionConfiguration {
      * 
      * @param serviceName
      * @param timeout
-     * @throws XMPPException
+     * @throws SmackException
      */
-    public AndroidConnectionConfiguration(String serviceName, int timeout) throws XMPPException {
+    public AndroidConnectionConfiguration(String serviceName, int timeout) throws SmackException {
         super();
         AndroidInit(serviceName, timeout);
     }
@@ -52,9 +52,9 @@ public class AndroidConnectionConfiguration extends ConnectionConfiguration {
      * 
      * @param serviceName
      * @param timeout
-     * @throws XMPPException
+     * @throws SmackException
      */
-    private void AndroidInit(String serviceName, int timeout) throws XMPPException {
+    private void AndroidInit(String serviceName, int timeout) throws SmackException {
         class DnsSrvLookupRunnable implements Runnable {
             String serviceName;
             List<HostAddress> addresses;
@@ -79,12 +79,12 @@ public class AndroidConnectionConfiguration extends ConnectionConfiguration {
         try {
             t.join(timeout);
         } catch (InterruptedException e) {
-            throw new XMPPException("DNS lookup timeout after " + timeout + "ms", e);
+            throw new SmackException("DNS lookup timeout after " + timeout + "ms", e);
         }
 
         hostAddresses = dnsSrv.getHostAddresses();
         if (hostAddresses == null) {
-            throw new XMPPException("DNS lookup failure");
+            throw new SmackException("DNS lookup failure");
         }
 
         ProxyInfo proxy = ProxyInfo.forDefaultProxy();
