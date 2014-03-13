@@ -37,10 +37,12 @@ Smack classes are optimized away:
 -optimizations !code/allocation/variable
 
 # Smack specific configuration
+-keep class de.measite.smack.AndroidDebugger { *; }
 -keep class * implements org.jivesoftware.smack.initializer.SmackInitializer
 -keep class * implements org.jivesoftware.smack.provider.IQProvider
 -keep class * implements org.jivesoftware.smack.provider.PacketExtensionProvider
 -keep class * extends org.jivesoftware.smack.packet.Packet
+-keep class org.jivesoftware.smack.ReconnectionManager
 -keep class org.jivesoftware.smackx.disco.ServiceDiscoveryManager
 -keep class org.jivesoftware.smackx.xhtmlim.XHTMLManager
 -keep class org.jivesoftware.smackx.muc.MultiUserChat
@@ -51,6 +53,7 @@ Smack classes are optimized away:
 -keep class org.jivesoftware.smackx.commands.AdHocCommandManager
 -keep class org.jivesoftware.smackx.ping.PingManager
 -keep class org.jivesoftware.smackx.privacy.PrivacyListManager
+-keep class org.jivesoftware.smackx.time.EntityTimeManager
 
 Problems / Debugging
 ==============================
