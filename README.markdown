@@ -47,6 +47,7 @@ Apps that use this fork of aSmack
 - [Project MAXS](http://projectmaxs.org)
 - [GTalkSMS](http://code.google.com/p/gtalksms/)
 - [yaxim](https://github.com/ge0rg/yaxim)
+- [kontalk](https://github.com/kontalk/androidclient)
 - your app?
 
 Contribution
