@@ -1,6 +1,7 @@
 package de.measite.smack;
 
 import org.jivesoftware.smack.debugger.SmackDebugger;
+import org.jivesoftware.smack.AbstractConnectionListener;
 import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.XMPPConnection;
@@ -95,7 +96,7 @@ public class AndroidDebugger implements SmackDebugger {
             }
         };
 
-        connListener = new ConnectionListener() {
+        connListener = new AbstractConnectionListener() {
             public void connectionClosed() {
                 Log.d("SMACK",
                         dateFormatter.format(new Date()) + " Connection closed (" +
