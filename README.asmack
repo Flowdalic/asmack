@@ -54,6 +54,7 @@ Smack classes are optimized away:
 -keep class org.jivesoftware.smackx.ping.PingManager
 -keep class org.jivesoftware.smackx.privacy.PrivacyListManager
 -keep class org.jivesoftware.smackx.time.EntityTimeManager
+-keep class org.jivesoftware.smackx.vcardtemp.VCardManager
 
 Problems / Debugging
 ==============================
