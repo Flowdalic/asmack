@@ -102,6 +102,10 @@ aSmack consists of the following components:
    Copyright © 2013 Robin Collier
    Copyright © 2009 Jonas Ådahl
    Apache License, Version 2.0
+ * aSmack custom code (various glue stuff)
+   Copyright © 2011-2014 Florian Schmaus
+   Copyright © 2009-2010 Rene Treffer
+   Apache License, Version 2.0
  * Apache Harmony (SASL/XML)
    Copyright © 2006, 2010 Apache Software Foundation
    Apache License, Version 2.0
@@ -110,10 +114,6 @@ aSmack consists of the following components:
    OpenLDAP Public License, Version 2.8
  * Apache qpid (SASL)
    Copyright © 2006-2008 Apache Software Foundation
-   Apache License, Version 2.0
- * aSmack custom code (various glue stuff)
-   Copyright © 2011-2014 Florian Schmaus
-   Copyright © 2009-2010 Rene Treffer
    Apache License, Version 2.0
 
 License texts:
