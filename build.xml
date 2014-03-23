@@ -27,6 +27,7 @@
       debug="true"
       debuglevel="source,lines"
       excludes="**/de/measite/smack/AndroidDebugger.java"
+	  includeantruntime="false"
     />
     <copy todir="build/classes/trunk"><fileset dir="build/src/trunk" includes="META-INF/**" /></copy>
     <jar
@@ -60,6 +61,7 @@
       bootclasspath="${sdk-location}/platforms/${android.version}/android.jar:lib/org.xbill.dns_2.1.6.jar:${jingle}"
       debug="true"
       debuglevel="source,lines"
+	  includeantruntime="false"
     />
     <copy todir="build/classes/${android.version}">
       <fileset dir="build/resources" />
