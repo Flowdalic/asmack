@@ -81,7 +81,6 @@ aSmack release for detailed license information. aSmack currently
 contains code with the following licenses:
 
 - Apache License, Version 2.0
-- BSD 2-Clause License
 - OpenLDAP Public License, Version 2.8
 
 Flattr
