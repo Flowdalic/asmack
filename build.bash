@@ -157,7 +157,7 @@ copyfolder() {
 	cd ${ASMACK_BASE}
 	(
 		cd "${1}"
-		tar -cSsp --exclude-vcs "${3}"
+		tar -cSp --exclude-vcs "${3}"
 	) | (
 		cd "${2}"
 		tar -xSsp
