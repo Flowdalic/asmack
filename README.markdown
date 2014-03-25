@@ -3,10 +3,6 @@ aSmack - buildsystem for Smack on Android
 
 *This repository doesn't contain much code, it's a build environment!*
 
-Tracking trunk can be hard. Doing massive changes on top of trunk can
-be near impossible. We are mixing 6 open source projects to provide a
-working xmpp library for Android. All trunk-based.
-
 This repository contains a source fetching, patching and building
 script.  As well as all the minor changes to make an Android version
 fly.  See the patches/ folder for a detailed list of changes and
