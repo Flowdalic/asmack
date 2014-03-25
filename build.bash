@@ -243,8 +243,8 @@ buildandroid() {
 		sdklocation=${ANDROID_HOME}
 	fi
 
-	for f in ${sdklocation}/platforms/* ; do
-		version=`basename $f`
+	for f in "${sdklocation}"/platforms/* ; do
+		version=`basename "$f"`
 		if [[ "$version" != android-* ]] ; then
 			echo "$sdklocation contains no Android SDKs"
 			echo "You must install at least one Android SDK Platform"
