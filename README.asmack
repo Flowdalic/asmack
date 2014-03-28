@@ -10,12 +10,12 @@ Important Notes
 Requirements
 ------------
 
-Although not strictly necessary any more, it is still heavily
-encouraged to call SmackAndroid.init(Context) (in
-org.jivesoftware.smack).
+You have to call SmackAndroid.init(Context) (in
+org.jivesoftware.smack) in order to initialize Smack on Android or
+Smack won't work as expected!
 
 Smack requires dnsjava for DNS SRV record lookup. You need to add the
-dnsjava library to your projects libraries.
+dnsjava library to your project's libraries.
 
 ConnectionConfiguration
 -----------------------
