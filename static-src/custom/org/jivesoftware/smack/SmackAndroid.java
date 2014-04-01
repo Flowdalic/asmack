@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.jivesoftware.smack.util.DNSUtil;
 import org.jivesoftware.smack.util.dns.DNSJavaResolver;
+import org.xbill.DNS.Lookup;
 import org.xbill.DNS.ResolverConfig;
 
 import android.content.BroadcastReceiver;
@@ -20,8 +21,9 @@ public class SmackAndroid {
 	private BroadcastReceiver mConnectivityChangedReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			LOGGER.fine("ConnectivityChange received, calling ResolverConfig.refresh()");
+			LOGGER.fine("ConnectivityChange received, calling ResolverConfig.refresh() and Lookup.refreshDefault()");
 			ResolverConfig.refresh();
+			Lookup.refreshDefault();
 		}
 	};
 
