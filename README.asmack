@@ -17,12 +17,6 @@ Smack won't work as expected!
 Smack requires dnsjava for DNS SRV record lookup. You need to add the
 dnsjava library to your project's libraries.
 
-ConnectionConfiguration
------------------------
-
-Please use the provided AndroidConnectionConfiguration class to create
-a new connection.
-
 ProGuard
 --------
 
@@ -55,6 +49,8 @@ Smack classes are optimized away:
 -keep class org.jivesoftware.smackx.privacy.PrivacyListManager
 -keep class org.jivesoftware.smackx.time.EntityTimeManager
 -keep class org.jivesoftware.smackx.vcardtemp.VCardManager
+-keep class org.jivesoftware.smack.CustomSmackConfiguration
+
 
 Problems / Debugging
 ==============================
