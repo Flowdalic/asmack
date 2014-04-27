@@ -203,7 +203,7 @@ patchsrc() {
 		if [[ $PATCH == *.sh ]]; then
 			"../../${1}/$PATCH" || exit 1
 		elif [[ $PATCH == *.patch ]]; then
-			patch -p0 < "../../${1}/$PATCH" || exit 1
+			patch -p0 --no-backup-if-mismatch < "../../${1}/$PATCH" || exit 1
 		fi
 	done
 }
