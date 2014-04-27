@@ -1,6 +1,18 @@
 --- org/jivesoftware/smack/SASLAuthentication.java
 +++ org/jivesoftware/smack/SASLAuthentication.java
-@@ -84,15 +84,11 @@ public class SASLAuthentication {
+@@ -23,11 +23,9 @@ import org.jivesoftware.smack.SmackException.ResourceBindingNotOfferedException;
+ import org.jivesoftware.smack.XMPPException.XMPPErrorException;
+ import org.jivesoftware.smack.packet.Packet;
+ import org.jivesoftware.smack.sasl.SASLAnonymous;
+-import org.jivesoftware.smack.sasl.SASLCramMD5Mechanism;
+ import org.jivesoftware.smack.sasl.SASLDigestMD5Mechanism;
+ import org.jivesoftware.smack.sasl.SASLErrorException;
+ import org.jivesoftware.smack.sasl.SASLExternalMechanism;
+-import org.jivesoftware.smack.sasl.SASLGSSAPIMechanism;
+ import org.jivesoftware.smack.sasl.SASLMechanism;
+ import org.jivesoftware.smack.sasl.SASLMechanism.SASLFailure;
+ import org.jivesoftware.smack.sasl.SASLPlainMechanism;
+@@ -94,17 +92,13 @@ public class SASLAuthentication {
  
          // Register SASL mechanisms supported by Smack
          registerSASLMechanism("EXTERNAL", SASLExternalMechanism.class);
@@ -12,10 +24,11 @@
  
 -        supportSASLMechanism("GSSAPI",0);
 -        supportSASLMechanism("DIGEST-MD5",1);
-+		 supportSASLMechanism("DIGEST-MD5",0);
 -        supportSASLMechanism("CRAM-MD5",2);
 -        supportSASLMechanism("PLAIN",3);
-+        supportSASLMechanism("PLAIN",1);
 -        supportSASLMechanism("ANONYMOUS",4);
++        supportSASLMechanism("DIGEST-MD5",0);
++        supportSASLMechanism("PLAIN",1);
 +        supportSASLMechanism("ANONYMOUS",2);
  
+     }
