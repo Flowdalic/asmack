@@ -172,14 +172,14 @@ createbuildsrc() {
 	mkdir -p build/src
 	mkdir -p build/resources
 
-	execute copyfolder "src/smack/core/src/main/java/" "build/src" "."
-	execute copyfolder "src/smack/core/src/main/resources/" "build/resources" "."
-	execute copyfolder "src/smack/tcp/src/main/java/" "build/src" "."
-	execute copyfolder "src/smack/extensions/src/main/java/" "build/src" "."
-	execute copyfolder "src/smack/extensions/src/main/resources/" "build/resources" "."
-	execute copyfolder "src/smack/experimental/src/main/java/" "build/src" "."
-	execute copyfolder "src/smack/experimental/src/main/resources/" "build/resources" "."
-	execute copyfolder "src/smack/resolver-dnsjava/src/main/java/" "build/src" "."
+	execute copyfolder "src/smack/smack-core/src/main/java/" "build/src" "."
+	execute copyfolder "src/smack/smack-core/src/main/resources/" "build/resources" "."
+	execute copyfolder "src/smack/smack-tcp/src/main/java/" "build/src" "."
+	execute copyfolder "src/smack/smack-extensions/src/main/java/" "build/src" "."
+	execute copyfolder "src/smack/smack-extensions/src/main/resources/" "build/resources" "."
+	execute copyfolder "src/smack/smack-experimental/src/main/java/" "build/src" "."
+	execute copyfolder "src/smack/smack-experimental/src/main/resources/" "build/resources" "."
+	execute copyfolder "src/smack/smack-resolver-dnsjava/src/main/java/" "build/src" "."
 
 	execute copyfolder "src/qpid/java" "build/src" "org/apache/qpid/management/common/sasl"
 	execute copyfolder "src/novell-openldap-jldap" "build/src" "."
