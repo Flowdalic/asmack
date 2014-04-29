@@ -95,13 +95,47 @@ fetchall() {
 	wait
 }
 
+parseSmack() {
+	VERSION_TAG=$(grep  -o -P "(?<=shortVersion = ').*(?=')" src/smack/build.gradle)
+	SNAPSHOT=$(grep  -o -P "(?<=isSnapshot = ).*(?=$)" src/smack/build.gradle)
+
+	if ! $SNAPSHOT && ! grep ${VERSION_TAG} CHANGELOG; then
+		echo "Error: Could not find the tag in the CHANGELOG file. Please write a short summary of changes"
+		exit 1
+	fi
+	if ! $SNAPSHOT && ! git diff --exit-code; then
+		echo "Error: Unstaged changes found, please stages your changes"
+		exit 1
+	fi
+	if ! $SNAPSHOT ! git diff --cached --exit-code; then
+		echo "Error: Staged, but uncommited changes found, please commit"
+		exit 1
+	fi
+	if $SNAPSHOT; then
+		VERSION_TAG+="-SNAPSHOT-${MACHINE_DATE}"
+	fi
+	RELEASE_DIR=${ASMACK_RELEASES}/${VERSION_TAG}
+	if [ -d $RELEASE_DIR ]; then
+		if $SNAPSHOT; then
+			rm -rf $RELEASE_DIR
+		else
+			echo "Error: Release dir already exists"
+			exit 1
+		fi
+	fi
+	TAG_FILE=${VERSION_TAG_DIR}/${VERSION_TAG}.tag
+	if [ -f $TAG_FILE ]; then
+		if $SNAPSHOT; then
+			rm $TAG_FILE
+		else
+			echo "Error: Tag file already exists"
+			exit 1
+		fi
+	fi
+}
+
 createVersionTag() {
 	local versionFile=build/resources/org.jivesoftware.smack/version
-	# Skip this step is no version tag is given
-	if [[ -z $VERSION_TAG ]]; then
-		echo "aSmack SNAPSHOT" > $versionFile
-		return
-	fi
 	echo "aSmack $VERSION_TAG" > $versionFile
 
 	local v
@@ -304,16 +338,13 @@ buildcustom() {
 }
 
 parseopts() {
-	while getopts a:b:r:st:cdhjopux OPTION "$@"; do
+	while getopts a:b:r:cdhjopux OPTION "$@"; do
 		case $OPTION in
 			a)
 				BUILD_ANDROID_VERSIONS="${OPTARG}"
 				;;
 			r)
 				SMACK_REPO="${OPTARG}"
-				;;
-			s)
-				SNAPSHOT=true
 				;;
 			b)
 				SMACK_BRANCH="${OPTARG}"
@@ -341,9 +372,6 @@ parseopts() {
 			p)
 				PARALLEL_BUILD=true
 				;;
-			t)
-				VERSION_TAG="${OPTARG}"
-				;;
 			x)
 				PUBLISH_RELEASE=true
 				;;
@@ -364,9 +392,6 @@ parseopts() {
 				;;
 		esac
 	done
-	if $SNAPSHOT; then
-		VERSION_TAG+="-SNAPSHOT-${MACHINE_DATE}"
-	fi
 }
 
 prepareRelease() {
@@ -547,39 +572,6 @@ setconfig() {
 		SMACK_LOCAL=true
 		SMACK_REPO=`readlink -f $SMACK_REPO`
 	fi
-
-	if [[ -n ${VERSION_TAG} ]]; then
-		if ! $SNAPSHOT && ! grep ${VERSION_TAG} CHANGELOG; then
-			echo "Error: Could not find the tag in the CHANGELOG file. Please write a short summary of changes"
-			exit 1
-		fi
-		if ! git diff --exit-code; then
-			echo "Error: Unstaged changes found, please stages your changes"
-			exit 1
-		fi
-		if ! git diff --cached --exit-code; then
-			echo "Error: Staged, but uncommited changes found, please commit"
-			exit 1
-		fi
-		RELEASE_DIR=${ASMACK_RELEASES}/${VERSION_TAG}
-		if [ -d $RELEASE_DIR ]; then
-			if $SNAPSHOT; then
-				rm -rf $RELEASE_DIR
-			else
-				echo "Error: Release dir already exists"
-				exit 1
-			fi
-		fi
-		TAG_FILE=${VERSION_TAG_DIR}/${VERSION_TAG}.tag
-		if [ -f $TAG_FILE ]; then
-			if $SNAPSHOT; then
-				rm $TAG_FILE
-			else
-				echo "Error: Tag file already exists"
-				exit 1
-			fi
-		fi
-	fi
 }
 
 printconfig() {
@@ -613,6 +605,7 @@ copystaticsrc
 testsmackgit
 fetchall
 createbuildsrc
+parseSmack
 createVersionTag
 patchsrc "patch"
 if $BUILD_JINGLE ; then
