@@ -3,7 +3,7 @@ package org.jivesoftware.smack;
 import java.util.logging.Logger;
 
 import org.jivesoftware.smack.util.DNSUtil;
-import org.jivesoftware.smack.util.dns.DNSJavaResolver;
+import org.jivesoftware.smack.util.dns.dnsjava.DNSJavaResolver;
 import org.xbill.DNS.Lookup;
 import org.xbill.DNS.ResolverConfig;
 
