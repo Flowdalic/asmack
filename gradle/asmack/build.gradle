@@ -1,0 +1,131 @@
+apply plugin: 'android-library'
+apply plugin: 'android-maven'
+apply plugin: 'signing'
+
+description = """\
+asmack."""
+
+
+dependencies {
+	compile 'dnsjava:dnsjava:2.1.6'
+}
+
+android {
+	compileSdkVersion 19
+    buildToolsVersion '19.1.0'
+
+    defaultConfig {
+    	versionCode 1
+    	versionName "##smackVersion##"
+        minSdkVersion 7
+        targetSdkVersion 19
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+group = "org.igniterealtime.smack"
+artifactId = "asmack"
+version = "##smackVersion##"
+
+android.libraryVariants.all { variant ->
+  def name = variant.buildType.name
+  if (name.equals(com.android.builder.BuilderConstants.DEBUG)) {
+    return; // Skip debug builds.
+  }
+  task("javadoc${variant.name.capitalize()}", type: Javadoc) {
+    description "Generates Javadoc for $variant.name."
+    source = variant.javaCompile.source
+    options.encoding = "UTF-8"
+    ext.androidJar = "${android.plugin.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+    classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+  }
+
+  task("bundleJavadoc${variant.name.capitalize()}", type: Jar) {
+    description "Bundles Javadoc into zip for $variant.name."
+    classifier = "javadoc"
+    from tasks["javadoc${variant.name.capitalize()}"]
+  }
+
+}
+
+task sourcesJar(type: Jar) {
+  classifier = 'sources'
+  from android.sourceSets.main.java
+}
+
+task jar(type: Jar) {
+  from 'build/classes/release'
+}
+
+task javadocJar(type: Jar, dependsOn: "javadocRelease") {
+  classifier = 'javadoc'
+  from 'build/docs/javadoc'
+}
+
+artifacts {
+  archives sourcesJar
+  archives javadocJar
+  archives jar
+}
+
+task wrapper(type: Wrapper) {
+  description "Generates the gradle wrapper"
+  gradleVersion = "1.10"
+}
+
+
+signing {
+  sign configurations.archives
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+      repository(url: repositoryUrl) {
+        authentication(userName: sonatypeUser, password: sonatypePass)
+      }
+
+      pom.project {
+        inceptionYear '2013'
+        name 'asmack'
+        artifactId 'asmack'
+        packaging 'jar', 'aar'
+        description 'Smack for Android'
+        url 'https://github.com/Flowdalic/asmack'
+
+        scm {
+          url 'scm:git@github.com:Flowdalic/asmack.git'
+          connection 'scm:git@github.com:Flowdalic/asmack.git'
+          developerConnection 'scm:git@github.com:Flowdalic/asmack.git'
+        }
+
+        licenses {
+          license {
+            name 'The Apache Software License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            distribution 'repo'
+          }
+          license {
+            name 'OpenLDAP Public License, Version 2.8'
+            url 'http://www.openldap.org/doc/admin24/license.html'
+            distribution 'repo'
+          }
+        }
+
+        developers {
+          developer {
+			id 'flow'
+			name 'Florian Schmaus'
+			email 'flow@igniterealtime.org'
+          }
+        }
+      }
+    }
+  }
+}
