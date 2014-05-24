@@ -107,7 +107,7 @@ parseSmack() {
 		echo "Error: Unstaged changes found, please stages your changes"
 		exit 1
 	fi
-	if ! $SNAPSHOT ! git diff --cached --exit-code; then
+	if ! $SNAPSHOT && ! git diff --cached --exit-code; then
 		echo "Error: Staged, but uncommited changes found, please commit"
 		exit 1
 	fi
