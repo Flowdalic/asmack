@@ -1,3 +1,7 @@
+Release 4.0.0-rc2
+	Many improvements. The API is considered stable. Now it is the perfect
+	time to test (a)Smack 4.0 if you haven't already.
+
 Release 4.0.0-rc1
 	Includes all the changes of the 0.9-SNAPSHOT series
 
