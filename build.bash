@@ -544,8 +544,10 @@ setdefaults() {
 	# Often used variables
 	ASMACK_BASE=$(pwd)
 	ASMACK_RELEASES=${ASMACK_BASE}/releases
+	[[ ! -d "$ASMACK_RELEASES" ]] && mkdir "$ASMACK_RELEASES"
 	SRC_DIR=${ASMACK_BASE}/src
 	VERSION_TAG_DIR=${ASMACK_BASE}/version-tags
+	[[ ! -d "$VERSION_TAG_DIR" ]] && mkdir "$VERSION_TAG_DIR"
 	STARTTIME=$(date -u "+%s")
 	BUILD_DATE=$(date)
 	MACHINE_DATE=$(date "+%Y-%m-%d")
