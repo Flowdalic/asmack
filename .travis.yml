@@ -1,2 +1,2 @@
 language: android
-script: ./build.bash
+script: ./build.bash -b 4.0
