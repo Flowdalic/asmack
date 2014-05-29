@@ -379,7 +379,7 @@ parseopts() {
 				echo "$0 -d -c -u -j -r <repo> -b <branch>"
 				echo "-d: Enable debug"
 				echo "-j: Build Jingle code"
-				echo "-b: Build BOSH code"
+				echo "-o: Build BOSH code"
 				echo "-c: Apply custom patchs from patch directory"
 				echo "-u: DON'T update remote third party resources"
 				echo "-r <repo>: Git repository (can be local or remote) for underlying smack repository"
