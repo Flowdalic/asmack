@@ -10,6 +10,7 @@ scripts.
 
 [![Build Status](https://travis-ci.org/Flowdalic/asmack.svg?branch=master)](https://travis-ci.org/Flowdalic/asmack)
 
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Flowdalic&url=https://github.com/flowdalic/asmack&title=asmack&language=&tags=github&category=software)
 
 Compiled JARs
 =============
@@ -82,7 +83,3 @@ contains code with the following licenses:
 - Apache License, Version 2.0
 - OpenLDAP Public License, Version 2.8
 
-Flattr
-======
-
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Flowdalic&url=https://github.com/flowdalic/asmack&title=asmack&language=&tags=github&category=software)
