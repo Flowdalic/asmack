@@ -8,7 +8,7 @@ script.  As well as all the minor changes to make an Android version
 fly.  See the patches/ folder for a detailed list of changes and
 scripts.
 
-[![Build Status](https://travis-ci.org/flowdalic/asmack.svg?branch=master)](https://travis-ci.org/flowdalic/asmack)
+[![Build Status](https://travis-ci.org/Flowdalic/asmack.svg?branch=master)](https://travis-ci.org/Flowdalic/asmack)
 
 
 Compiled JARs
