@@ -31,7 +31,8 @@ public class SmackAndroid {
 	private Context mCtx;
 
 	private SmackAndroid(Context ctx) {
-		mCtx = ctx;
+		// Use the application context to prevent "receiver not registered" messages
+		mCtx = ctx.getApplicationContext();
 		DNSUtil.setDNSResolver(DNSJavaResolver.getInstance());
 	}
 
