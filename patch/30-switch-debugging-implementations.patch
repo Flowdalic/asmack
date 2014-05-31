@@ -1,6 +1,6 @@
---- ../../../src/smack/org/jivesoftware/smack/XMPPConnection.java	2010-02-03 23:29:21.000000000 +0100
-+++ org/jivesoftware/smack/XMPPConnection.java	2010-02-03 23:56:56.000000000 +0100
-@@ -743,12 +743,12 @@
+--- ../../../src/smack/org/jivesoftware/smack/AbstractXMPPConnection.java	2010-02-03 23:29:21.000000000 +0100
++++ org/jivesoftware/smack/AbstractXMPPConnection.java	2010-02-03 23:56:56.000000000 +0100
+@@ -796,12 +796,12 @@
                  if (debuggerClass == null) {
                      try {
                          debuggerClass =
@@ -14,4 +14,4 @@
 +                                    Class.forName("org.jivesoftware.smack.debugger.ConsoleDebugger");
                          }
                          catch (Exception ex2) {
-                             ex2.printStackTrace();
+                             LOGGER.warning("Unabled to instantiate either Smack debugger class");
