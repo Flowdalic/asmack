@@ -635,6 +635,14 @@ public class DigestMD5SaslClient implements SaslClient
         else
             m_realm = ((RealmCallback)callbacks[0]).getText();
 
+        // RFC 2831 about realm in 2.1.1: "This directive is optional"
+        // also in 2.1.2: "If the directive is missing, "realm-value"
+        // will set to the empty string when computing A1"
+        if (m_realm == null)
+        {
+            m_realm = "";
+        }
+
         m_clientNonce = getClientNonce();
 
         m_name = ((NameCallback)callbacks[2]).getName();
