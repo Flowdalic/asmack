@@ -21,9 +21,29 @@ public class SmackAndroid {
 	private BroadcastReceiver mConnectivityChangedReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			LOGGER.fine("ConnectivityChange received, calling ResolverConfig.refresh() and Lookup.refreshDefault()");
-			ResolverConfig.refresh();
-			Lookup.refreshDefault();
+			LOGGER.fine("ConnectivityChange received, calling ResolverConfig.refresh() and Lookup.refreshDefault() in new Thread");
+			// Lookup.refreshDefault may cause network I/O. So in order to prevent a NetworkOnMainThreadException,
+			// we refresh dnsjava in a new thread.
+			// Full stacktrace of the offending call:
+			// Caused by: android.os.NetworkOnMainThreadException
+			// at android.os.StrictMode$AndroidBlockGuardPolicy.onNetwork(StrictMode.java:1128)
+			// at java.net.InetAddress.lookupHostByName(InetAddress.java:385)
+			// at java.net.InetAddress.getAllByNameImpl(InetAddress.java:236)
+			// at java.net.InetAddress.getByName(InetAddress.java:289)
+			// at org.xbill.DNS.SimpleResolver.<init>(SimpleResolver.java:56)
+			// at org.xbill.DNS.SimpleResolver.<init>(SimpleResolver.java:68)
+			// at org.xbill.DNS.ExtendedResolver.<init>(ExtendedResolver.java:266)
+			// at org.xbill.DNS.Lookup.refreshDefault(Lookup.java:86)
+			// at org.xbill.DNS.Lookup.<clinit>(Lookup.java:97)
+			Thread thread = new Thread() {
+					@Override
+					public void run() {
+						ResolverConfig.refresh();
+						Lookup.refreshDefault();
+					}
+				};
+			thread.setDaemon(true);
+			thread.start();
 		}
 	};
 
