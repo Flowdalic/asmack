@@ -1,3 +1,7 @@
+Release 4.0.0
+	See JIRA for a full list of fixed issues for (a)Smack 4.0:
+	https://igniterealtime.org/issues/browse/SMACK-410?jql=fixVersion%20%3D%204.0.0%20AND%20project%20%3D%20SMACK
+
 Release 4.0.0-rc2
 	Many improvements. The API is considered stable. Now it is the perfect
 	time to test (a)Smack 4.0 if you haven't already.
