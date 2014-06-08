@@ -8,9 +8,7 @@ script.  As well as all the minor changes to make an Android version
 fly.  See the patches/ folder for a detailed list of changes and
 scripts.
 
-[![Build Status](https://travis-ci.org/Flowdalic/asmack.svg?branch=master)](https://travis-ci.org/Flowdalic/asmack)
-
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Flowdalic&url=https://github.com/flowdalic/asmack&title=asmack&language=&tags=github&category=software)
+[![Build Status](https://travis-ci.org/Flowdalic/asmack.svg?branch=master)](https://travis-ci.org/Flowdalic/asmack) [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Flowdalic&url=https://github.com/flowdalic/asmack&title=asmack&language=&tags=github&category=software)
 
 Compiled JARs
 =============
@@ -31,7 +29,18 @@ in mind that this is IRC, it may take a while till you get an
 answer. Up to a few days. So make sure to idle around. :)
 
 You can also use upstream's discussion forum:
+https://community.igniterealtime.org/community/support/smack_users
+
+Bug reporting
+=============
+
+If you want to report a bug, please post along with a detailed bug
+description and proposed fix to
 http://community.igniterealtime.org/community/developers/smack
+
+If you are not sure if it is an bug or not, ask on the Smack users
+forum:
+https://community.igniterealtime.org/community/support/smack_users
 
 Compiling aSmack
 ==========================
@@ -53,24 +62,14 @@ Apps that use this fork of aSmack
 Contribution
 ============
 
-If possible, please base patches on smack, not on aSmack. You can use
-the 'upstream' branch from [smack @
-github](https://github.com/Flowdalic/smack). Only in some cases the
-'master' branch should be used.
+Please only base changes on aSmack if they are in fact aSmack
+specific. Most code improvments should be done directly in Smack so
+that both worlds (Java SE and Android) benefit from it.
 
-If your code follows [Smack's contributor guidelines](
-http://community.igniterealtime.org/docs/DOC-1984), is good documented
-and comes with some testcases, then it's possible to commit it
-upstream. Simply join #smack @ freenode and ask for a code review.
-
-Contributors
-============
-
-We do not keep a seperate CONTRIBUTORS file, and we discourage @author
-tags.  However you're free to add your full name to every git commit,
-and we will preserver this. Let us know if you've helped on
-non-technical stuff and we'll find a way to give you the deserved
-credit.
+Your code contribution must follow [Smack's contributor guidelines](
+http://community.igniterealtime.org/docs/DOC-1984), be good documented
+and should contain some testcases. Then you can simply join #smack @
+freenode and ask for a code review.
 
 Open Source Licenses
 ====================
