@@ -8,7 +8,7 @@ script.  As well as all the minor changes to make an Android version
 fly.  See the patches/ folder for a detailed list of changes and
 scripts.
 
-[![Build Status](https://travis-ci.org/Flowdalic/asmack.svg?branch=master)](https://travis-ci.org/Flowdalic/asmack) [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Flowdalic&url=https://github.com/flowdalic/asmack&title=asmack&language=&tags=github&category=software)
+[![Build Status](https://travis-ci.org/Flowdalic/asmack.svg?branch=master)](https://travis-ci.org/Flowdalic/asmack)  [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Flowdalic&url=https://github.com/flowdalic/asmack&title=asmack&language=&tags=github&category=software)  [![Project Stats](https://www.ohloh.net/p/asmack/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/asmack)
 
 Compiled JARs
 =============
