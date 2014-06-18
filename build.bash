@@ -320,25 +320,8 @@ buildandroid() {
 	fi
 }
 
-buildcustom() {
-	for dir in `find patch -maxdepth 1 -mindepth 1 -type d`; do
-		buildsrc
-		patchsrc "patch"
-		if $BUILD_JINGLE ; then
-			patchsrc "jingle"
-			JINGLE_ARGS="-Djingle=lib/jstun.jar"
-		fi
-		$BUILD_BOSH && patchsrc "bosh"
-		patchsrc "${dir}"
-		local custom
-		custom=$(echo ${dir} | sed 's:patch/:-:')
-		ant -Djar.suffix="${custom}" $JINGLE_ARGS
-		buildandroid "${custom}"
-	done
-}
-
 parseopts() {
-	while getopts a:b:r:cdhjopux OPTION "$@"; do
+	while getopts a:b:r:c:dhjopux OPTION "$@"; do
 		case $OPTION in
 			a)
 				BUILD_ANDROID_VERSIONS="${OPTARG}"
@@ -362,7 +345,7 @@ parseopts() {
 				UPDATE_REMOTE=false
 				;;
 			c)
-				BUILD_CUSTOM=true
+				BUILD_CUSTOM="${OPTARG}"
 				;;
 			o)
 				BUILD_BOSH=true
@@ -529,7 +512,7 @@ setdefaults() {
 	SMACK_BRANCH=master
 	SMACK_LOCAL=false
 	UPDATE_REMOTE=true
-	BUILD_CUSTOM=false
+	BUILD_CUSTOM=
 	BUILD_JINGLE=false
 	BUILD_BOSH=false
 	SNAPSHOT=false
@@ -614,11 +597,10 @@ if $BUILD_JINGLE ; then
 	patchsrc "jingle"
 	JINGLE_ARGS="-Djingle=lib/jstun.jar"
 fi
-build
-
-if $BUILD_CUSTOM ; then
-	buildcustom
+if [[ -n $BUILD_CUSTOM ]]; then
+	patchsrc "patch/${BUILD_CUSTOM}"
 fi
+build
 
 if cmdExists advzip ; then
 	echo "advzip found, compressing files"
