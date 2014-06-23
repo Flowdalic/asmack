@@ -135,8 +135,10 @@ parseSmack() {
 }
 
 createVersionTag() {
-	local versionFile=build/resources/org.jivesoftware.smack/version
+	local versionFile=build/asmack/src/main/resources/org.jivesoftware.smack/version
 	echo "aSmack $VERSION_TAG" > $versionFile
+
+	sed -i s/"##smackVersion##"/"$VERSION_TAG"/g ${ASMACK_BASE}/build/asmack/build.gradle
 
 	local v
 	cat <<EOF  > $TAG_FILE
@@ -203,21 +205,21 @@ createbuildsrc() {
 	echo "## Step 20: creating build/src"
 	cd "${ASMACK_BASE}"
 	rm -rf build
-	mkdir -p build/src
-	mkdir -p build/resources
+	mkdir -p build/asmack/src/main/java
+	mkdir -p build/asmack/src/main/resources
 
-	execute copyfolder "src/smack/smack-core/src/main/java/" "build/src" "."
-	execute copyfolder "src/smack/smack-core/src/main/resources/" "build/resources" "."
-	execute copyfolder "src/smack/smack-tcp/src/main/java/" "build/src" "."
-	execute copyfolder "src/smack/smack-extensions/src/main/java/" "build/src" "."
-	execute copyfolder "src/smack/smack-extensions/src/main/resources/" "build/resources" "."
-	execute copyfolder "src/smack/smack-experimental/src/main/java/" "build/src" "."
-	execute copyfolder "src/smack/smack-experimental/src/main/resources/" "build/resources" "."
-	execute copyfolder "src/smack/smack-resolver-dnsjava/src/main/java/" "build/src" "."
+	execute copyfolder "src/smack/smack-core/src/main/java/" "build/asmack/src/main/java" "."
+	execute copyfolder "src/smack/smack-core/src/main/resources/" "build/asmack/src/main/resources" "."
+	execute copyfolder "src/smack/smack-tcp/src/main/java/" "build/asmack/src/main/java" "."
+	execute copyfolder "src/smack/smack-extensions/src/main/java/" "build/asmack/src/main/java" "."
+	execute copyfolder "src/smack/smack-extensions/src/main/resources/" "build/asmack/src/main/resources" "."
+	execute copyfolder "src/smack/smack-experimental/src/main/java/" "build/asmack/src/main/java" "."
+	execute copyfolder "src/smack/smack-experimental/src/main/resources/" "build/asmack/src/main/resources" "."
+	execute copyfolder "src/smack/smack-resolver-dnsjava/src/main/java/" "build/asmack/src/main/java" "."
 
-	execute copyfolder "src/qpid/java" "build/src" "org/apache/qpid/management/common/sasl"
-	execute copyfolder "src/novell-openldap-jldap" "build/src" "."
-	execute copyfolder "src/harmony" "build/src" "."
+	execute copyfolder "src/qpid/java" "build/asmack/src/main/java" "org/apache/qpid/management/common/sasl"
+	execute copyfolder "src/novell-openldap-jldap" "build/asmack/src/main/java" "."
+	execute copyfolder "src/harmony" "build/asmack/src/main/java" "."
 	# if $BUILD_BOSH; then
 	# 	execute copyfolder "src/jbosh/src/main/java" "build/src/trunk" "."
 	# 	cp -r src/smack-bosh .
@@ -225,19 +227,20 @@ createbuildsrc() {
 #	$BUILD_JINGLE && execute copyfolder "src/smack/jingle/extension/source/" "build/src/trunk" "."
 	wait
 	# custom overwrites some files from smack, so this has to be done as last
-	copyfolder "src/custom" "build/src/" "."
+	copyfolder "src/custom" "build/asmack/src/main/java" "."
+	copyfolder "gradle" "build" "."
 }
 
 patchsrc() {
 	echo "## Step 25: patch build/src"
-	cd ${ASMACK_BASE}/build/src
+	cd ${ASMACK_BASE}/build/asmack/src/main/java
 	# patch src path in directly in asmack root
-	for PATCH in `(cd "../../${1}" ; find -maxdepth 1 -type f)|sort` ; do
+	for PATCH in `(cd "../../../../../${1}" ; find -maxdepth 1 -type f)|sort` ; do
 		echo $PATCH
 		if [[ $PATCH == *.sh ]]; then
-			"../../${1}/$PATCH" || exit 1
+			"../../../../../${1}/$PATCH" || exit 1
 		elif [[ $PATCH == *.patch ]]; then
-			patch -p0 --no-backup-if-mismatch < "../../${1}/$PATCH" || exit 1
+			patch -p0 --no-backup-if-mismatch < "../../../../../${1}/$PATCH" || exit 1
 		fi
 	done
 }
@@ -255,69 +258,8 @@ buildandroid() {
 	local version
 	local sdks
 	local minSdkVer=8
-
-	cd $ASMACK_BASE
-
-	if [ -z "$ANDROID_HOME" ] ; then
-		if [ ! -f local.properties ] ; then
-			echo "Could not find local.properties file"
-			echo "See local.properties.example"
-			echo "Alternatively you may define ANDROID_HOME environment variable to point to your Android SDK installation"
-			exit 1
-		fi
-
-		sdklocation=$(grep sdk-location local.properties| cut -d= -f2)
-		if [ -z "$sdklocation" ] ; then
-			echo "Android SDK not found. Don't build android version"
-			exit 1
-		fi
-		# replace ${user.home} with $HOME
-		sdklocation=${sdklocation/\$\{user.home\}/$HOME}
-	else
-		sdklocation=${ANDROID_HOME}
-	fi
-
-	for f in "${sdklocation}"/platforms/* ; do
-		version=`basename "$f"`
-		if [[ "$version" != android-* ]] ; then
-			echo "$sdklocation contains no Android SDKs"
-			echo "You must install at least one Android SDK Platform"
-			echo "You might also check your android-sdk path in local.properties"
-			echo " or in ANDROID_HOME environment variable"
-			exit 1
-		fi
-		if [[ ${version#android-} -ge $minSdkVer ]] ; then
-			if [ -n $BUILD_ANDROID_VERSIONS ] ; then
-				for build_version in $BUILD_ANDROID_VERSIONS ; do
-					[ ${version#android-} != $build_version ] && continue 2
-				done
-			fi
-			echo "Building for ${version}"
-			sdks="${sdks} ${version}\n"
-		fi
-
-	done
-
-	if [ -z "${sdks}" ] ; then
-		echo "No SDKs of a suitable minimal API (${minSdkVer}) version found"
-		exit 1
-	fi
-
-	local asmack_suffix
-	if [[ -n ${VERSION_TAG} ]] && [[ -n ${1} ]] ; then
-		asmack_suffix="${1}-${VERSION_TAG}"
-	elif [[ -n ${VERSION_TAG} ]] ; then
-		asmack_suffix="-${VERSION_TAG}"
-	else
-		asmack_suffix="${1}"
-	fi
-	if ! echo -e ${sdks} \
-		| xargs -I{} -n 1 $XARGS_ARGS ant \
-		-Dandroid.version={} \
-		-Djar.suffix="${asmack_suffix}" \
-		compile-android ; then
-		exit 1
-	fi
+	cd ${ASMACK_BASE}/build
+	./gradlew assembleRelease
 }
 
 parseopts() {
@@ -611,8 +553,8 @@ else
 	echo "consider installing advzip"
 fi
 
-prepareRelease
-publishRelease
+#prepareRelease
+#publishRelease
 
 STOPTIME=$(date -u "+%s")
 RUNTIME=$(( $STOPTIME - $STARTTIME ))
