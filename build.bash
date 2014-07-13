@@ -92,6 +92,7 @@ fetchall() {
 	$BUILD_BOSH && execute gitfetch "git://kenai.com/jbosh~origin" "master" "jbosh"
 	# jldap doesn't compile with the latest version (missing deps?), therefore it's a fixed version for now
 	#  execute gitfetch "git://git.openldap.org/openldap-jldap.git" "master" "novell-openldap-jldap"
+	execute gitfetch "https://github.com/igniterealtime/jxmpp.git" "master" "jxmpp"
 	wait
 }
 
@@ -226,6 +227,9 @@ createbuildsrc() {
 	wait
 	# custom overwrites some files from smack, so this has to be done as last
 	copyfolder "src/custom" "build/src/" "."
+
+  execute copyfolder "src/jxmpp/jxmpp-core/src/main/java" "build/src" "."
+  execute copyfolder "src/jxmpp/jxmpp-util-cache/src/main/java" "build/src" "."
 }
 
 patchsrc() {
