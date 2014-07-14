@@ -58,7 +58,7 @@
       source="7"
       srcdir="build/src"
       destdir="build/classes/${android.version}"
-      bootclasspath="${sdk-location}/platforms/${android.version}/android.jar:lib/org.xbill.dns_2.1.6.jar:${jingle}"
+      bootclasspath="${sdk-location}/platforms/${android.version}/android.jar:lib/org.xbill.dns_2.1.6.jar:lib/jxmpp-core-0.1.0.jar:lib/jxmpp-util-cache-0.1.0.jar:lib/minidns-0.1.1.jar:${jingle}"
       debug="true"
       debuglevel="source,lines"
 	  includeantruntime="false"

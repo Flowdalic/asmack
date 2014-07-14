@@ -23,20 +23,15 @@ ProGuard
 If you use ProGuard, you have to configure it so that no important
 Smack classes are optimized away:
 
-# This dnsjava class uses old Sun API
--dontnote org.xbill.DNS.spi.DNSJavaNameServiceDescriptor
--dontwarn org.xbill.DNS.spi.DNSJavaNameServiceDescriptor
-
-# See http://stackoverflow.com/questions/5701126, happens in dnsjava
--optimizations !code/allocation/variable
-
 # Smack specific configuration
 -keep class de.measite.smack.AndroidDebugger { *; }
 -keep class * implements org.jivesoftware.smack.initializer.SmackInitializer
 -keep class * implements org.jivesoftware.smack.provider.IQProvider
 -keep class * implements org.jivesoftware.smack.provider.PacketExtensionProvider
 -keep class * extends org.jivesoftware.smack.packet.Packet
+-keep class org.jivesoftware.smack.XMPPConnection
 -keep class org.jivesoftware.smack.ReconnectionManager
+-keep class org.jivesoftware.smack.CustomSmackConfiguration
 -keep class org.jivesoftware.smackx.disco.ServiceDiscoveryManager
 -keep class org.jivesoftware.smackx.xhtmlim.XHTMLManager
 -keep class org.jivesoftware.smackx.muc.MultiUserChat
@@ -49,8 +44,6 @@ Smack classes are optimized away:
 -keep class org.jivesoftware.smackx.privacy.PrivacyListManager
 -keep class org.jivesoftware.smackx.time.EntityTimeManager
 -keep class org.jivesoftware.smackx.vcardtemp.VCardManager
--keep class org.jivesoftware.smack.CustomSmackConfiguration
-
 
 Problems / Debugging
 ==============================

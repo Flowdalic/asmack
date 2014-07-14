@@ -1,3 +1,6 @@
+#!/bin/bash
+
+cat > org/jivesoftware/smack/SmackAndroid.java <<EOF
 package org.jivesoftware.smack;
 
 import java.util.logging.Logger;
@@ -90,3 +93,4 @@ public class SmackAndroid {
 		}
 	}
 }
+EOF

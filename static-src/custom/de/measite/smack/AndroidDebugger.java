@@ -128,15 +128,13 @@ public class AndroidDebugger implements SmackDebugger {
     }
 
     public void userHasLogged(String user) {
-        boolean isAnonymous = "".equals(StringUtils.parseName(user));
         String title =
                 "User logged (" + connection.getConnectionCounter() + "): "
-                + (isAnonymous ? "" : StringUtils.parseBareAddress(user))
+                + user
                 + "@"
                 + connection.getServiceName()
                 + ":"
                 + connection.getPort();
-        title += "/" + StringUtils.parseResource(user);
         Log.d("SMACK", title);
         // Add the connection listener to the connection so that the debugger can be notified
         // whenever the connection is closed.
