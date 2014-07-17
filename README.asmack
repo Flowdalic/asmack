@@ -69,12 +69,12 @@ Reporting a bug
 Your issue should contain
 1. a logcat
 2. a server to reproduce
-3. the code you are using (for FOSS project we'll accept reposituroy URLs)
+3. the code you are using (for FOSS project we'll accept repository URLs)
 
-If you record a logcat and make sure to remove your credentials
+If you record a logcat, make sure to remove your credentials
 (usually a base64 block inside <auth></auth>).
 
-There is no guarantee that we will reply immediatly. But we will try
+There is no guarantee that we will reply immediately. But we will try
 to investigate the problem. Feel free to join #smack @ freenode and
 ask for help (you may have to idle for some time before you get a
 reply).
