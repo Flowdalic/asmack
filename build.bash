@@ -509,7 +509,7 @@ execute() {
 setdefaults() {
 	# Default configuration, can be changed with script arguments
 	SMACK_REPO=git://github.com/Flowdalic/smack.git
-	SMACK_BRANCH=master
+	SMACK_BRANCH=
 	SMACK_LOCAL=false
 	UPDATE_REMOTE=true
 	BUILD_CUSTOM=
@@ -573,6 +573,11 @@ checkPrerequisites() {
 
 	if ! tar --version |grep GNU &> /dev/null ; then
 		echo "aSmack's build.bash needs GNU tar"
+		exit 1
+	fi
+	if [[ -z $SMACK_BRANCH ]] ; then
+		echo "aSmack is no longer required for Smack's master branch."
+		echo "You *need to* specify a branch with -b. Aborting"
 		exit 1
 	fi
 }
