@@ -42,15 +42,6 @@ If you are not sure if it is an bug or not, ask on the Smack users
 forum:
 https://community.igniterealtime.org/community/support/smack_users
 
-Compiling aSmack
-==========================
-
-Linux: https://github.com/Flowdalic/asmack/wiki/Build-Instructions-for-Linux
-
-Mac OS X: https://github.com/Flowdalic/asmack/wiki/Build-Instructions-on-Mac-OS-X
-
-Note that building on Mac OS X is a user contribution and not offically supported.
-
 Apps that use this fork of aSmack
 =================================
 - [Project MAXS](http://projectmaxs.org)
