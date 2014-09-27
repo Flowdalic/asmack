@@ -5,10 +5,17 @@ aSmack - buildsystem for Smack on Android
 
 This repository contains a source fetching, patching and building
 script.  As well as all the minor changes to make an Android version
-fly.  See the patches/ folder for a detailed list of changes and
-scripts.
+fly.  See the `patches/` folder for a detailed list of changes and
+applied scripts.
 
 [![Build Status](https://travis-ci.org/Flowdalic/asmack.svg?branch=master)](https://travis-ci.org/Flowdalic/asmack)  [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=Flowdalic&url=https://github.com/flowdalic/asmack&title=asmack&language=&tags=github&category=software)  [![Project Stats](https://www.ohloh.net/p/asmack/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/asmack)
+
+Smack 4.1 adds native support for Android
+-----------------------------------------
+
+Starting with Version 4.1 Smack is able to run without modifications on Android. Smack 4.1 is currently in a alpha development stage. Snapshots and alpha releases are on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22smack-android%22). Everyone is invited to test and provide feedback.
+
+More information on how to use Smack 4.1 in your Android Project can be found in the [Smack 4.1 Readme and Upgrade Guide](https://github.com/igniterealtime/Smack/wiki/Smack-4.1-Readme-and-Upgrade-Guide).
 
 Compiled JARs
 =============
