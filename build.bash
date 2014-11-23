@@ -96,8 +96,8 @@ fetchall() {
 }
 
 parseSmack() {
-	VERSION_TAG=$(grep  -o -P "(?<=shortVersion = ').*(?=')" src/smack/build.gradle)
-	SNAPSHOT=$(grep  -o -P "(?<=isSnapshot = ).*(?=$)" src/smack/build.gradle)
+	VERSION_TAG=$(grep  -o -P "(?<=shortVersion = ').*(?=')" src/smack/version.gradle)
+	SNAPSHOT=$(grep  -o -P "(?<=isSnapshot = ).*(?=$)" src/smack/version.gradle)
 
 	if ! $SNAPSHOT && ! grep ${VERSION_TAG} CHANGELOG; then
 		echo "Error: Could not find the tag in the CHANGELOG file. Please write a short summary of changes"
