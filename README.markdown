@@ -13,7 +13,7 @@ applied scripts.
 Smack 4.1 adds native support for Android
 -----------------------------------------
 
-Starting with Version 4.1 Smack is able to run without modifications on Android. Smack 4.1 is currently in a alpha development stage. Snapshots and alpha releases are on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22smack-android%22). Everyone is invited to test and provide feedback.
+Starting with Version 4.1 [Smack](https://github.com/igniterealtime/Smack) is able to run without modifications on Android. Smack 4.1 is currently in a beta development stage. Snapshots and beta releases are on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22smack-android%22). Everyone is invited to test and provide feedback.
 
 More information on how to use Smack 4.1 in your Android Project can be found in the [Smack 4.1 Readme and Upgrade Guide](https://github.com/igniterealtime/Smack/wiki/Smack-4.1-Readme-and-Upgrade-Guide).
 
