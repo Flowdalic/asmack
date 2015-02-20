@@ -1,3 +1,7 @@
+Release 4.0.7
+	A security vulnerability regarding Hostname verification was reported and fixed (SMACK-643)
+	See JIRA for a full list of fixed issues: https://igniterealtime.org/issues/browse/SMACK
+
 Release 4.0.6
 	See JIRA for a full list of fixed issues: https://igniterealtime.org/issues/browse/SMACK
 
