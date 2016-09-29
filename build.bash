@@ -616,6 +616,13 @@ else
 	echo "consider installing advzip"
 fi
 
+
+# - uncomment this to enable maven deployment
+# - to use this config add deployment server crenitials to your .m2/settings.xml if you need it
+# - optionally to differ API levels -Dclassifier=API_level can be used
+#cd ${ASMACK_BASE} && mvn deploy:deploy-file -Dfile=build/asmack-android-8.jar -Dsources=build/asmack-android-8-source.zip -DpomFile=./pom.xml -DrepositoryId=deployment -Durl=http://asmack_mvn_repo/
+
+
 prepareRelease
 publishRelease
 
